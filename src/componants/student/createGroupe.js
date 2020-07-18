@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 import { Button} from "semantic-ui-react";
+import HorNavbar from '../HorNavbar';
 function CreateGroup() {
     const [groupName,setGname] = useState('');
     const [members,setMembers] = useState([]);
@@ -19,7 +20,6 @@ function CreateGroup() {
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
-            "Content-Type": "application/json",
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization' : 'Bearer '+ token
           },
@@ -42,7 +42,6 @@ function CreateGroup() {
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
-            "Content-Type": "application/json",
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization' : 'Bearer '+ token
           },
@@ -83,7 +82,6 @@ function CreateGroup() {
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
-            "Content-Type": "application/json",
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization' : 'Bearer '+ token
           },
@@ -107,7 +105,6 @@ function CreateGroup() {
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
-            "Content-Type": "application/json",
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization' : 'Bearer '+ token
           },
@@ -131,7 +128,6 @@ function CreateGroup() {
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
-            "Content-Type": "application/json",
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization' : 'Bearer '+ token
           },
@@ -252,6 +248,7 @@ function CreateGroup() {
 
     return (
         <React.Fragment>
+          <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
             <header className="App-header">
               <p>
                 {Grp}

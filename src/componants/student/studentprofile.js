@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { BrowserRouter , Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button} from "semantic-ui-react";
 import HorNavbar from '../HorNavbar';
 function Studentprofile() {
@@ -34,15 +34,10 @@ function Studentprofile() {
             setpromo(response.data['0'].promo)
         })
         .catch(function (error) {
+          history.push('/Forbiden')
           }
         )
     }
-
-    const logout = () =>{
-      localStorage.removeItem("token");
-      localStorage.removeItem("type");
-      history.push('/login')
-    } 
 
     useEffect(()=> {
       if (localStorage.getItem('type')!=='student'){
@@ -52,8 +47,8 @@ function Studentprofile() {
     },[]);
         return (
             <React.Fragment>
+              <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
                 <header className="App-header">
-                  <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
                   <p>
                     Student page
                   </p>
@@ -65,7 +60,7 @@ function Studentprofile() {
                     <h1>i'm a {gender}</h1>
                     <h1>i'm a {promo} student at esi sba</h1>
                     <Button color='blue' onClick={()=>{history.replace('/changePassword')}}>change password</Button>
-                    <Button color='red' onClick={logout}>logout</Button>
+                    <Button color='red' onClick={()=>{history.push("/logout")}}>logout</Button>
                   </center>
                 </div>
               </React.Fragment>

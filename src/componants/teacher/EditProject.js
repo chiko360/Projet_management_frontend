@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 import { Button, Header } from "semantic-ui-react";
+import HorNavbar from '../HorNavbar';
 import "../../addP.css";
 
 function EditProject(props) {
@@ -72,6 +73,8 @@ function EditProject(props) {
         getProject();
     },[]);
     return(
+        <React.Fragment>
+        <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
         <div className="auth-main">
           <div class="auth-content">
                 <div className="auth-card">
@@ -103,6 +106,7 @@ function EditProject(props) {
                   </div>
                   </div>
               </div>
+            </React.Fragment>
         );
 }
 

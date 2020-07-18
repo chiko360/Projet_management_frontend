@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 import { Button, Header } from "semantic-ui-react";
+import HorNavbar from '../HorNavbar';
 import "../../addP.css";
 function AddProject() {
 
@@ -61,6 +62,8 @@ function AddProject() {
       }
   },[]);
     return(
+      <React.Fragment>
+        <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
         <div className="auth-main">
           <div class="auth-content">
                 <div className="auth-card">
@@ -79,7 +82,7 @@ function AddProject() {
                     <form class="ui form">
                     <textarea rows="4" cols="50" type="text" name="introduction" placeholder="introduction" onChange={(event)=>{setIntro(event.target.value)}} /> 
                     </form><br/>
-                    teacher  <form class="ui form">
+                    <form class="ui form">
                     <textarea rows="4" cols="50" type="text" name="tools" placeholder="tools" onChange={(event)=>{setTools(event.target.value)}} />
                     </form><br/>
                     <form class="ui form">
@@ -93,6 +96,7 @@ function AddProject() {
                   </div>
                   </div>
               </div>
+              </React.Fragment>
         );
 }
 

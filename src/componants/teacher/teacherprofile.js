@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { BrowserRouter , Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Pusher from "pusher-js";
 import { toast } from 'react-semantic-toasts';
 import 'semantic-ui-css/components/reset.min.css';
@@ -46,33 +46,31 @@ function Teacherprofile() {
         )
     }
 
-    const logout = () =>{
-      localStorage.removeItem("token");
-      localStorage.removeItem("type");
-      history.push('/login')
-    } 
 
     useEffect(()=> {
+      if (localStorage.getItem('type')!=='teacher'){
+        history.push('/Forbiden')
+      }
         getinfo();
-        const pusher = new Pusher("269da359d7787125ca29", {cluster: "eu",
+        //const pusher = new Pusher("269da359d7787125ca29", {cluster: "eu",
         //authEndpoint: "http://localhost:8000/api/pusher/auth",
-          });
-          var channel = pusher.subscribe("my-channel");
-          channel.bind('my-event', function(data) {
-            return toast({
-              type: "info",
-              icon: "info",
-              title: data.title,
-              description: data.body,
-              time: 5000,
-            });
-          }
-        );
-    });
+        //  });
+        //  var channel = pusher.subscribe("my-channel");
+        //  channel.bind('my-event', function(data) {
+        //    return toast({
+        //      type: "info",
+        //      icon: "info",
+        //      title: data.title,
+        //      description: data.body,
+        //      time: 5000,
+        //    });
+        //  }
+        //);
+    },[]);
     return(
             <React.Fragment>
+              <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
                 <header className="App-header">
-                <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
                   <p>
                     teacher page
                   </p>
@@ -84,7 +82,7 @@ function Teacherprofile() {
                     <h1>i'm a {gender}</h1>
                     <h1>i'm a {grade} teacher at esi sba</h1>
                     <Button color='blue' onClick={()=>{history.replace('/changePassword')}}>change password</Button>
-                    <Button color='red' onClick={logout}>logout</Button>
+                    <Button color='red' onClick={()=>{history.push("/logout")}}>logout</Button>
                   </center>
               </div>
               </React.Fragment>

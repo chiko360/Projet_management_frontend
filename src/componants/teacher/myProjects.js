@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Button} from "semantic-ui-react";
-import EditProject from './EditProject';
-import { BrowserRouter as Router , Route, Link } from "react-router-dom";
+import HorNavbar from '../HorNavbar';
+import { Link } from "react-router-dom";
 function MyProjects() {
 
     const [posts, setPost] = useState([]);
+    //const [approuved, setapr] = useState(null);
+    //const [id, setid] = useState(null);
     let history = useHistory();
 
     const getprojects = async () => {
@@ -23,7 +25,6 @@ function MyProjects() {
                 };
         await axios(options).then(res => {
             const response = res.data;
-            console.log(response)
             setPost(response)
         })
     }
@@ -65,6 +66,21 @@ function MyProjects() {
         }
     }
 
+    const EditButton = (props) =>{
+        const approuved = props.approuved
+        const id = props.id
+        console.log(approuved)
+        if (approuved!=='true'){
+            return <Link
+            to={{
+              pathname: "/teacher/editProject/"+id+"/",
+            }}
+            > 
+            <Button color='green' >edit topic</Button> </Link>
+        }
+        else {return null}
+    }
+
     useEffect(()=> {
         if (localStorage.getItem('type')!=='teacher'){
             history.push('/Forbiden')
@@ -73,6 +89,7 @@ function MyProjects() {
     },[]);
     return(
             <React.Fragment>
+                <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
                 <header className="App-header">
                   <p>
                     my Projects
@@ -80,6 +97,8 @@ function MyProjects() {
                 </header>
                 <div>
                         {posts.map((post,index) => {
+                        //    setapr(post.approuved)
+                        //    setid(post.id)
                         return <div>
                                 <h2 class="ui top attached header">{post.title}</h2>
                                 <div class="ui attached segment">
@@ -89,14 +108,9 @@ function MyProjects() {
                                 <h3>tools : {post.tools}</h3>
                                 <h3>tags : {post.tags}</h3>
                                 <h3>details :{post.details}</h3>
-                                <h3>approuved : {post.approved}</h3>
+                                <h3>approuved : {String(post.approved)}</h3>
                                 <Button color='red' onClick={()=>{deleteProject(post.id)}}>delete topic</Button>
-                                <Link
-                                      to={{
-                                        pathname: "/teacher/editProject/"+post.id+"/",
-                                      }}
-                                    > 
-                                <Button color='green' >edit topic</Button> </Link>
+                                <EditButton approuved={String(post.approved)} id={post.id} />
                                 </div>
                             </div>
                     })}

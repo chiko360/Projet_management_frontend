@@ -1,8 +1,8 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { BrowserRouter , Route } from "react-router-dom";
 import jsPDF from 'jspdf';
 import { Button} from "semantic-ui-react";
+import HorNavbar from '../HorNavbar';
 
 function ApprovedProjects() {
 
@@ -49,6 +49,7 @@ function ApprovedProjects() {
     
     return(
         <React.Fragment>
+            <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
         <header className="App-header">
           <p>
             my Projects
@@ -61,7 +62,7 @@ function ApprovedProjects() {
                             <div class="ui grid">
                                 <div class="four wide column">
                                     <div class="ui fluid vertical tabular menu">
-                                        <a class="active item">{post.title}</a>
+                                        <div class="active item">{post.title}</div>
                                     </div>
                                 </div>
                             <div class="stretched twelve wide column">

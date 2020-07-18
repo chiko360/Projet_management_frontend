@@ -1,14 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Button, Form, Header } from "semantic-ui-react";
+import { Button, Card, Container, Row, Col } from "reactstrap";
+import Footer from './Footer'; 
+import { Form } from "semantic-ui-react";
 import "../login.css";
+import IndexNavbar from './header/NavbarComponent';
 function Login() {
+
+  document.documentElement.classList.remove("nav-open");
+  React.useEffect(() => {
+    document.body.classList.add("login");
+    return function cleanup() {
+      document.body.classList.remove("login");
+    };
+  });
+
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-  const [loggedIn,setLoggedIn] = useState(false);
-  const [account_type,setType] = useState(null);
   const [emailError,setEerror] = useState(null);
   const [passwordError,setPerror] = useState(null);
   const [loginError,setLerror] = useState(null);
@@ -41,15 +50,12 @@ function Login() {
         .then((res) => {
           console.log(res)
           localStorage.setItem("token",res.data.token)
-          setLoggedIn(true)
           if (res.data.account_type === 'student'){
             localStorage.setItem("type","student")
-            setType('student');
             history.replace('/student');
           }
           else if (res.data.account_type === 'teacher') {
             localStorage.setItem("type","teacher")
-            setType('teacher');
             history.replace('/teacher');
           }
         })
@@ -93,42 +99,60 @@ function Login() {
     },[]);
 
     return (
-            <div>
-              <div className="auth-main">
-                  <div class="auth-content">
-                    <div className="auth-card">
-                      <Header as="h2" color="black" textAlign="center">
-                          Log In to you account      
-                      </Header>
-                      <Form.Group size="large" className="auth-form" autocomplete="off">
-                        <Form.Input
-                          
-                          icon="at"
-                          iconPosition="left"
-                          placeholder="Email"
-                          className="auth-input-field"
-                          onChange={(event)=>{setEmail(event.target.value)}}
-                        />
-                        <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
-                        <Form.Input
-                          
-                          icon="lock"
-                          iconPosition="left"
-                          placeholder="Password"
-                          type="password"
-                          className="auth-input-field"
-                          onChange={(event)=>{setPassword(event.target.value)}}
-                        />
-                        <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
-                          <Button  color="blue" size="huge" onClick={()=>{handlelogin()}} >
-                            Login
-                          </Button>
-                          <div style={{ fontSize: 12, color: "red" }}>{loginError}</div> 
-                      </Form.Group>
-                    </div>
-                  </div>
+    <>
+    <IndexNavbar />
+    <section id="home" class="parallax-section">
+     <div class="overlay"></div>
+     <div class="image-overlay">    
+    </div>
+        <div class="container">
+        <div className="filter" />
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto" lg="4">
+              <Card className="card-register ml-auto mr-auto">
+                <h3 className="title mx-auto">Welcome Back</h3>
+                <Form className="register-form">
+                  <label>Email</label>
+                  <Form.Input
+                    icon="at"
+                    iconPosition="left"
+                    placeholder="Email"
+                    onChange={(event)=>{setEmail(event.target.value)}}
+                  />
+                  <center><div style={{ fontSize: 15, color: "red" }}>{emailError}</div></center>
+                  <label>Password</label>
+                  <Form.Input
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                    onChange={(event)=>{setPassword(event.target.value)}}
+                  />
+                  <center><div style={{ fontSize: 15, color: "red" }}>{passwordError}</div></center>
+                  <Button block className="btn-round" color="info" onClick={()=>{handlelogin()}}>
+                    LOGIN
+                  </Button>
+                  <center><div style={{ fontSize: 15, color: "red" }}>{loginError}</div></center>
+                </Form>
+                <div className="forgot">
+                  <Button
+                    className="btn-link"
+                    color="info"
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                  >
+                      Forget Password?
+              </Button>
                 </div>
-              </div>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </section> 
+    <Footer/>
+    </>
         );
     }
 
