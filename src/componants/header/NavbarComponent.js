@@ -11,6 +11,11 @@ import {
   NavLink,
   Nav,
   Container,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledDropdown
 } from "reactstrap";
 import PropTypes from 'prop-types';
 
@@ -58,7 +63,8 @@ return function cleanup() {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/"
+            to="/index"
+            target="_blank"
             title="make it easy"
           >
             PFE esi-sba
@@ -86,7 +92,8 @@ return function cleanup() {
             
             <NavItem>
               <NavLink
-                href="/"
+                href="/Index"
+                target="_blank"
               >
              Home
               </NavLink>
@@ -94,7 +101,17 @@ return function cleanup() {
 
             <NavItem>
               <NavLink
-                href="/contact"
+                href="/student"
+                target="_blank"
+              >
+                Services 
+             </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink
+                href="/contactus"
+                target="_blank"
               >
                 Contact Us 
              </NavLink>
@@ -102,14 +119,20 @@ return function cleanup() {
           
                     <NavItem>
               <NavLink
-                href="/about"
+                href="/aboutus"
+                target="_blank"
               >
                 About Us 
              </NavLink>
             </NavItem>
+
+           
+
             <NavItem>
+            
+
               <Button block className="btn-round btn-info" href="/login">
-                    Login
+                    Login Now
                   </Button>
             </NavItem>
           

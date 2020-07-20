@@ -2,10 +2,10 @@ import React, { useEffect,useState} from 'react';
 import { Dropdown,Menu,Icon, Segment} from 'semantic-ui-react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import "../navbar.css";
 import Pusher from "pusher-js";
 import { toast } from 'react-semantic-toasts';
 function HorNavbar(props) {
+  
 
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);

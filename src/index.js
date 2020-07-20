@@ -1,17 +1,56 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import './App.css';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'aos/dist/aos.css'; 
+import './assets/css/font-awesome.min.css';
+import './assets/css/tooplate-style.css';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import Login from './componants/LoginPage';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Studentprofile from './componants/student/studentprofile'
+import Teacherprofile from './componants/teacher/teacherprofile'
+import AddProject from './componants/teacher/addProject'
+import EditProject from './componants/teacher/EditProject'
+import MyProjects from './componants/teacher/myProjects'
+import ApprovedProjects from './componants/student/approvedprojects'
+import ChangePassword from './componants/changePassword'
+import CreateGroup from './componants/student/createGroupe';
+import Forbiden from './componants/Forbiden';
+import Logout from './componants/logout';
+import {ContactUsPage} from './componants/ContactPage';
+import {AboutUsPage} from './componants/AboutUsPage';
+
+
+
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  <BrowserRouter>
+  <Switch>
+          <Route path='/teacher/editProject/:id/' component={EditProject} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/contactus" component={ContactUsPage} />
+          <Route exact path="/aboutus" component={AboutUsPage} />
+          <Route exact path="/" component={App} />
+          <Route exact path="/student" component={Studentprofile} />
+          <Route exact path="/teacher" component={Teacherprofile} />
+          <Route exact path="/teacher/addProject" component={AddProject} />
+          <Route exact path="/teacher/editProject" component={EditProject} />
+          <Route exact path="/teacher/MyProjects" component={MyProjects} />
+          <Route exact path="/student/themes" component={ApprovedProjects} />
+          <Route exact path="/changePassword" component={ChangePassword} />
+          <Route exact path="/student/group" component={CreateGroup} />
+          <Route exact path="/Forbiden" component={Forbiden} />
+    </Switch>
+
+</BrowserRouter>,
+
+document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

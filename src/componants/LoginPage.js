@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "reactstrap";
 import Footer from './Footer'; 
 import { Form } from "semantic-ui-react";
-import "../login.css";
 import IndexNavbar from './header/NavbarComponent';
 function Login() {
 

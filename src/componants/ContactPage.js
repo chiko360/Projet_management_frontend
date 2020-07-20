@@ -1,3 +1,4 @@
+
 import React, {Component} from "react";
 // reactstrap components
 import {
@@ -16,6 +17,19 @@ import ContactHeader from './header/ContactHeader';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
 import Footer from './Footer'; 
+import cliensone from '../assets/images/clients/client-1.jpg';
+import clienstwo from '../assets/images/clients/client-2.jpg';
+import cliensthree from '../assets/images/clients/client-3.png';
+import cliensfour from '../assets/images/clients/client-4.jpg';
+import cliensfive from '../assets/images/clients/client-5.png';
+import clienssix from '../assets/images/clients/client-6.png';
+import cliensseven from '../assets/images/clients/client-7.jpg';
+import clienseight from '../assets/images/clients/client-8.jpg';
+import test1 from '../assets/images/testimonials/testimonials-1.jpg';
+import test2 from '../assets/images/testimonials/testimonials-2.jpg';
+import test3 from '../assets/images/testimonials/testimonials-3.jpg';
+import test4 from '../assets/images/testimonials/testimonials-4.jpg';
+import test5 from '../assets/images/testimonials/testimonials-5.jpg';
 
 
 class ContactUsPage extends Component {
@@ -58,7 +72,9 @@ class ContactUsPage extends Component {
     <>
 <IndexNavbar />
 <ContactHeader />
+
 <section id="headersmall" class="parallax-section">
+
 <div class="overlay"></div> 
 <div class="image-overlay">    
 </div>
@@ -181,4 +197,4 @@ class ContactUsPage extends Component {
   }
 }
 
-export default ContactUsPage;
+export {ContactUsPage};

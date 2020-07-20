@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { Form } from "semantic-ui-react";
-import { Button, Card, Input, Container, Row, Col } from "reactstrap";
+
+import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import Footer from './Footer';
 
 function ChangePassword() {
