@@ -13,7 +13,6 @@ import * as serviceWorker from './serviceWorker';
 import Studentprofile from './componants/student/studentprofile'
 import Teacherprofile from './componants/teacher/teacherprofile'
 import AddProject from './componants/teacher/addProject'
-import EditProject from './componants/teacher/EditProject'
 import MyProjects from './componants/teacher/myProjects'
 import ApprovedProjects from './componants/student/approvedprojects'
 import ChangePassword from './componants/changePassword'
@@ -29,7 +28,6 @@ import {AboutUsPage} from './componants/AboutUsPage';
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
-          <Route path='/teacher/editProject/:id/' component={EditProject} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/contactus" component={ContactUsPage} />
@@ -38,7 +36,6 @@ ReactDOM.render(
           <Route exact path="/student" component={Studentprofile} />
           <Route exact path="/teacher" component={Teacherprofile} />
           <Route exact path="/teacher/addProject" component={AddProject} />
-          <Route exact path="/teacher/editProject" component={EditProject} />
           <Route exact path="/teacher/MyProjects" component={MyProjects} />
           <Route exact path="/student/themes" component={ApprovedProjects} />
           <Route exact path="/changePassword" component={ChangePassword} />

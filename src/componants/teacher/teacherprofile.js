@@ -9,8 +9,25 @@ import 'semantic-ui-css/components/container.min.css';
 import 'semantic-ui-css/components/icon.min.css';
 import 'semantic-ui-css/components/message.min.css';
 import 'semantic-ui-css/components/header.min.css';
-import { Button} from "semantic-ui-react";
-import HorNavbar from "../HorNavbar"
+//import { Button} from "semantic-ui-react";
+import HorNavbar from "../HorNavbar";
+import {
+  Button,
+  Label,
+  FormGroup,
+  Input,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
+import avatar from '../../assets/images/avatar.jpg';
+import Icofont from 'react-icofont';
+import Footer from '../Footer'; 
 function Teacherprofile() {
 
   const [activeTab, setActiveTab] = React.useState("1");

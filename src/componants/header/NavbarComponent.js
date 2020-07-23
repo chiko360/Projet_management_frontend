@@ -63,8 +63,7 @@ return function cleanup() {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/index"
-            target="_blank"
+            to="/"
             title="make it easy"
           >
             PFE esi-sba
@@ -92,8 +91,7 @@ return function cleanup() {
             
             <NavItem>
               <NavLink
-                href="/Index"
-                target="_blank"
+                href="/"
               >
              Home
               </NavLink>
@@ -101,17 +99,7 @@ return function cleanup() {
 
             <NavItem>
               <NavLink
-                href="/student"
-                target="_blank"
-              >
-                Services 
-             </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink
                 href="/contactus"
-                target="_blank"
               >
                 Contact Us 
              </NavLink>
@@ -120,7 +108,6 @@ return function cleanup() {
                     <NavItem>
               <NavLink
                 href="/aboutus"
-                target="_blank"
               >
                 About Us 
              </NavLink>
