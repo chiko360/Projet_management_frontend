@@ -951,13 +951,13 @@ footer .copyright-text {
   
 .card {
   border-radius: 12px;
-  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
-  background-color: #FFFFFF;
-  color: #333333;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.198);
+  background-color: #ffffff;
+  color: #131313;
   margin-bottom: 20px;
   position: relative;
   z-index: 1;
-  border: 0 none;
+  border: 6 black;
   -webkit-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
   -moz-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
   -o-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
@@ -1066,6 +1066,17 @@ footer .copyright-text {
     margin-right: 5px; }
   .card .card-title-uppercase {
     text-transform: uppercase; }
+
+
+    .headerr{
+      background-color: #74a9ff;
+      color: #f3f9fd;
+      position: relative;
+      border-radius: 6px 36x 0 0;
+      z-index: 3; 
+    }
+
+
   .card .header {
     position: relative;
     border-radius: 3px 3px 0 0;
@@ -4982,3 +4993,64 @@ img.rounded {
 .profile-tabs {
   margin: 50px 0;
   min-height: 300px; }
+
+
+/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+  padding: 15px 0;
+  background: #f8f8f8;
+  min-height: 40px;
+  margin-top: 86px;
+}
+
+@media (max-width: 992px) {
+  .breadcrumbs {
+    margin-top: 72px;
+  }
+}
+
+.breadcrumbs h2 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+@media (max-width: 992px) {
+  .breadcrumbs ol {
+    margin-top: 10px;
+  }
+}
+
+.breadcrumbs ol li + li {
+  padding-left: 10px;
+}
+
+.breadcrumbs ol li + li::before {
+  display: inline-block;
+  padding-right: 10px;
+  color: #3c3c3c;
+  content: "/";
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs .d-flex {
+    display: block !important;
+  }
+  .breadcrumbs ol {
+    display: block;
+  }
+  .breadcrumbs ol li {
+    display: inline-block;
+  }
+}

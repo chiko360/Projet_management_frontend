@@ -124,9 +124,9 @@ function AddProject() {
     <input className="form-control my-3" type="text" name="keywords" placeholder="keywords" onChange={(event)=>{setTags(event.target.value)}} /> <br/>
     <br/>
     </Form>
-    <Button block className="btn-round" color="info" onClick={()=>{Post()}} >
-               Submit
-    </Button>
+    <center><Button size="lg" className="btn-round" color="info" onClick={()=>{Post()}} >
+        submit
+   </Button></center>
     </div>
         </div>
       </div>     
