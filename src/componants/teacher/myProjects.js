@@ -71,7 +71,8 @@ function MyProjects() {
         let response = await axios(options);
         let responseOK = response && response.status === 200 ;
         if (responseOK) {
-            history.push('/teacher/MyProjects');
+            toggleModalDelete();
+            window.location.reload();
         }
     }
     const editProject = async (index) => {
@@ -90,7 +91,7 @@ function MyProjects() {
         let response = await axios(options);
         let responseOK = response && response.status === 200 ;
         if (responseOK) {
-            toggleModalDelete();
+            toggleModal();
             window.location.reload();
         }
     }
@@ -100,7 +101,7 @@ function MyProjects() {
             return <Button
             type="button"  
             className="btn-round" 
-            color="warning"
+            color="primary"
             onClick={()=>{
                 toggleModal();
                 setTitle(props.title);
@@ -140,6 +141,19 @@ function MyProjects() {
                                                     </div>
                                                 </section>
                                             <hr/>
+                                            {(() => {
+                                                if (posts.length===0){
+                                                 return <div className="container">
+                                                 <div class="card my-4">
+                                                 <div class="card-body">
+                                                 <br/><br/><br/><br/><br/><br/><br/><br/>
+                                                    <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/teacher/addproject"> add one now !</a></h1></center>
+                                                    <br/><br/><br/><br/><br/><br/><br/>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+                                                }
+                                            })()}
                                         {posts.map((post,index) => {
                                             return <div className="container">
                                             <div class="card my-4">

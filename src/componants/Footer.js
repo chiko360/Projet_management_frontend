@@ -1,10 +1,10 @@
 import React from 'react';
 const Footer = () => {
   return (
-          <footer className="page-footer font-small unique-color-dark">
+          <footer style={{bottom:'0',position: 'relative',left: '0',right:'0'}} className="page-footer font-small unique-color-dark">
             <div style={{backgroundColor: '#3498db'}}>
               <div className="container">
-                {/* Grid row*/}
+                {/* Grid row style={{bottom:'0',position: 'relative',left: '0',right:'0'}}*/}
                 <div className="row py-4 d-flex align-items-center">
                   {/* Grid column */}
                   <div className="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
