@@ -10,7 +10,7 @@ import 'semantic-ui-css/components/icon.min.css';
 import 'semantic-ui-css/components/message.min.css';
 import 'semantic-ui-css/components/header.min.css';
 //import { Button} from "semantic-ui-react";
-import HorNavbar from "../HorNavbar";
+import IndexNavbar from  '../header/NavbarComponent';
 import {
   Button,
   Label,
@@ -95,7 +95,7 @@ function Teacherprofile() {
     },[]);
     return(
       <>
-<HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
       
       <div class="page-header header-filter" data-parallax="true" >
       </div>

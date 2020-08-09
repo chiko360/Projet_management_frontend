@@ -1,137 +1,182 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
-import { Button} from "semantic-ui-react";
-import HorNavbar from '../HorNavbar';
-function CreateGroup() {
-    const [groupName,setGname] = useState('');
-    const [members,setMembers] = useState([]);
-    const [nameError,setNE] = useState(null);
-    const [ServerError,setSE] = useState(null);
-    const [Grp,setGrp] = useState('');
-    const [Leader,setLeader] = useState(false);
-    const [mem, setmem] = useState([]);
-    const [leadername,setLN] = useState([]);
-    let history = useHistory();
+import NavBlack from '../header/NavBlack';
+import Footer from '../Footer';
+import {
+  Button,
+  FormGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Modal,
+  UncontrolledTooltip,
+  PopoverBody,
+  PopoverHeader,
+  UncontrolledPopover,
+  Label,
+  Input,
+  Form,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
+import avatar from '../../assets/images/avatar.jpg';
 
-    const getMembers = async () => {
-      let url = 'http://localhost:8000/groups/getMembers/';
-      let token = localStorage.getItem("token");
-      axios.create({
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization' : 'Bearer '+ token
-          },
-      })
+
+function CreateGroup() {
+  const [modal, setModal] = React.useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  }
+  const [activeTab, setActiveTab] = React.useState("1");
+
+  const toggle = tab => {
+    if (activeTab !== tab) {
+      setActiveTab(tab);
+    }
+
+  };
+  const [groupName, setGname] = useState('');
+  const [members, setMembers] = useState([]);
+  const [nameError, setNE] = useState(null);
+  const [ServerError, setSE] = useState(null);
+  const [Grp, setGrp] = useState('');
+  const [Leader, setLeader] = useState(false);
+  const [mem, setmem] = useState([]);
+  const [leadername, setLN] = useState([]);
+  let history = useHistory();
+
+  const getMembers = async () => {
+    let url = 'http://localhost:8000/groups/getMembers/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
       .request({
         url: url,
         method: "get",
       })
       .then((res) => {
-          setmem(res.data);
-        }
+        setmem(res.data);
+      }
       )
       .catch(() => {
         console.log('don\'t have a grp');
       })
-    }
+  }
 
-    const havegrp = async () => {
-      let url = 'http://localhost:8000/profiles/getgroup/';
-      let token = localStorage.getItem("token");
-      axios.create({
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization' : 'Bearer '+ token
-          },
-      })
+  const havegrp = async () => {
+    let url = 'http://localhost:8000/profiles/getgroup/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
       .request({
         url: url,
         method: "get",
       })
       .then((res) => {
-          setGrp(res.data.grp);
-          setLeader(res.data.leader)
-          setLN(res.data.leaderName)
-        }
+        setGrp(res.data.grp);
+        setLeader(res.data.leader)
+        setLN(res.data.leaderName)
+      }
       )
       .catch(() => {
         history.push('/*')
       })
-    }
+  }
 
-    const handleCreation = async () =>{
-        const isValid = validate();
-        if (isValid===true && Grp==='') {
-          setNE(null);
-          createGroup();
-        }
-        else if (Grp!==''){
-          for (var i = 0; i < members.length; i++) {
-            var memlist= members[i].label.split(' ');
-            const first_name=memlist[0]
-            const last_name=memlist[1]
-            Addmembers(first_name,last_name);
-          }
-        }
-    }
 
-    const deletemember = async (first_name,last_name) => {
-      let url = 'http://localhost:8000/groups/deletemember/';
-      let token = localStorage.getItem("token");
-      axios.create({
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization' : 'Bearer '+ token
-          },
-      })
+
+  const handleCreation = async () => {
+    const isValid = validate();
+    if (isValid === true && Grp === '') {
+      setNE(null);
+      createGroup();
+    }
+    else if (Grp !== '') {
+      for (var i = 0; i < members.length; i++) {
+        var memlist = members[i].label.split(' ');
+        const first_name = memlist[0]
+        const last_name = memlist[1]
+        Addmembers(first_name, last_name);
+      }
+    }
+  }
+
+
+
+  const deletemember = async (first_name, last_name) => {
+    let url = 'http://localhost:8000/groups/deletemember/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
       .request({
         url: url,
         method: "post",
-        data: { first_name,last_name },
+        data: { first_name, last_name },
       })
       .then((res) => {
-          history.push('/student/createGroup')
-        }
+        history.push('/student/group')
+      }
       )
       .catch(() => {
         console.log('error');
       })
-    }
+  }
 
-    const Addmembers = async (first_name,last_name) => {
-      let url = 'http://localhost:8000/groups/addmember/';
-      let token = localStorage.getItem("token");
-      axios.create({
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization' : 'Bearer '+ token
-          },
-      })
+
+
+  const Addmembers = async (first_name, last_name) => {
+    let url = 'http://localhost:8000/groups/addmember/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
       .request({
         url: url,
         method: "post",
-        data: { first_name,last_name },
+        data: { first_name, last_name },
       })
       .then((res) => {
-        console.log(first_name+' '+last_name+' was added')
-        }
+        console.log(first_name + ':' + last_name + ' was added')
+      }
       )
       .catch(() => {
         console.log('error');
         setSE('you don\'t have a groupe')
       })
-    }
-    const createGroup = async () => {
-      let url = 'http://localhost:8000/groups/creategroup/';
-      let token = localStorage.getItem("token");
-      axios.create({
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization' : 'Bearer '+ token
-          },
-      })
+  }
+
+  const createGroup = async () => {
+    let url = 'http://localhost:8000/groups/creategroup/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
       .request({
         url: url,
         method: "post",
@@ -140,139 +185,276 @@ function CreateGroup() {
       .then((res) => {
         console.log('created')
         for (var i = 0; i < members.length; i++) {
-          var memlist= members[i].label.split(' ');
-          const first_name=memlist[0]
-          const last_name=memlist[1]
-          Addmembers(first_name,last_name);
+          var memlist = members[i].label.split(' ');
+          const first_name = memlist[0]
+          const last_name = memlist[1]
+          Addmembers(first_name, last_name);
         }
       })
       .catch(() => {
         console.log('already exist')
         for (var i = 0; i < members.length; i++) {
-          var memlist= members[i].label.split(' ');
-          const first_name=memlist[0]
-          const last_name=memlist[1]
-          Addmembers(first_name,last_name);
+          var memlist = members[i].label.split(' ');
+          const first_name = memlist[0]
+          const last_name = memlist[1]
+          Addmembers(first_name, last_name);
         }
       });
+  }
+  const validate = () => {
+    let nameError = "";
+    if (groupName === '') {
+      nameError = 'Group name can\'t be blank';
     }
-    const validate = () => {
-        let nameError = "";
-
-        if (groupName==='') {
-          nameError = 'Group name can\'t be blank';
-        }
-    
-        if (nameError) {
-          setNE(nameError);
-          return false;
-        }
-    
-        return true;
-      };
-
-    const addmember = members => {
-        setMembers(members);
+    if (nameError) {
+      setNE(nameError);
+      return false;
     }
-    const loadOptions = async (inputText,callback)=> {
-        let url = 'http://localhost:8000/members/'+inputText;
-        let token = localStorage.getItem("token")
-        let options = {
-          method: 'get',
-          url: url,
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json;charset=UTF-8',
-              'Authorization' : 'Bearer '+ token
-          },
-        };
-        const response = await fetch(url,options)
-        const json = await response.json()
-        callback(json.map(i=>({label:i.first_name+' '+i.last_name,value:i.last_name+' '+i.last_name})));
+
+    return true;
+  };
+
+  const addmember = members => {
+    setMembers(members);
+  }
+
+  const loadOptions = async (callback, inputText) => {
+    let url = 'http://localhost:8000/members/'+inputText;
+    let token = localStorage.getItem("token")
+    let options = {
+      method: 'GET',
+      url: url,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    };
+    const response = await fetch(url, options)
+    const json = await response.json()
+    callback(json.map(i => ({ label: i.first_name + ' ' + i.last_name, value: i.last_name + ' ' + i.last_name })));
+  }
+
+
+  useEffect(() => {
+    havegrp();
+    getMembers();
+  }, []);
+
+
+
+
+  function InputGN(props) {
+    const havegrp = props.grp;
+    if (havegrp === '') {
+      return (
+        <div>
+          <Form name="form" >
+            <br />
+            <h3>Add the name of your group </h3>
+            <br />
+            <input placeholder="Enter name of your group.. "
+              type="text"
+              className="form-control"
+              name="Gname"
+              onChange={(event) => { setGname(event.target.value) }} />
+            <br />
+            <Button
+              block
+              className="btn-hover color-1"
+              onClick={() => { handleCreation() }}>
+              Validate Group's Name
+               </Button>
+            <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
+          </Form>
+        </div>
+      )
     }
-    useEffect(()=> {
-      havegrp();
-      getMembers();
-    },[]);
+    else return null;
+  }
 
+  function AddFeild(props) {
+    const isLeader = props.Leader;
+    if (isLeader) {
+      return (
+        <div>
+          <br/>
+          <Form name="form" >
+            <h4>Enter the name of the member you want to add yo yout group. </h4>
+            <br />
+            <Container>
 
-    function InputGN(props) {
-      const havegrp = props.grp;
-      if (havegrp==='') {
-        return (
-          <div>
-              <input type="text" name="Gname" placeholder="enter a groupe name" onChange={(event)=>{setGname(event.target.value)}} /> <br/>
-              <Button class="ui button" color="blue" onClick={()=>{handleCreation()}}>create group</Button>
-              <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
-          </div>
-        )
-      }
-      else return null;
-    }  
-    function AddFeild(props) {
-      const isLeader = props.Leader;
-      if (isLeader) {
-        return (
-          <div>
-            <br/>
-            <div style={{ fontSize: 26}}>add members :</div> <br/>
-            <AsyncSelect  isMulti value={members} onChange={addmember} placeholder='enter members names' loadOptions={loadOptions} /><br/><br/>
-            <Button class="ui button" color="blue" onClick={()=>{handleCreation()}}>invite member</Button>
+            <Row>
+            <Col lg="9" md="12" style={{height : "60px" }}>
+
+            <AsyncSelect
+              isMulti
+              value={members}
+              onChange={addmember}
+              placeholder='enter members names..'
+              loadOptions={loadOptions}
+            />
+            <br />
+            </Col>
+            
+<Col>
+            <Button
+              style={{ float: 'right' }}
+              block
+              className="btn-hover color-1"
+              onClick={() => { handleCreation() }}>Validate Member</Button>
+              </Col>
+
+</Row>
+</Container>
+
             <div style={{ fontSize: 12, color: "red" }}>{ServerError}</div>
-          </div>
-        )
-      }
-      else return null;
-    }    
-    function DltButton(props) {
-      const isLeader = props.Leader;
-      const first_name = props.first_name;
-      const last_name = props.last_name;
-      const leader = props.LN;
-      var LNList= leader.split(' ');
-      const leaderLN=LNList[0]
-      const leaderFN=LNList[1]
-      console.log(leaderFN);
-      if (first_name===leaderFN && last_name===leaderLN){
-        return null;
-      }
-      else if (isLeader) {
-        return (
-          <Button class="ui button" color="red" onClick={()=>{deletemember(first_name,last_name)}}>delete member</Button>
-        )
-      }
-      else {
-        return null;
-      }
-    }
 
-    return (
-        <React.Fragment>
-          <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
-            <header className="App-header">
-              <p>
-                {Grp}
-              </p>
-            </header>
-          <div><center>
-            <InputGN grp={Grp}/>
-            <AddFeild Leader={Leader}/>
-            <div>
-              {mem.map((mem,index) => {
-              return <ul>
-                      <h1>{index +1}</h1>
-                      <h2>first name : {mem.first_name}</h2>
-                      <h2>last name : {mem.last_name}</h2>
-                      <h3>gender : {mem.gender}</h3>
-                      <h3>birth date : {mem.birth_date}</h3>
-                      <DltButton Leader={Leader} LN={leadername} first_name={mem.first_name} last_name={mem.last_name} />
+          </Form>
+
+        </div>
+
+      )
+    }
+    else return null;
+  }
+
+
+
+  function DltButton(props) {
+    const isLeader = props.Leader;
+    const first_name = props.first_name;
+    const last_name = props.last_name;
+    const leader = props.LN;
+    var LNList = leader.split(' ');
+    const leaderLN = LNList[0]
+    const leaderFN = LNList[1]
+    console.log(leaderFN);
+    if (first_name === leaderFN && last_name === leaderLN) {
+      return null;
+    }
+    else if (isLeader) {
+      return (
+        <Button className="btn-hover color-11"
+         onClick={() => { deletemember(first_name, last_name) }}>
+          delete member
+        </Button>
+      )
+    }
+    else {
+      return null;
+    }
+  }
+
+  return (
+
+    <>
+      <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
+      <br/>
+        <br/>
+<br/>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div className="section about">
+              <Container>
+                <section class="breadcrumbs">
+                  <div class="container">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2>All Informations of the Group</h2>
+                      <a href="/student/group">
+                       
+                       
+                       </a>
+                    </div>
+                  </div>
+                </section>
+                <hr />
+                <div className="container">
+                  <div class="card my-4">
+                    <h2 class="card-header headerrr headerrr-hover">
+                      <br />
+                      Current Group "{Grp}" Infos
+                      <br /> 
+       <br /> 
+                    </h2>
+
+                    <div class="card-body">
+                      <div>
+                        <AddFeild Leader={Leader} />
+                        <br />
+                        <InputGN grp={Grp} />
+                        <br />
+                        <h3 class="card-header headerrr headerrr-hover">
+                      Current Members
+                      <br/>
+                      <small>Leader: {leadername}</small>
+                    </h3>
+                    <br/>
+                    <br/>
+
+                        {mem.map((mem, index) => {
+                          return <Row>
+                <Col className="ml-auto mr-auto" md="7">
+                  <ul className="list-unstyled follows">
+
+                    <li>
+                      <Row>
+
+                        <Col className="ml-auto mr-auto" lg="2" md="4" xs="4">
+                        
+                              <img src={avatar} alt="Circle Image" class="img-raised rounded-circle img-fluid" />
+                            </Col>
+                           
+                        <Col className="ml-auto mr-auto" lg="7" md="4" xs="4">
+                          <p>
+                            <h4>
+                            {mem.first_name} {mem.last_name} 
+                            </h4>
+                             Gender : {mem.gender}
+                            <br/>
+                            Birth Date : {mem.birth_date}
+                          <br />
+                          </p>
+                          <DltButton Leader={Leader} LN={leadername} first_name={mem.first_name} last_name={mem.last_name} />
+
+                        </Col>
+                       
+                      </Row>
+                    </li>
+                    <hr />
+                  
                   </ul>
-              })}
+                </Col>
+              </Row>
+                          
+                          
+                         
+                        })}
+                    
+                      </div>
+
+
+                    </div>
+                    <br/>
+      
+      
+                  </div>
                 </div>
-            </center> 
+              </Container>
+
+              <br/>
+        <br/>
+        <br/>
+<br/>
+            </div>
           </div>
-          </React.Fragment>
-    );
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default CreateGroup;

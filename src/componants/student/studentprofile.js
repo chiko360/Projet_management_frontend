@@ -16,7 +16,6 @@ import {
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import HorNavbar from '../HorNavbar';
-import IndexNavbar from '../header/NavbarComponent';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
 import Footer from '../Footer'; 
@@ -98,132 +97,45 @@ function Studentprofile() {
                             
                             <div className="name">
                            
-                        <Button className="btn-round" color="info" >
-                           <Icofont icon="ssl-security"/> Change Password
-                        </Button>
-                        <br></br>
-                        <br></br>
-                        <Button className="btn-round "  color="danger" outline>
-                           <Icofont icon="logout"/> 
-                        </Button>
-              <h4 className="title">
+                        
+              <h2>
               {first_name} {last_name} <br />
-              </h4>
-              <h6 className="description">Leader of Team</h6>
+            </h2>
             </div>
                             </div>
+                            <br/>
                             <Row>
             <Col className="ml-auto mr-auto text-center" md="12">
-                    <h6>date of birth: {date_of_birth}</h6>
-                    <h6>gender: {gender}</h6>
-                    <h6>i'm a {promo} student at esi sba</h6>
+                    <h5>Date of Birth: {date_of_birth}</h5>
+                    <h5>Gender: {gender}</h5>
+                    <h5>I'm a {promo} Student at ESI SBA</h5>
+
               <br />
+              <Button size="lg"  className="bttn-hover color-4" style={{width:'250px'}}>
+                           <Icofont icon="ssl-security"/> Change Password
+                        </Button>
             
        </Col>
        </Row>
        <br />
-          <div className="nav-tabs-navigation">
-            <div className="nav-tabs-wrapper">
-              <Nav role="tablist" tabs>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "1" ? "active" : ""}
-                    onClick={() => {
-                      toggle("1");
-                    }}
-                  >
-                   More Infos
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "2" ? "active" : ""}
-                    onClick={() => {
-                      toggle("2");
-                    }}
-                  >
-                    Following
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </div>
-          </div>
-          {/* Tab panes */} <TabContent className="following" activeTab={activeTab}>
-            <TabPane tabId="1" id="follows">
-              <Row>
-                <Col className="ml-auto mr-auto" md="10">
-                  <ul className="list-unstyled follows">
-                    <li>
-                      <Row>
-                    
-                        <Col className="ml-auto mr-auto" lg="7" md="6" xs="6">
-                          <h6>
-                            Did you choose a team?<br />
-                            <small>Click check if you did.</small>
-                          </h6>
-                        </Col>
-                        <Col className="ml-auto mr-auto" lg="3" md="4" xs="4">
-                          <FormGroup check>
-                            <Label check>
-                              <Input
-                                defaultChecked
-                                defaultValue=""
-                                type="checkbox"
-                              />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </li>
-                    <hr />
-                    <li>
-                      <Row>
-                     
-                        <Col className="ml-auto mr-auto" lg="7" md="6" xs="6">
-                          <h6>
-                            Did you choose a theme? <br />
-                            <small>Click check if you did.</small>
-                          </h6>
-                        </Col>
-                        <Col className="ml-auto mr-auto" lg="3" md="6" xs="4">
-                          <FormGroup check>
-                            <Label check>
-                              <Input defaultValue="" type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane className="text-center" tabId="2" id="following">
-              <h3 className="text-muted">Not following anyone yet :(</h3>
-              <Button className="btn-round" color="warning">
-                Find artists
-              </Button>
-            </TabPane>
-          </TabContent>
+         </div>
         
-	                    </div>
-                        
-    	            </div>
-                </div>
+         </div>
+         </div>
 				<br></br>
 				<br></br>
 				<br></br>
-				<br></br>
-
-
  
             </div>
+           
         </div>
+ 
 	</div>
 	   
-
+  <br/>
+         <br/> 
+         <br/>
+         <br/>
           <Footer/>
 
 </>

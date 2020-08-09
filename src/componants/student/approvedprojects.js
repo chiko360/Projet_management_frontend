@@ -1,8 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
-import { Button} from "semantic-ui-react";
-import HorNavbar from '../HorNavbar';
+import { Button, Container} from "reactstrap";
+import NavBlack from  '../header/NavBlack';
+import Footer from '../Footer';
 
 function ApprovedProjects() {
 
@@ -48,42 +49,89 @@ function ApprovedProjects() {
     },[]);
     
     return(
-        <React.Fragment>
-            <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
-        <header className="App-header">
-          <p>
-            my Projects
-          </p>
-        </header>
-        <div>
-        {posts.map((post,index) => {
-            return <div>
-                        <div>
-                            <div class="ui grid">
-                                <div class="four wide column">
-                                    <div class="ui fluid vertical tabular menu">
-                                        <div class="active item">{post.title}</div>
-                                    </div>
-                                </div>
-                            <div class="stretched twelve wide column">
-                                <div class="ui bottom attached segment active tab">
-                                        <h3>proposed by : {post.user}</h3>
-                                        <h3>created at : {post.creating_date}</h3>
-                                        <h3>introduction : {post.introduction}</h3>
-                                        <h3>tools : {post.tools}</h3>
-                                        <h3>tags : {post.tags}</h3>
-                                        <h3>details :{post.details}</h3>
-                                        <center>
-                                        <Button color='blue' onClick={()=>{pdfDownload(post.title,post.user,post.creating_date,post.introduction,post.tools,post.details)}}>view in pdf</Button></center>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                })} 
+<>
+<NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+<br/>
+        <br/>
+<br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div className="section about">
+                    <Container>  
+                                                <section class="breadcrumbs">
+                                                    <div class="container">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <h2>Check All Projects.</h2>
+                                                            <a href="/student/addproject">
+
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            <hr/>
+                                            {(() => {
+                                                if (posts.length===0){
+                                                 return <div className="container">
+                                                 <div class="card my-4">
+                                                 <div class="card-body">
+                                                <br/><br/><br/><br/><br/><br/><br/>
+                                                    <center><h1 > there is no project that has been submited yet.</h1></center>
+                                                <br/><br/><br/><br/><br/><br/><br/>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+                                                }
+                                            })()}
+
+{posts.map((post,index) => {
+
+return <div className="container">
+<div class="card my-4">
+<div class=" card-header headerrr headerrr-hover "> <h2>{post.title}</h2>
+<h4>by : {post.user}</h4>
+</div>
+    <div class="card-body">
+    <h5 style={{color:'#3498db', float: 'right'}}>{post.creating_date}</h5>
+    <br/>
+    <br/>
+                <h3 style={{color:'#3498db'}}>What this project is about? </h3>
+                <p> {post.introduction}</p>
+                <h3 style={{color:'#3498db'}}>What do you need to make this project? </h3>
+                 <p> {post.tools}</p>
+                <h3 style={{color:'#3498db'}}>You need more details? </h3>
+                <p>{post.details}</p>
+                <h3 style={{color:'#3498db'}}>Tags: </h3>
+                <p>{post.tags}</p>
+                
+                <Button
+                style={{float: 'right'}}
+                 className="btn-hover color-4 left-side" 
+                 onClick={()=>{pdfDownload(post.title,post.user,post.creating_date,post.introduction,post.tools,post.details)}}>
+
+                    view in pdf</Button>
+
+</div> 
+<br/>
+<br/>
+
         </div>
-        </React.Fragment>
-    );
+        </div>
+
+        })} 
+                        </Container>
+                        <br/>
+        <br/>
+        <br/>
+<br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <Footer/>  
+        </>            
+);
 }
 
 export default ApprovedProjects;

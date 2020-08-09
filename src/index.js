@@ -4,6 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css'; 
 import './assets/css/font-awesome.min.css';
+import './assets/css/smthing.css';
 import './assets/css/tooplate-style.css';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
@@ -14,6 +15,8 @@ import Studentprofile from './componants/student/studentprofile'
 import Teacherprofile from './componants/teacher/teacherprofile'
 import AddProject from './componants/teacher/addProject'
 import MyProjects from './componants/teacher/myProjects'
+import StudentAddProject from './componants/student/addProject'
+import StudentMyProjects from './componants/student/myProjects'
 import ApprovedProjects from './componants/student/approvedprojects'
 import ChangePassword from './componants/changePassword'
 import CreateGroup from './componants/student/createGroupe';
@@ -37,6 +40,8 @@ ReactDOM.render(
           <Route exact path="/teacher" component={Teacherprofile} />
           <Route exact path="/teacher/addProject" component={AddProject} />
           <Route exact path="/teacher/MyProjects" component={MyProjects} />
+          <Route exact path="/student/addProject" component={StudentAddProject} />
+          <Route exact path="/student/MyProjects" component={StudentMyProjects} />
           <Route exact path="/student/themes" component={ApprovedProjects} />
           <Route exact path="/changePassword" component={ChangePassword} />
           <Route exact path="/student/group" component={CreateGroup} />

@@ -12,7 +12,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import IndexNavbar from './header/NavbarComponent';
+import NavSimple from './header/NavSimple';
 import ContactHeader from './header/ContactHeader';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
@@ -70,7 +70,7 @@ class ContactUsPage extends Component {
 
   return (
     <>
-<IndexNavbar />
+<NavSimple/>
 <ContactHeader />
 
 <section id="headersmall" class="parallax-section">

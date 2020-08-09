@@ -23,7 +23,7 @@ import {
      Container,
      Row, Col
    } from "reactstrap";
-import IndexNavbar from './componants/header/NavbarComponent';
+import NavSimple from './componants/header/NavSimple';
 import Icofont from 'react-icofont';
 
 console.log(etud);
@@ -52,8 +52,7 @@ class App extends Component {
     return (
 
 <div className="App">
-
-<IndexNavbar />
+<NavSimple/>
 <section id="home" class="parallax-section">
      <div class="overlay"></div>
      <div id="slideshow">

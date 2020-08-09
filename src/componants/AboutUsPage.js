@@ -12,7 +12,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import IndexNavbar from './header/NavbarComponent';
+import NavSimple from './header/NavSimple';
 import AboutHeader from './header/AboutHeader';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
@@ -70,7 +70,7 @@ class AboutUsPage extends Component {
 
   return (
     <>
-<IndexNavbar />
+<NavSimple/>
 <AboutHeader />
         <section id="about" class="about">
 <Container>

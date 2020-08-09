@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import AsyncSelect from 'react-select/async';
-import { Header } from "semantic-ui-react";
 import NavBlack from  '../header/NavBlack';
 import "../../addP.css";
 import Footer from '../Footer';
@@ -12,10 +10,10 @@ import {
   Input,
   Container,
 } from "reactstrap";
-function AddProject() {
+function StudentAddProject() {
 
     const [title, setTitle] = useState(null);
-    const [promo, setPromo] = useState("2CPI");
+    const [promo, setpromo] = useState(null);
     const [introduction, setIntro] = useState(null);
     const [tags, setTags] = useState(null);
     const [tools, setTools] = useState(null);
@@ -44,8 +42,9 @@ function AddProject() {
       callback(json.map(i=>({label:i.first_name+' '+i.last_name,value:i.last_name+' '+i.last_name})));
     }
 
+
     const Post = async () => {
-        let url = 'http://localhost:8000/posts/addpost/';
+        let url = 'http://localhost:8000/posts/createpoststudent/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'POST',
@@ -60,17 +59,129 @@ function AddProject() {
         let response = await axios(options);
         let responseOK = response && response.status === 200 ;
         if (responseOK) {
-            history.replace('/teacher/MyProjects');
+            history.replace('/student/MyProjects');
         }
     }
+
+    const getinfo = async () => {
+      let url = 'http://localhost:8000/profiles/student/';
+      let token = localStorage.getItem("token")
+      let options = {
+                  method: 'get',
+                  url: url,
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json;charset=UTF-8',
+                      'Authorization' : 'Bearer '+ token
+                  },
+              };
+      
+      await axios(options).then(res => {
+          const response = res.data;
+          setpromo(response.data['0'].promo)
+      })
+      .catch(function (error) {
+        history.push('/Forbiden')
+        }
+      )
+  }
     useEffect(()=> {
-      if (localStorage.getItem('type')!=='teacher'){
-          history.push('/Forbiden')
+      if (localStorage.getItem('type')!=='student'){
+        history.push('/Forbiden')
       }
+      getinfo();
   },[]);
-    return(    
+
+
+  function AbleProject(props) {
+    if (props.promo==='3CS / SIW' || props.promo==='3CS / ISI') {
+      return (
+    <div>
+       <div className="container">
+        <div class="card my-4">
+    <h2 class="card-header headerrr headerrr-hover">
+   Fill the fields and hit submit to add a new project. 
+   <br/>
+   <br/>    
+    </h2>
+    <div class="card-body">
+<Form>
+    <Input
+      className="form-control my-3"
+      name="title"
+       placeholder="Add a title to your project.." 
+       onChange={(event)=>{setTitle(event.target.value)}}
+    />
+    <textarea
+      className="form-control my-3"
+      rows="3" cols="50" 
+      type="text"
+       name="introduction" 
+       placeholder="Add an introduction to your project.." 
+       onChange={(event)=>{setIntro(event.target.value)}}
+      >
+    </textarea>
+    
+    <textarea
+      className="form-control my-3"
+      rows="3" cols="50"
+       type="text" 
+       name="tools"
+        placeholder="Enter the tools needed to make your project.." 
+        onChange={(event)=>{setTools(event.target.value)}}
+     >
+    </textarea>
+
+    <textarea
+      className="form-control my-3"
+      rows="5" cols="50" 
+      type="text" 
+      name="details"
+       placeholder="Add more details to your project.." 
+       onChange={(event)=>{setDetails(event.target.value)}}
+      >
+    </textarea>
+    <input 
+    className="form-control my-3" 
+    type="text" 
+    name="keywords"
+     placeholder="Enter the key words.."
+      onChange={(event)=>{setTags(event.target.value)}} /> <br/>
+    <br/>
+    </Form>
+    <center>
+      <Button block size="lg" className="bttn-hover color-1"  onClick={()=>{Post()}} >
+        submit
+   </Button></center>
+   <br/>
+    </div>
+        </div>
+        </div>
+        </div>
+      )
+    }
+    else 
+      return(
+      <div className="container">
+      <div class="card my-4">
+      <div class="card-body">
+      <br/><br/><br/><br/><br/><br/><br/><br/>
+         <center><h1 > you have to be a 3CS student to be able to post a project. </h1></center>
+         <br/><br/><br/><br/><br/><br/><br/>
+      {promo}
+      </div>
+
+      </div>
+      </div>
+    );
+  }  
+    return(      
 <>
 <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+<br/>
+        <br/>
+        <br/>
+
 <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -81,55 +192,18 @@ function AddProject() {
 
         <div class="d-flex justify-content-between align-items-center">
           <h2>Add Project</h2>
-          <a href="/teacher/myprojects"><Button className="btn-round" color="info" >back to my Projects</Button></a>
+          <a href="/student/myprojects"><Button size="lg" className="bttn-hover color-9">my Projects</Button></a>
         </div>
       </div>
     </section>
-    <hr/>
-  <div className="container">
-        <div class="card my-4">
-    <h5 class="card-header headerr">Fill the fields and hit submit to add a new project.</h5>
-    <div class="card-body">
-<Form>
-    <Input
-      className="form-control my-3"
-      name="title" placeholder="title" onChange={(event)=>{setTitle(event.target.value)}}
-    />
-    <form class="ui form">
-    <select onChange={(event)=>{setPromo(event.target.value)}}>
-                <option>2CPI</option>
-                <option>1CS</option>
-                <option>2CS</option>
-                <option>3CS</option>
-            </select></form>
-    <br/>
-
-    <textarea
-      className="form-control my-3"
-      rows="4" cols="50" type="text" name="introduction" placeholder="introduction" onChange={(event)=>{setIntro(event.target.value)}}
-      >
-    </textarea>
     
-    <textarea
-      className="form-control my-3"
-      rows="4" cols="50" type="text" name="tools" placeholder="tools" onChange={(event)=>{setTools(event.target.value)}}
-     >
-    </textarea>
+    <hr/>
 
-    <textarea
-      className="form-control my-3"
-      rows="10" cols="50" type="text" name="details" placeholder="details" onChange={(event)=>{setDetails(event.target.value)}}
-      >
-    </textarea>
-    <input className="form-control my-3" type="text" name="keywords" placeholder="keywords" onChange={(event)=>{setTags(event.target.value)}} /> <br/>
-    <br/>
-    </Form>
-    <center><Button size="lg" className="btn-round" color="info" onClick={()=>{Post()}} >
-        submit
-   </Button></center>
-    </div>
-        </div>
-      </div>     
+        <AbleProject promo={promo}/> 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         </Container>
     </div>
   </div>
@@ -140,7 +214,7 @@ function AddProject() {
     );
 }
 
-export default AddProject;
+export default StudentAddProject;
 
 //<React.Fragment>
 //<HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>

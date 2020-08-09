@@ -13,7 +13,7 @@ import {
   Col
 } from "reactstrap";
 import Footer from '../Footer';
-function MyProjects() {
+function StudentMyProjects() {
     const [title, setTitle] = useState(null);
     const [promo, setPromo] = useState(null);
     const [introduction, setIntro] = useState(null);
@@ -57,7 +57,7 @@ function MyProjects() {
     }
 
     const deleteProject = async (index) => {
-        let url = 'http://localhost:8000/posts/'+index+'/delete/';
+        let url = 'http://localhost:8000/posts/'+index+'/deletepost/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'DELETE',
@@ -76,7 +76,7 @@ function MyProjects() {
         }
     }
     const editProject = async (index) => {
-        let url = 'http://localhost:8000/posts/'+index+'/edit/';
+        let url = 'http://localhost:8000/posts/'+index+'/editpost/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'PUT',
@@ -119,7 +119,7 @@ function MyProjects() {
     }
 
     useEffect(()=> {
-        if (localStorage.getItem('type')!=='teacher'){
+        if (localStorage.getItem('type')!=='student'){
             history.push('/Forbiden')
         }
         getprojects();
@@ -127,6 +127,9 @@ function MyProjects() {
     return(
         <>
     <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+    <br/>
+        <br/>
+<br/>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -136,7 +139,8 @@ function MyProjects() {
                                                     <div class="container">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <h2>Check All Your Projects.</h2>
-                                                            <a href="/teacher/addproject"><Button className="btn-round" color="info" >add Project</Button></a>
+                                                            <a href="/student/addproject">
+                                                                <Button size="lg" className="bttn-hover color-9" >add Project</Button></a>
                                                         </div>
                                                     </div>
                                                 </section>
@@ -157,7 +161,7 @@ function MyProjects() {
                                         {posts.map((post,index) => {
                                             return <div className="container">
                                             <div class="card my-4">
-                                                <h5 class="card-header headerr">{post.title}</h5>
+                                                <h5 class="card-header headerrr headerrr-hover">{post.title}</h5>
                                                 <div class="card-body">
                                                     <h3>promo : {post.promo}</h3>
                                                     <h3>created at : {post.creating_date}</h3>
@@ -264,7 +268,7 @@ function MyProjects() {
                                         </Button>
                                     </div>
                                     <div className="divider" />
-                                    <div className="right-side">
+                                    <div className="left-side">
                                         <Button className="btn-round" color="info" type="button" onClick={()=>{editProject(post.id)}}>
                                          Save
                                         </Button>
@@ -276,6 +280,10 @@ function MyProjects() {
                             </div>  })}    
                         </Container>
                     </div>
+                    <br/>
+        <br/>
+        <br/>
+<br/>
                 </div>
             </div>
         </div>
@@ -284,7 +292,7 @@ function MyProjects() {
         );
     }
 
-export default MyProjects;
+export default StudentMyProjects;
 //
 //<React.Fragment>
 //                <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>

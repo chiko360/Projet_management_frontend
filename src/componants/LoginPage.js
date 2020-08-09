@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "reactstrap";
 import Footer from './Footer'; 
 import { Form } from "semantic-ui-react";
-import IndexNavbar from './header/NavbarComponent';
+import NavSimple from './header/NavSimple';
+
 function Login() {
 
   document.documentElement.classList.remove("nav-open");
@@ -99,8 +100,8 @@ function Login() {
 
     return (
     <>
-    <IndexNavbar />
-    <section id="home" class="parallax-section">
+<NavSimple/>   
+ <section id="home" class="parallax-section">
      <div class="overlay"></div>
      <div class="image-overlay">    
     </div>
