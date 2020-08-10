@@ -75,6 +75,7 @@ function Teacherprofile() {
 
     useEffect(()=> {
       if (localStorage.getItem('type')!=='teacher'){
+        console.log('forbiden')
         history.push('/Forbiden')
       }
         getinfo();

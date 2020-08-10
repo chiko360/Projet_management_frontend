@@ -32,6 +32,7 @@ function IndexNavbar(props) {
   const [last_name, setlname] = useState(null);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
+  const [invitations, setInv] = useState([]);
   const type = props.type
   const logged = props.islogged
   let history = useHistory();
@@ -84,7 +85,24 @@ function IndexNavbar(props) {
         setNotif(response)
     })
 }
-
+const getinvites = async () => {
+  let url = 'http://localhost:8000/groups/invitations/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'get',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      console.log(response)
+      setInv(response)
+  })
+}
 
   function Loginbutton(props){
     const logged = props.logged
@@ -191,8 +209,8 @@ function IndexNavbar(props) {
 
   useEffect(()=> {
     getinfo();
-      getnotifs();
-
+    getnotifs();
+    getinvites();
       const updateNavbarColor = () => {
         if (
           document.documentElement.scrollTop > 70 ||
