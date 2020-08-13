@@ -95,13 +95,20 @@ class AboutUsPage extends Component {
               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
               culpa qui officia deserunt mollit anim id est laborum.
             </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
+            <Button
+            href="#"  
+              style={{width:"150px"}}
+              className="btn-hover color-3  btn-md">
+                Learn More
+             </Button>
+
+          
           </div>
           </Row>
         </Container>
             </section>
 
-            <section id="clients" class="clients clients">
+<section id="clients" class="clients clients">
 <div class="section-title" data-aos="fade-up">
           <h2>Our Partners</h2>
         </div>

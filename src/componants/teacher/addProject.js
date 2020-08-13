@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import AsyncSelect from 'react-select/async';
-import { Header } from "semantic-ui-react";
 import NavBlack from  '../header/NavBlack';
-import "../../addP.css";
+import AOS from 'aos';
 import Footer from '../Footer';
 import {
   Button,
@@ -63,10 +61,14 @@ function AddProject() {
             history.replace('/teacher/MyProjects');
         }
     }
+
     useEffect(()=> {
       if (localStorage.getItem('type')!=='teacher'){
           history.push('/Forbiden')
       }
+      
+    AOS.init();
+    AOS.refresh();
   },[]);
     return(    
 <>
@@ -75,63 +77,110 @@ function AddProject() {
             <div class="row">
                 <div class="col-lg-12">
                     <div className="section about">
+                      <br/>
+                      <br/>
+                      <br/>
                         <Container>  
-                        <section class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Add Project</h2>
-          <a href="/teacher/myprojects"><Button className="btn-round" color="info" >back to my Projects</Button></a>
-        </div>
-      </div>
-    </section>
+                        <section class="breadcrumbs"  data-aos="fade-up" data-aos-delay="200">
+                  <div class="container">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2>Add Project</h2>
+                      <ol>
+                        <li><a href="/index">home</a></li>
+                        <li><a href="/teacher">teacher</a></li>
+                        <li>add project</li>
+                      </ol>
+                    </div>
+                  </div>
+                </section>
     <hr/>
   <div className="container">
         <div class="card my-4">
-    <h5 class="card-header headerr">Fill the fields and hit submit to add a new project.</h5>
-    <div class="card-body">
-<Form>
-    <Input
-      className="form-control my-3"
-      name="title" placeholder="title" onChange={(event)=>{setTitle(event.target.value)}}
-    />
-    <form class="ui form">
+    <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+      <br/>
+      Fill the fields and hit submit to add a new project.
+      <a href="/teacher/myprojects">
+                  <Button
+                    style={{ float: 'right' }}
+                    size="lg"
+                    className="bttn-hover color-9">
+                    my Projects
+  </Button>
+                </a>
+
+                <br />
+                <br />
+                </h2>
+
+
+    <div class="card-body" data-aos="fade-up" data-aos-delay="600">
+                <Form>
+                  <Input
+                    className="form-control my-3"
+                    name="title"
+                    placeholder="Add a title to your project.."
+                    onChange={(event) => { setTitle(event.target.value) }}
+                  />
+                      <form class="ui form">
     <select onChange={(event)=>{setPromo(event.target.value)}}>
                 <option>2CPI</option>
                 <option>1CS</option>
                 <option>2CS</option>
                 <option>3CS</option>
             </select></form>
-    <br/>
-
-    <textarea
-      className="form-control my-3"
-      rows="4" cols="50" type="text" name="introduction" placeholder="introduction" onChange={(event)=>{setIntro(event.target.value)}}
-      >
-    </textarea>
     
-    <textarea
-      className="form-control my-3"
-      rows="4" cols="50" type="text" name="tools" placeholder="tools" onChange={(event)=>{setTools(event.target.value)}}
-     >
-    </textarea>
+                  <textarea
+                    className="form-control my-3"
+                    rows="3" cols="50"
+                    type="text"
+                    name="introduction"
+                    placeholder="Add an introduction to your project.."
+                    onChange={(event) => { setIntro(event.target.value) }}
+                  >
+                  </textarea>
 
-    <textarea
-      className="form-control my-3"
-      rows="10" cols="50" type="text" name="details" placeholder="details" onChange={(event)=>{setDetails(event.target.value)}}
-      >
-    </textarea>
-    <input className="form-control my-3" type="text" name="keywords" placeholder="keywords" onChange={(event)=>{setTags(event.target.value)}} /> <br/>
-    <br/>
-    </Form>
-    <center><Button size="lg" className="btn-round" color="info" onClick={()=>{Post()}} >
+                  <textarea
+                    className="form-control my-3"
+                    rows="3" cols="50"
+                    type="text"
+                    name="tools"
+                    placeholder="Enter the tools needed to make your project.."
+                    onChange={(event) => { setTools(event.target.value) }}
+                  >
+                  </textarea>
+
+                  <textarea
+                    className="form-control my-3"
+                    rows="5" cols="50"
+                    type="text"
+                    name="details"
+                    placeholder="Add more details to your project.."
+                    onChange={(event) => { setDetails(event.target.value) }}
+                  >
+                  </textarea>
+                  <input
+                    className="form-control my-3"
+                    type="text"
+                    name="keywords"
+                    placeholder="Enter the key words.."
+                    onChange={(event) => { setTags(event.target.value) }} /> <br />
+                  <br />
+                </Form>
+                <center>
+                  <Button size="lg" className="bttn-hover color-1" onClick={()=>{Post()}} >
         submit
    </Button></center>
+   <br/>
+   <br/>
     </div>
         </div>
       </div>     
         </Container>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
   </div>
   </div>

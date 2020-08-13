@@ -32,6 +32,7 @@ function IndexNavbar(props) {
   const [last_name, setlname] = useState(null);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
+  const [invitations, setInv] = useState([]);
   const type = props.type
   const logged = props.islogged
   let history = useHistory();
@@ -41,30 +42,6 @@ function IndexNavbar(props) {
     return (str.length > n) ? str.substr(0, n-1) + '...' : str;
   };
 
-  const getinfo = async () => {
-    let url = 'http://localhost:8000/profiles/student/';
-    let token = localStorage.getItem("token")
-    let options = {
-                method: 'get',
-                url: url,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization' : 'Bearer '+ token
-                },
-            };
-    
-    await axios(options).then(res => {
-        const response = res.data;
-        setfname(response.data['0'].first_name)
-        setlname(response.data['0'].last_name)
-
-    })
-    .catch(function (error) {
-      history.push('/Forbiden')
-      }
-    )
-}
 
 
   const getnotifs = async () => {
@@ -84,7 +61,24 @@ function IndexNavbar(props) {
         setNotif(response)
     })
 }
-
+const getinvites = async () => {
+  let url = 'http://localhost:8000/groups/invitations/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'get',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      console.log(response)
+      setInv(response)
+  })
+}
 
   function Loginbutton(props){
     const logged = props.logged
@@ -144,16 +138,14 @@ function IndexNavbar(props) {
                       <DropdownToggle
                         aria-expanded={false}
                         caret
-                        color="default"
                         data-toggle="dropdown"
                         id="dropdownMenuButton"
                         nav
                         onClick={e => e.preventDefault()}
                         role="button"
-                        className="btn-round btn-info" 
-
+                        className="bttn-hover color-8"
                       >
-                         <Icofont icon="user-alt-7"/> : {first_name} {last_name} 
+                         <Icofont icon="user-alt-7" /> : name name
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
@@ -178,21 +170,16 @@ function IndexNavbar(props) {
                                           </DropdownItem>
 
                         <DropdownItem divider />
-                        
-                        
-                      </DropdownMenu>
+                        </DropdownMenu>
                     </UncontrolledDropdown>
-                    
-             
               </NavItem>
               </Nav>
     }
   }
 
   useEffect(()=> {
-    getinfo();
-      getnotifs();
-
+    getnotifs();
+    getinvites();
       const updateNavbarColor = () => {
         if (
           document.documentElement.scrollTop > 70 ||
@@ -289,17 +276,7 @@ function IndexNavbar(props) {
                 </NavLink>
            
       </NavItem>
-      <NavItem
-          name='Themes'
-          >
-               <NavLink
-                target="_blank"
-                active={activeItem === 'Themes'}
-                onClick={()=>{history.push("/student/MyProjects");}}
-              >
-                 My Projects
-                </NavLink>
-          </NavItem>
+
         <NavItem
           name='My group'
           >

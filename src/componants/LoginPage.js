@@ -5,6 +5,7 @@ import { Button, Card, Container, Row, Col } from "reactstrap";
 import Footer from './Footer'; 
 import { Form } from "semantic-ui-react";
 import NavSimple from './header/NavSimple';
+import AOS from 'aos';
 
 function Login() {
 
@@ -27,10 +28,10 @@ function Login() {
   const handlelogin = () =>{
     const isValid = validate();
     if (isValid) {
+      login();
       setEerror(null);
       setPerror(null);
       setLerror(null);
-      login();
     }
   }
 
@@ -54,7 +55,7 @@ function Login() {
             localStorage.setItem("type","student")
             history.replace('/student');
           }
-          else if (res.data.account_type === 'teacher') {
+          else if (res.data.account_type === 'teacher'){
             localStorage.setItem("type","teacher")
             history.replace('/teacher');
           }
@@ -90,6 +91,9 @@ function Login() {
     };
 
     useEffect(()=> {
+      
+    AOS.init();
+    AOS.refresh();
       let token = localStorage.getItem("token")
       console.log(token)
       let type = localStorage.getItem("type")
@@ -110,19 +114,23 @@ function Login() {
         <Container>
           <Row>
             <Col className="ml-auto mr-auto" lg="4">
-              <Card className="card-register ml-auto mr-auto">
-                <h3 className="title mx-auto">Welcome Back</h3>
+              <Card className="card-register ml-auto mr-auto" data-aos="fade-up" data-aos-delay="100">
+                <center>
+                <h3  data-aos="fade-up" data-aos-delay="200" >Welcome Back</h3>
+                </center>
                 <Form className="register-form">
-                  <label>Email</label>
+                  <label data-aos="fade-up" data-aos-delay="300">Email</label>
                   <Form.Input
+                  data-aos="fade-up" data-aos-delay="400"
                     icon="at"
                     iconPosition="left"
                     placeholder="Email"
                     onChange={(event)=>{setEmail(event.target.value)}}
                   />
                   <center><div style={{ fontSize: 15, color: "red" }}>{emailError}</div></center>
-                  <label>Password</label>
+                  <label data-aos="fade-up" data-aos-delay="500">Password</label>
                   <Form.Input
+                  data-aos="fade-up" data-aos-delay="600"
                     icon="lock"
                     iconPosition="left"
                     placeholder="Password"
@@ -130,13 +138,18 @@ function Login() {
                     onChange={(event)=>{setPassword(event.target.value)}}
                   />
                   <center><div style={{ fontSize: 15, color: "red" }}>{passwordError}</div></center>
-                  <Button block className="btn-round" color="info" onClick={()=>{handlelogin()}}>
+                  <Button 
+                  data-aos="fade-up" data-aos-delay="700"
+                  style={{width: '100%'}} 
+                  className="bttn-hover color-9" 
+                  onClick={()=>{handlelogin()}}>
                     LOGIN
                   </Button>
                   <center><div style={{ fontSize: 15, color: "red" }}>{loginError}</div></center>
                 </Form>
                 <div className="forgot">
                   <Button
+                  data-aos="fade-up" data-aos-delay="800"
                     className="btn-link"
                     color="info"
                     href="#"

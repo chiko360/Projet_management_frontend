@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import NavBlack from  '../header/NavBlack';
+import AOS from 'aos';
 import {
     Form,
     Button,
@@ -13,7 +14,7 @@ import {
   Col
 } from "reactstrap";
 import Footer from '../Footer';
-function MyProjects() {
+function TeacherMyProjects() {
     const [title, setTitle] = useState(null);
     const [promo, setPromo] = useState(null);
     const [introduction, setIntro] = useState(null);
@@ -23,9 +24,9 @@ function MyProjects() {
     const [posts, setPost] = useState([]);
     const [id, setID] = useState(null);
     let history = useHistory();
-    const [modal, setModal] = React.useState(false);
-    const [modaldelete, setModalDelete] = React.useState(false);
-    const [activeTab, setActiveTab] = React.useState("1");
+    const [modal, setModal] = useState(false);
+    const [modaldelete, setModalDelete] = useState(false);
+    const [activeTab, setActiveTab] = useState("1");
 
     const toggleModal = () => {
         setModal(!modal);
@@ -38,6 +39,7 @@ function MyProjects() {
         setActiveTab(tab);
       }
     };
+
     const getprojects = async () => {
         let url = 'http://localhost:8000/posts/myprojects/';
         let token = localStorage.getItem("token")
@@ -71,8 +73,7 @@ function MyProjects() {
         let response = await axios(options);
         let responseOK = response && response.status === 200 ;
         if (responseOK) {
-            toggleModalDelete();
-            window.location.reload();
+            getprojects();
         }
     }
     const editProject = async (index) => {
@@ -86,13 +87,11 @@ function MyProjects() {
                         'Content-Type': 'application/json;charset=UTF-8',
                         'Authorization' : 'Bearer '+ token
                     },
-                    data: {title,promo,introduction,tags,tools,details}
                 };
         let response = await axios(options);
         let responseOK = response && response.status === 200 ;
         if (responseOK) {
-            toggleModal();
-            window.location.reload();
+            history.replace('/teacher/MyProjects');
         }
     }
 
@@ -123,29 +122,38 @@ function MyProjects() {
             history.push('/Forbiden')
         }
         getprojects();
+        AOS.init();
+        AOS.refresh();
     },[]);
     return(
         <>
     <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+    <br/>
+        <br/>
+<br/>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div className="section about">
                     <Container>  
-                                                <section class="breadcrumbs">
-                                                    <div class="container">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <h2>Check All Your Projects.</h2>
-                                                            <a href="/teacher/addproject"><Button className="btn-round" color="info" >add Project</Button></a>
-                                                        </div>
-                                                    </div>
-                                                </section>
+                    <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="container">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h2>Check All Your Projects.</h2>
+                                            <ol>
+                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/teacher">teacher</a></li>
+                                                <li>my project</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </section>
                                             <hr/>
                                             {(() => {
                                                 if (posts.length===0){
                                                  return <div className="container">
                                                  <div class="card my-4">
-                                                 <div class="card-body">
+                                                 <div class="card-body" data-aos="fade-up" data-aos-delay="400">
                                                  <br/><br/><br/><br/><br/><br/><br/><br/>
                                                     <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/teacher/addproject"> add one now !</a></h1></center>
                                                     <br/><br/><br/><br/><br/><br/><br/>
@@ -157,8 +165,8 @@ function MyProjects() {
                                         {posts.map((post,index) => {
                                             return <div className="container">
                                             <div class="card my-4">
-                                                <h5 class="card-header headerr">{post.title}</h5>
-                                                <div class="card-body">
+                                                <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{post.title}</h5>
+                                                <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                                                     <h3>promo : {post.promo}</h3>
                                                     <h3>created at : {post.creating_date}</h3>
                                                     <h3>introduction : {post.introduction}</h3>
@@ -264,7 +272,7 @@ function MyProjects() {
                                         </Button>
                                     </div>
                                     <div className="divider" />
-                                    <div className="right-side">
+                                    <div className="left-side">
                                         <Button className="btn-round" color="info" type="button" onClick={()=>{editProject(post.id)}}>
                                          Save
                                         </Button>
@@ -276,6 +284,10 @@ function MyProjects() {
                             </div>  })}    
                         </Container>
                     </div>
+                    <br/>
+        <br/>
+        <br/>
+<br/>
                 </div>
             </div>
         </div>
@@ -284,7 +296,7 @@ function MyProjects() {
         );
     }
 
-export default MyProjects;
+export default TeacherMyProjects;
 //
 //<React.Fragment>
 //                <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>

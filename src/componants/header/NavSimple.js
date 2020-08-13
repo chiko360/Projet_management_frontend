@@ -115,7 +115,10 @@ return function cleanup() {
 
             <NavItem>
             
-              <Button block className="btn-round btn-info" href="/login">
+              <Button     
+              style={{width:"100%"}}          
+               className="bttn-hover color-9 btn-lg "  
+               href="/login">
                     Login Now
                   </Button>
             </NavItem>

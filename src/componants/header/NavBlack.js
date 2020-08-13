@@ -32,39 +32,16 @@ function NavBlack(props) {
   const [last_name, setlname] = useState(null);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
+  const [invitations, setInv] = useState([]);
   const type = props.type
   const logged = props.islogged
   let history = useHistory();
-  const handleItemClick = (e, { name }) => setAItem(name)
+  //const handleItemClick = (e, { name }) => setAItem(name)
 
   function Truncate(str, n){
     return (str.length > n) ? str.substr(0, n-1) + '...' : str;
   };
 
-  const getinfo = async () => {
-    let url = 'http://localhost:8000/profiles/student/';
-    let token = localStorage.getItem("token")
-    let options = {
-                method: 'get',
-                url: url,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization' : 'Bearer '+ token
-                },
-            };
-    
-    await axios(options).then(res => {
-        const response = res.data;
-        setfname(response.data['0'].first_name)
-        setlname(response.data['0'].last_name)
-
-    })
-    .catch(function (error) {
-      history.push('/Forbiden')
-      }
-    )
-}
 
 
   const getnotifs = async () => {
@@ -85,6 +62,61 @@ function NavBlack(props) {
     })
 }
 
+const getinvites = async () => {
+  let url = 'http://localhost:8000/groups/invitations/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'get',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      console.log(response)
+      setInv(response)
+  })
+}
+
+const acceptInv = async (grp) => {
+  let url = 'http://localhost:8000/groups/handleinvite/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'Post',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+              data: { 'grp':grp,'accepted': true}
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      //TODO : message that he joing the groupe
+  })
+}
+const refuseInv = async (grp) => {
+  let url = 'http://localhost:8000/groups/handleinvite/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'Post',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+              data: {'grp':grp,'accepted':false },
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      //TODO : message that he refused to join the groupe
+  })
+}
 
   function Loginbutton(props){
     const logged = props.logged
@@ -118,7 +150,8 @@ function NavBlack(props) {
                 <NavItem 
                   name='Notifications'
                   active={activeItem === 'Notifications'}
-                  onClick={handleItemClick}>
+                  //onClick={handleItemClick}
+                  >
                   <Dropdown scrolling nav inNavbar >
                     <DropdownToggle
                         caret
@@ -146,7 +179,39 @@ function NavBlack(props) {
                      </DropdownMenu>
                     </Dropdown>
                      </NavItem>
-
+                     <NavItem 
+                  name='invitations'
+                  active={activeItem === 'invitations'}
+                  //onClick={handleItemClick}
+                  >
+                  <Dropdown scrolling nav inNavbar >
+                    <DropdownToggle
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        nav
+                        role="button"
+                      >
+                       <Icofont icon="users-alt-3"/>
+                       </DropdownToggle>
+                      <DropdownMenu
+                        style={{minHeight:"600px"}}
+                      >
+                    {invitations.map((inv,index) => {
+                      return  <div style={{width: "500px",height:"100px"}}>
+                       <DropdownItem>
+                           <div class='box'>
+                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
+                              <h4 class='notif-card' >{inv.timestamp}</h4>
+                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
+                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
+                        </div>
+                      </DropdownItem>
+                    </div>
+                    })}
+                     </DropdownMenu>
+                    </Dropdown>
+                     </NavItem>
                      <NavItem
                 name='Log out'
                 >
@@ -160,10 +225,10 @@ function NavBlack(props) {
                         nav
                         onClick={e => e.preventDefault()}
                         role="button"
-                        className="btn-round btn-info" 
+                        className="bttn-hover color-8"
 
                       >
-                         <Icofont icon="user-alt-7"/> : {first_name} {last_name} 
+                         <Icofont icon="user-alt-7"/> : name name
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
@@ -200,8 +265,8 @@ function NavBlack(props) {
   }
 
   useEffect(()=> {
-    getinfo();
-      getnotifs();
+    getnotifs();
+    getinvites();
 
       const updateNavbarColor = () => {
         if (
@@ -301,17 +366,7 @@ function NavBlack(props) {
                 </NavLink>
            
       </NavItem>
-      <NavItem
-          name='Themes'
-          >
-               <NavLink
-                target="_blank"
-                active={activeItem === 'Themes'}
-                onClick={()=>{history.push("/student/MyProjects");}}
-              >
-                 My Projects
-                </NavLink>
-          </NavItem>
+    
         <NavItem
           name='My group'
           >

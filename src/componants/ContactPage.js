@@ -177,7 +177,9 @@ class ContactUsPage extends Component {
              </div>
              <Row>
                <Col className="ml-auto mr-auto" md="4" data-aos="fade-up" data-aos-delay="550">
-                 <Button className="btn-round btn-info" color="info" size="lg">
+                 <Button 
+              style={{width:"100%"}}
+              className="bttn-hover color-2 btn-lg ">
                    Send Your Message
                  </Button>
                </Col>
