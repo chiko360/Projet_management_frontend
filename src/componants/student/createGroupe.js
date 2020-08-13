@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 import NavBlack from '../header/NavBlack';
 import Footer from '../Footer';
+import AOS from 'aos';
 import {
   Button,
   FormGroup,
@@ -31,18 +32,9 @@ import avatar from '../../assets/images/avatar.jpg';
 
 
 function CreateGroup() {
-  const [modal, setModal] = React.useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  }
-  const [activeTab, setActiveTab] = React.useState("1");
 
-  const toggle = tab => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-    }
 
-  };
+
   const [groupName, setGname] = useState('');
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
@@ -52,7 +44,21 @@ function CreateGroup() {
   const [mem, setmem] = useState([]);
   const [leadername, setLN] = useState([]);
   let history = useHistory();
+  const [modal, setModal] = React.useState(false);
+  const [modaldelete, setModalDelete] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState("1");
 
+  const toggleModal = () => {
+      setModal(!modal);
+  } 
+  const toggleModalDelete = () => {
+      setModalDelete(!modaldelete);
+  }
+  const toggle = tab => {
+    if (activeTab !== tab) {
+      setActiveTab(tab);
+    }
+  };
   const getMembers = async () => {
     let url = 'http://localhost:8000/groups/getMembers/';
     let token = localStorage.getItem("token");
@@ -117,8 +123,6 @@ function CreateGroup() {
     }
   }
 
-
-
   const deletemember = async (first_name, last_name) => {
     let url = 'http://localhost:8000/groups/deletemember/';
     let token = localStorage.getItem("token");
@@ -135,6 +139,8 @@ function CreateGroup() {
       })
       .then((res) => {
         history.push('/student/group')
+        window.location.reload();
+
       }
       )
       .catch(() => {
@@ -234,11 +240,14 @@ function CreateGroup() {
     const json = await response.json()
     callback(json.map(i => ({ label: i.first_name + ' ' + i.last_name, value: i.last_name + ' ' + i.last_name })));
   }
-
-
+ 
+ 
   useEffect(() => {
+   
     havegrp();
     getMembers();
+    AOS.init(); 
+    AOS.refresh(); 
   }, []);
 
 
@@ -249,11 +258,12 @@ function CreateGroup() {
     if (havegrp === '') {
       return (
         <div>
-          <Form name="form" >
+          <Form name="form"  data-aos="fade-up" data-aos-delay="400" >
             <br />
             <h3>Add the name of your group </h3>
             <br />
             <input placeholder="Enter name of your group.. "
+             data-aos="fade-up" data-aos-delay="200"
               type="text"
               className="form-control"
               name="Gname"
@@ -279,8 +289,8 @@ function CreateGroup() {
       return (
         <div>
           <br/>
-          <Form name="form" >
-            <h4>Enter the name of the member you want to add yo yout group. </h4>
+          <Form name="form"  data-aos="fade-up"  >
+            <h4 >Enter the name of the member you want to add yo yout group. </h4>
             <br />
             <Container>
 
@@ -335,10 +345,44 @@ function CreateGroup() {
     }
     else if (isLeader) {
       return (
+        <>
         <Button className="btn-hover color-11"
-         onClick={() => { deletemember(first_name, last_name) }}>
+         onClick={toggleModalDelete}>
           delete member
         </Button>
+          <Modal class="modal-dialog modal-xs" isOpen={modaldelete} toggle={toggleModalDelete}>
+              <div className="modal-body">
+              <div class="text-center mr-auto"> 
+              <Col style={{ height:"100px"}}>
+                <br/>
+              <h3>
+              Do you really want to delete this member?
+              </h3>
+              </Col>
+              </div>
+              </div>
+              <div className="modal-footer">
+                  <Button      
+                  style={{width:"100px"}}
+                  className="btn-hover color-11"
+                  onClick={() => { deletemember(first_name, last_name) }}                  >
+                  Delete
+                  </Button>
+              <div className="divider" />
+              <div className="right-side">
+                  <Button 
+                  outline
+                  style={{width:"100%"}}
+                  className="btn-hover color-8"
+                  type="button"
+                  onClick={toggleModalDelete}
+                      >
+                  Cancel
+                  </Button>
+              </div>
+              </div>
+          </Modal>
+          </>
       )
     }
     else {
@@ -358,42 +402,42 @@ function CreateGroup() {
           <div class="col-lg-12">
             <div className="section about">
               <Container>
-                <section class="breadcrumbs">
-                  <div class="container">
-
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h2>All Informations of the Group</h2>
-                      <a href="/student/group">
-                       
-                       
-                       </a>
-                    </div>
-                  </div>
-                </section>
+              <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="container">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h2>All Your Group's Inormations.</h2>
+                                            <ol>
+                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/student">student</a></li>
+                                                <li>my group</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </section>
                 <hr />
                 <div className="container">
                   <div class="card my-4">
-                    <h2 class="card-header headerrr headerrr-hover">
+                    <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
                       <br />
                       Current Group "{Grp}" Infos
                       <br /> 
        <br /> 
                     </h2>
 
-                    <div class="card-body">
+                    <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <div>
                         <AddField Leader={Leader} />
                         <br />
                         <InputGN grp={Grp} />
                         <br />
-                        <h3 class="card-header headerrr headerrr-hover">
+                        <h3 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
                       Current Members
                       <br/>
                       <small>Leader: {leadername}</small>
                     </h3>
                     <br/>
                     <br/>
-
+<div data-aos="fade-up" data-aos-delay="400">
                         {mem.map((mem, index) => {
                           return <Row>
                 <Col className="ml-auto mr-auto" md="7">
@@ -432,6 +476,7 @@ function CreateGroup() {
                           
                          
                         })}
+                        </div>
                     
                       </div>
 

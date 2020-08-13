@@ -18,6 +18,7 @@ import MyProjects from './componants/teacher/myProjects'
 import StudentAddProject from './componants/student/addProject'
 import StudentMyProjects from './componants/student/myProjects'
 import ApprovedProjects from './componants/student/approvedprojects'
+import ChooseProject from './componants/student/chooseProject'
 import ChangePassword from './componants/changePassword'
 import CreateGroup from './componants/student/createGroupe';
 import Forbiden from './componants/Forbiden';
@@ -42,6 +43,7 @@ ReactDOM.render(
           <Route exact path="/teacher/MyProjects" component={MyProjects} />
           <Route exact path="/student/addProject" component={StudentAddProject} />
           <Route exact path="/student/MyProjects" component={StudentMyProjects} />
+          <Route exact path="/student/ChooseProject" component={ChooseProject} />
           <Route exact path="/student/themes" component={ApprovedProjects} />
           <Route exact path="/changePassword" component={ChangePassword} />
           <Route exact path="/student/group" component={CreateGroup} />

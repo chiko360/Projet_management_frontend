@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import NavBlack from  '../header/NavBlack';
+import AOS from 'aos';
 import {
     Form,
     Button,
@@ -123,6 +124,8 @@ function StudentMyProjects() {
             history.push('/Forbiden')
         }
         getprojects();
+        AOS.init();
+        AOS.refresh();
     },[]);
     return(
         <>
@@ -135,21 +138,24 @@ function StudentMyProjects() {
             <div class="col-lg-12">
                 <div className="section about">
                     <Container>  
-                                                <section class="breadcrumbs">
-                                                    <div class="container">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <h2>Check All Your Projects.</h2>
-                                                            <a href="/student/addproject">
-                                                                <Button size="lg" className="bttn-hover color-9" >add Project</Button></a>
-                                                        </div>
-                                                    </div>
-                                                </section>
+                    <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="container">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h2>Check All Your Projects.</h2>
+                                            <ol>
+                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/student">student</a></li>
+                                                <li>my project</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </section>
                                             <hr/>
                                             {(() => {
                                                 if (posts.length===0){
                                                  return <div className="container">
                                                  <div class="card my-4">
-                                                 <div class="card-body">
+                                                 <div class="card-body" data-aos="fade-up" data-aos-delay="400">
                                                  <br/><br/><br/><br/><br/><br/><br/><br/>
                                                     <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/teacher/addproject"> add one now !</a></h1></center>
                                                     <br/><br/><br/><br/><br/><br/><br/>
@@ -161,8 +167,8 @@ function StudentMyProjects() {
                                         {posts.map((post,index) => {
                                             return <div className="container">
                                             <div class="card my-4">
-                                                <h5 class="card-header headerrr headerrr-hover">{post.title}</h5>
-                                                <div class="card-body">
+                                                <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{post.title}</h5>
+                                                <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                                                     <h3>promo : {post.promo}</h3>
                                                     <h3>created at : {post.creating_date}</h3>
                                                     <h3>introduction : {post.introduction}</h3>

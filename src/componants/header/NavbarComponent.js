@@ -42,30 +42,6 @@ function IndexNavbar(props) {
     return (str.length > n) ? str.substr(0, n-1) + '...' : str;
   };
 
-  const getinfo = async () => {
-    let url = 'http://localhost:8000/profiles/student/';
-    let token = localStorage.getItem("token")
-    let options = {
-                method: 'get',
-                url: url,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization' : 'Bearer '+ token
-                },
-            };
-    
-    await axios(options).then(res => {
-        const response = res.data;
-        setfname(response.data['0'].first_name)
-        setlname(response.data['0'].last_name)
-
-    })
-    .catch(function (error) {
-      history.push('/Forbiden')
-      }
-    )
-}
 
 
   const getnotifs = async () => {
@@ -162,16 +138,14 @@ const getinvites = async () => {
                       <DropdownToggle
                         aria-expanded={false}
                         caret
-                        color="default"
                         data-toggle="dropdown"
                         id="dropdownMenuButton"
                         nav
                         onClick={e => e.preventDefault()}
                         role="button"
-                        className="btn-round btn-info" 
-
+                        className="bttn-hover color-8"
                       >
-                         <Icofont icon="user-alt-7"/> : {first_name} {last_name} 
+                         <Icofont icon="user-alt-7" /> : name name
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
@@ -196,19 +170,18 @@ const getinvites = async () => {
                                           </DropdownItem>
 
                         <DropdownItem divider />
-                        
-                        
-                      </DropdownMenu>
+                        </DropdownMenu>
                     </UncontrolledDropdown>
-                    
-             
               </NavItem>
               </Nav>
     }
   }
 
   useEffect(()=> {
+<<<<<<< HEAD
     getinfo();
+=======
+>>>>>>> 9e9d68f572a7b940cd93fb6e2910cd7e1c0bd4cd
     getnotifs();
     getinvites();
       const updateNavbarColor = () => {
@@ -307,17 +280,7 @@ const getinvites = async () => {
                 </NavLink>
            
       </NavItem>
-      <NavItem
-          name='Themes'
-          >
-               <NavLink
-                target="_blank"
-                active={activeItem === 'Themes'}
-                onClick={()=>{history.push("/student/MyProjects");}}
-              >
-                 My Projects
-                </NavLink>
-          </NavItem>
+
         <NavItem
           name='My group'
           >

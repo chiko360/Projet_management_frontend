@@ -4,6 +4,8 @@ import jsPDF from 'jspdf';
 import { Button, Container} from "reactstrap";
 import NavBlack from  '../header/NavBlack';
 import Footer from '../Footer';
+import AOS from 'aos';
+
 
 function ApprovedProjects() {
 
@@ -46,6 +48,8 @@ function ApprovedProjects() {
 
     useEffect(()=> {
         getprojects();
+        AOS.init();
+        AOS.refresh();
     },[]);
     
     return(
@@ -59,21 +63,23 @@ function ApprovedProjects() {
             <div class="col-lg-12">
                 <div className="section about">
                     <Container>  
-                                                <section class="breadcrumbs">
-                                                    <div class="container">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <h2>Check All Projects.</h2>
-                                                            <a href="/student/addproject">
-
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </section>
+                    <section class="breadcrumbs">
+                                    <div class="container" data-aos="fade-up" data-aos-delay="200">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h2  
+                                            >Check All Submited Projects.</h2>
+                                            <ol >
+                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/student">student</a></li>
+                                                <li>all projects</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </section>
                                             <hr/>
                                             {(() => {
                                                 if (posts.length===0){
-                                                 return <div className="container">
+                                                 return <div className="container" data-aos="fade-up" data-aos-delay="400">
                                                  <div class="card my-4">
                                                  <div class="card-body">
                                                 <br/><br/><br/><br/><br/><br/><br/>
@@ -89,25 +95,29 @@ function ApprovedProjects() {
 
 return <div className="container">
 <div class="card my-4">
-<div class=" card-header headerrr headerrr-hover "> <h2>{post.title}</h2>
-<h4>by : {post.user}</h4>
+<div class=" card-header headerrr headerrr-hover " data-aos="fade-up" data-aos-delay="400"> <h2>{post.title}</h2>
+<h5>by : {post.user}</h5>
 </div>
-    <div class="card-body">
+    <div class="card-body" data-aos="fade-up" data-aos-delay="600">
     <h5 style={{color:'#3498db', float: 'right'}}>{post.creating_date}</h5>
     <br/>
     <br/>
-                <h3 style={{color:'#3498db'}}>What this project is about? </h3>
+                <h3 style={{color:'#3498db'}} >What this project is about? </h3>
                 <p> {post.introduction}</p>
+                <br/>
                 <h3 style={{color:'#3498db'}}>What do you need to make this project? </h3>
                  <p> {post.tools}</p>
+                 <br/>
                 <h3 style={{color:'#3498db'}}>You need more details? </h3>
                 <p>{post.details}</p>
+                <br/>
                 <h3 style={{color:'#3498db'}}>Tags: </h3>
                 <p>{post.tags}</p>
+                <br/>
                 
                 <Button
                 style={{float: 'right'}}
-                 className="btn-hover color-4 left-side" 
+                 className="btn-hover color-4 " 
                  onClick={()=>{pdfDownload(post.title,post.user,post.creating_date,post.introduction,post.tools,post.details)}}>
 
                     view in pdf</Button>

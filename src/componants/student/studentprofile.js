@@ -15,7 +15,7 @@ import {
   Col
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
-import HorNavbar from '../HorNavbar';
+import IndexNavbar from '../header/NavbarComponent';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
 import Footer from '../Footer'; 
@@ -69,11 +69,13 @@ function Studentprofile() {
         history.push('/Forbiden')
       }
         getinfo();
+        AOS.init();
+        AOS.refresh();
     },[]);
         return (
 <>
 
-<HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
 
 <div class="page-header header-filter" data-parallax="true" >
 </div>
@@ -89,13 +91,13 @@ function Studentprofile() {
         	           <div class="profile">
                      
                             <div className="owner">
-                                <div className="avatar">
+                                <div className="avatar" data-aos="fade-up" data-aos-delay="200">
 	                           
                                 <img src={avatar} alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
 	      
                             </div>
                             
-                            <div className="name">
+                            <div className="name" data-aos="fade-up" data-aos-delay="400">
                            
                         
               <h2>
@@ -106,12 +108,18 @@ function Studentprofile() {
                             <br/>
                             <Row>
             <Col className="ml-auto mr-auto text-center" md="12">
-                    <h5>Date of Birth: {date_of_birth}</h5>
-                    <h5>Gender: {gender}</h5>
-                    <h5>I'm a {promo} Student at ESI SBA</h5>
+                    <h5 data-aos="fade-up" data-aos-delay="500">Date of Birth: {date_of_birth}</h5>
+                    <h5 data-aos="fade-up" data-aos-delay="600">Gender: {gender}</h5>
+                    <h5 data-aos="fade-up" data-aos-delay="700">I'm a {promo} Student at ESI SBA</h5>
+<br/>
+              <Button
+               data-aos="fade-up" 
+               data-aos-delay="800" size="lg"  
+               className="bttn-hover color-4" 
+               style={{width:'250px'}}
+               onClick={() => { history.push("/changePassword") }}
 
-              <br />
-              <Button size="lg"  className="bttn-hover color-4" style={{width:'250px'}}>
+               >
                            <Icofont icon="ssl-security"/> Change Password
                         </Button>
             
@@ -139,11 +147,7 @@ function Studentprofile() {
           <Footer/>
 
 </>
-
-
-
-
-        );
+);
     }
 
 export default Studentprofile;

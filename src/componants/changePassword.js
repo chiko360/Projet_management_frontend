@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import Footer from './Footer';
+import AOS from 'aos';
+
+
 
 function ChangePassword() {
 
@@ -94,7 +96,13 @@ function ChangePassword() {
   
       return true;
     }
-
+    useEffect(()=> {
+      
+      AOS.init();
+      AOS.refresh();
+      
+      },[]);
+  
     return(
       <>
       <section id="home" class="parallax-section">
