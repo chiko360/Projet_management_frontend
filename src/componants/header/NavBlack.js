@@ -228,11 +228,7 @@ const refuseInv = async (grp) => {
                         className="bttn-hover color-8"
 
                       >
-<<<<<<< HEAD
-                         <Icofont icon="user-alt-7"/> {first_name} {last_name} 
-=======
                          <Icofont icon="user-alt-7"/> : name name
->>>>>>> 9e9d68f572a7b940cd93fb6e2910cd7e1c0bd4cd
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
@@ -269,10 +265,6 @@ const refuseInv = async (grp) => {
   }
 
   useEffect(()=> {
-<<<<<<< HEAD
-    getinfo();
-=======
->>>>>>> 9e9d68f572a7b940cd93fb6e2910cd7e1c0bd4cd
     getnotifs();
     getinvites();
 

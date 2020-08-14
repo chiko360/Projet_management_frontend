@@ -91,32 +91,6 @@ function Teacherprofile() {
         return (
 <>
 
-<<<<<<< HEAD
-    useEffect(()=> {
-      if (localStorage.getItem('type')!=='teacher'){
-        console.log('forbiden')
-        history.push('/Forbiden')
-      }
-        getinfo();
-        //const pusher = new Pusher("269da359d7787125ca29", {cluster: "eu",
-        //authEndpoint: "http://localhost:8000/api/pusher/auth",
-        //  });
-        //  var channel = pusher.subscribe("my-channel");
-        //  channel.bind('my-event', function(data) {
-        //    return toast({
-        //      type: "info",
-        //      icon: "info",
-        //      title: data.title,
-        //      description: data.body,
-        //      time: 5000,
-        //    });
-        //  }
-        //);
-    },[]);
-    return(
-      <>
-=======
->>>>>>> 9e9d68f572a7b940cd93fb6e2910cd7e1c0bd4cd
 <IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
 
 <div class="page-header header-filter" data-parallax="true" >

@@ -178,10 +178,6 @@ const getinvites = async () => {
   }
 
   useEffect(()=> {
-<<<<<<< HEAD
-    getinfo();
-=======
->>>>>>> 9e9d68f572a7b940cd93fb6e2910cd7e1c0bd4cd
     getnotifs();
     getinvites();
       const updateNavbarColor = () => {
