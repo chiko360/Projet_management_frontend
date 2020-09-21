@@ -177,7 +177,6 @@ function ChooseProject() {
                     </div>
                   </div>
                 </section>
-
                 <hr />
 
                 <div className="container">

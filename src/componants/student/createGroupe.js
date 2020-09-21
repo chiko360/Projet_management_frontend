@@ -100,9 +100,6 @@ function CreateGroup() {
         setLN(res.data.leaderName)
       }
       )
-      .catch(() => {
-        history.push('/*')
-      })
   }
 
 
@@ -262,6 +259,8 @@ function CreateGroup() {
             <br />
             <h3>Add the name of your group </h3>
             <br />
+            <Row>
+            <Col lg="9" md="12">
             <input placeholder="Enter name of your group.. "
              data-aos="fade-up" data-aos-delay="200"
               type="text"
@@ -269,14 +268,21 @@ function CreateGroup() {
               name="Gname"
               onChange={(event) => { setGname(event.target.value) }} />
             <br />
+            </Col>
+            <Col>
             <Button
               block
               className="btn-hover color-1"
               onClick={() => { handleCreation() }}>
-              Validate Group's Name
+              Validate Group
                </Button>
+               </Col>
+               </Row>
+
             <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
+
           </Form>
+          
         </div>
       )
     }
@@ -290,12 +296,12 @@ function CreateGroup() {
         <div>
           <br/>
           <Form name="form"  data-aos="fade-up"  >
-            <h4 >Enter the name of the member you want to add yo yout group. </h4>
+            <h4 >Enter the name of the member you want to add to your group. </h4>
             <br />
             <Container>
 
             <Row>
-            <Col lg="9" md="12" style={{height : "60px" }}>
+            <Col lg="8" md="10" style={{height : "60px" }}>
 
             <AsyncSelect
               isMulti
@@ -307,7 +313,7 @@ function CreateGroup() {
             <br />
             </Col>
             
-<Col>
+<Col >
             <Button
               style={{ float: 'right' }}
               block

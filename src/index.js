@@ -25,14 +25,15 @@ import Forbiden from './componants/Forbiden';
 import Logout from './componants/logout';
 import {ContactUsPage} from './componants/ContactPage';
 import {AboutUsPage} from './componants/AboutUsPage';
-
-
+import Resultspage from './componants/student/resultsPage';
+import SortPage from './componants/sortPage';
 
 
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/changepassword" component={ChangePassword} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/contactus" component={ContactUsPage} />
           <Route exact path="/aboutus" component={AboutUsPage} />
@@ -45,8 +46,9 @@ ReactDOM.render(
           <Route exact path="/student/MyProjects" component={StudentMyProjects} />
           <Route exact path="/student/ChooseProject" component={ChooseProject} />
           <Route exact path="/student/themes" component={ApprovedProjects} />
-          <Route exact path="/changePassword" component={ChangePassword} />
+          <Route exact path="/student/results" component={Resultspage} />
           <Route exact path="/student/group" component={CreateGroup} />
+          <Route exact path="/sort" component={SortPage} />
           <Route exact path="/Forbiden" component={Forbiden} />
     </Switch>
 
