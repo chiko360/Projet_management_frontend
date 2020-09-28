@@ -24,6 +24,7 @@ import {
 import NavSimple from './componants/header/NavSimple';
 import Icofont from 'react-icofont';
 
+
 console.log(etud);
 console.log(ens);
 console.log(entre);
@@ -39,6 +40,8 @@ class App extends Component {
     super(props, context);
     AOS.init();
   }
+
+
   componentWillReceiveProps() {
     AOS.refresh();
   }
@@ -62,11 +65,11 @@ class App extends Component {
 
               <Col lg="8" md="12">
                 <h1 data-aos="fade-up">PFE esi-sba</h1>
-                <h2 data-aos="fade-up" data-aos-delay="400">Un Projet Plus Puissant, Plus Résistant</h2>
+                <h2 data-aos="fade-up" data-aos-delay="400">A Strong Project, A Unique Breliant One</h2>
                 <br />
                 <p data-aos="fade-up" data-aos-delay="800">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
+                walk to the gradution with confident steps, do your work profetionaly with just few clicks, discover the projects uploaded by our teacher, and get you work done
+                 </p>
                 <br />
                 <div class="side" data-aos="fade-up" data-aos-delay="1200">
                   <Button
@@ -82,10 +85,10 @@ class App extends Component {
                 </div>
                 <div  >
 
-                <section id="section07" >
-  <a href="#section07"><span></span><span></span><span></span></a>
-</section>
+              
 </div>
+
+
 
               </Col>
             </Row>
@@ -116,23 +119,21 @@ class App extends Component {
                       <div class="count-box">
                         <Icofont icon="icofont-simple-smile" />
                         <CountUp delay={3} start={0} end={86} />
-                        <p><strong>Happy Students</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
+                        <p><strong>Happy Students</strong> our students are really satisfied with the services we provide </p>
                       </div>
                     </div>
-
                     <div class="col-md-6 d-md-flex align-items-md-stretch">
                       <div class="count-box">
                         <Icofont icon="icofont-document-folder" />
                         <CountUp delay={3} start={0} end={23} />
-                        <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
+                        <p><strong>Projects</strong> we put on the display of our students unique projects and on the trend </p>
                       </div>
                     </div>
-
                     <div class="col-md-6 d-md-flex align-items-md-stretch">
                       <div class="count-box">
                         <Icofont icon="icofont-clock-time" />
                         <CountUp delay={3} start={0} end={5} />
-                        <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non vel</p>
+                        <p><strong>Years of experience</strong> 5 years in the service and we are aiming for more </p>
                       </div>
                     </div>
 
@@ -140,7 +141,7 @@ class App extends Component {
                       <div class="count-box">
                         <Icofont icon="icofont-award" />
                         <CountUp delay={3} start={0} end={47} />
-                        <p><strong>Graduations</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
+                        <p><strong>Graduations</strong> we have 2 promos that graduated with excelence </p>
                       </div>
                     </div>
                   </div>
@@ -160,8 +161,8 @@ class App extends Component {
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                   <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon"><Icofont icon="learn" /></div>
-                    <h4 class="title"><a href="">Consult Themes</a></h4>
-                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    <h4 class="title"><a href="">Consult Projects</a></h4>
+                    <p class="description"> consult our projects and choose the one that suits you the most  </p>
                   </div>
                 </div>
 
@@ -169,15 +170,15 @@ class App extends Component {
                   <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon"><Icofont icon="group-students" /></div>
                     <h4 class="title"><a href="">Choose a Team</a></h4>
-                    <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                    <p class="description"> choose the memebers of your team, or join an exisiting one </p>
                   </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                   <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                     <div class="icon"><Icofont icon="list" /></div>
-                    <h4 class="title"><a href="">Choose a theme</a></h4>
-                    <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                    <h4 class="title"><a href="">Choose a Project</a></h4>
+                    <p class="description">fill the request form with the projects your Team have choosen</p>
                   </div>
                 </div>
 
@@ -187,7 +188,7 @@ class App extends Component {
 
                     <div class="icon"><Icofont icon="graduate-alt" /></div>
                     <h3 class="title"><a href="">Final Work</a></h3>
-                    <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    <p class="description">coordinate, code, and deliver your final work at the right time</p>
                   </div>
                 </div>
 
@@ -204,8 +205,8 @@ class App extends Component {
                 <div class="card cardone" data-aos="fade-up" data-aos-delay="100">
                   <div class="card-body">
                     <h5 class="card-title"><a href="">Teacher</a></h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua.</p>
-                    <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                    <p class="card-text">our well skilled teacher are in display to answer all your questions, and guide you through your journey.</p>
+                    <div class="read-more"><a href="http://www.esi-sba.dz"><i class="icofont-arrow-right"></i> Read More</a></div>
                   </div>
                 </div>
               </div>
@@ -213,8 +214,8 @@ class App extends Component {
                 <div class="card cardtwo" data-aos="fade-up" data-aos-delay="200">
                   <div class="card-body">
                     <h5 class="card-title"><a href="">Student</a></h5>
-                    <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem.</p>
-                    <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                    <p class="card-text"> we put all our energy and time to form and train our students through the projects we put in display. </p>
+                    <div class="read-more"><a href="http://www.esi-sba.dz"><i class="icofont-arrow-right"></i> Read More</a></div>
                   </div>
                 </div>
 
@@ -223,8 +224,8 @@ class App extends Component {
                 <div class="card cardthree" data-aos="fade-up" data-aos-delay="100">
                   <div class="card-body">
                     <h5 class="card-title"><a href="">Company</a></h5>
-                    <p class="card-text">Nemo enim ipsam voluptatem quia voluptas sit aut odit aut fugit, sed quia magni dolores.</p>
-                    <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                    <p class="card-text">we collab with companies all around the country to give you a chance to be a part of their project.</p>
+                    <div class="read-more"><a href="http://www.esi-sba.dz"><i class="icofont-arrow-right"></i> Read More</a></div>
                   </div>
                 </div>
               </div>
@@ -232,8 +233,8 @@ class App extends Component {
                 <div class="card cardfour" data-aos="fade-up" data-aos-delay="200">
                   <div class="card-body">
                     <h5 class="card-title"><a href="">Universities</a></h5>
-                    <p class="card-text">Nostrum eum sed et autem dolorum perspiciatis. Magni porro quisquam laudantium voluptatem.</p>
-                    <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                    <p class="card-text">our service will be servicing more algerian universities in the near future.</p>
+                    <div class="read-more"><a href="http://www.esi-sba.dz"><i class="icofont-arrow-right"></i> Read More</a></div>
                   </div>
                 </div>
               </div>
@@ -249,7 +250,7 @@ class App extends Component {
 
             <div class="section-title" data-aos="fade-up">
               <h2>Our Team</h2>
-              <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
+              <p>Meet The Heads Behind The Hard Work</p>
             </div>
 
             <div class="row">
@@ -340,11 +341,11 @@ class App extends Component {
             <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-5">
                 <Icofont icon="question-circle" />
-                <h4>Non consectetur a erat nam at lectus urna duis?</h4>
+                <h4>Can I change my team after i have been accepted in one already?</h4>
               </div>
               <div class="col-lg-7">
                 <p>
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  Only the team leader is the one who has the access to add or delete a member from their team, if you want to leave a team and join another, you have to ask the leader to delete you from the team so you can join another.
             </p>
               </div>
             </div>
@@ -352,23 +353,23 @@ class App extends Component {
             <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
               <div class="col-lg-5">
                 <Icofont icon="question-circle" />
-                <h4>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h4>
+                <h4>Will we get the project we want even if another team request to get it ?</h4>
               </div>
               <div class="col-lg-7">
                 <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-            </p>
+                  When two or more teams request the same project, we make a draw to select the team that will get that project, this is the only way that is fair and won't cause any conflicts.
+               </p>
               </div>
             </div>
             <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
               <div class="col-lg-5">
                 <Icofont icon="question-circle" />
-                <h4>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?</h4>
+                <h4>Can I select the number of my team members?</h4>
               </div>
               <div class="col-lg-7">
                 <p>
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus.
-            </p>
+                  Unfortunatly, you can't, the number of the team members is defined by the administration, the 2CPI, 1CS, 2CS students will make teams of 6-5 memebers, 3CS teams will make a team out of only 2 memebers.
+                   </p>
               </div>
             </div>
 
@@ -376,12 +377,12 @@ class App extends Component {
             <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
               <div class="col-lg-5">
                 <Icofont icon="question-circle" />
-                <h4>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h4>
+                <h4> I have an idea of a project, can i work on it instead of choosing one of yours?</h4>
               </div>
               <div class="col-lg-7">
                 <p>
-                  Aperiam itaque sit optio et deleniti eos nihil quidem cumque. Voluptas dolorum accusantium sunt sit enim. Provident consequuntur quam aut reiciendis qui rerum dolorem sit odio. Repellat assumenda soluta sunt pariatur error doloribus fuga.
-            </p>
+                  Only 3CS students have the right to propose a project and work on it instead of working on one of our updates projects, due to their experience with the projects that they have dealed with in the previous educational years.
+                  </p>
               </div>
             </div>
 
@@ -389,12 +390,13 @@ class App extends Component {
             <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="500">
               <div class="col-lg-5">
                 <Icofont icon="question-circle" />
-                <h4>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</h4>
+                <h4>If I didn't choose a team or a project and the deadline came, what will happen?</h4>
               </div>
               <div class="col-lg-7">
                 <p>
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-            </p>
+                  If you didn't choose a team and the deadline came, you will be affected randomly to a team that has members less than 5.
+                  and if you didn't choose a project, also a random project will be affected you you and your team.
+                    </p>
               </div>
             </div>
           </div>
@@ -415,7 +417,7 @@ class App extends Component {
               <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="contact-about">
                   <h3>PFE ESI-SBA</h3>
-                  <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                  <p>We are always in the service to answer all your quetions and help you if there is any issue with our template, also we put ourselves in the need of the students who face problem through their project making journey.</p>
                   <div class="social-links">
                     <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
                     <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
