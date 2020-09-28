@@ -184,6 +184,7 @@ const refuseInv = async (grp) => {
                   active={activeItem === 'invitations'}
                   //onClick={handleItemClick}
                   >
+
                   <Dropdown scrolling nav inNavbar >
                     <DropdownToggle
                         caret
@@ -195,7 +196,7 @@ const refuseInv = async (grp) => {
                        <Icofont icon="users-alt-3"/>
                        </DropdownToggle>
                       <DropdownMenu
-                        style={{minHeight:"600px"}}
+                        style={{miaxHeight:"100px"}}
                       >
                     {invitations.map((inv,index) => {
                       return  <div style={{width: "500px",height:"100px"}}>
@@ -244,13 +245,20 @@ const refuseInv = async (grp) => {
                         >
                           My Profile
                           </DropdownItem>
-                          
+                          <DropdownItem
+              onClick={()=>{history.push("/changepassword")}}
+              target="_blank"
+                        >
+                          change password
+                                          </DropdownItem>
                           <DropdownItem
               onClick={()=>{history.push("/logout")}}
               target="_blank"
                         >
                           Log Out
-                                          </DropdownItem>
+                        </DropdownItem>
+                       
+                        
 
                         <DropdownItem divider />
                         
@@ -326,18 +334,17 @@ const refuseInv = async (grp) => {
         >
     <Nav navbar>
     <NavItem
-                      name='Home'
+                      name='ChooseProjects'
                       >
               <NavLink
                 target="_blank"
-          active={activeItem === 'Home'}
-          onClick={()=>{history.push("/")}}
+          active={activeItem === 'ChooseProject'}
+          onClick={()=>{history.push("/student/ChooseProject")}}
               >
-                 Home
+                 Choose Project
                 </NavLink>
            
       </NavItem>
-
      
 
 

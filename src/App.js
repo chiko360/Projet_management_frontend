@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Component, useState, useEffect } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -58,6 +56,7 @@ class App extends Component {
           <div id="slideshow">
             <div class="slide slideone" ></div>
           </div>
+        
           <Container>
             <Row>
 
@@ -79,13 +78,21 @@ class App extends Component {
                   >
                     Join Us Now
               </Button>
+             
                 </div>
+                <div  >
+
+                <section id="section07" >
+  <a href="#section07"><span></span><span></span><span></span></a>
+</section>
+</div>
+
               </Col>
             </Row>
           </Container>
-
+          
         </section>
-
+        
         <section id="counts" class="counts">
           <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -175,7 +182,9 @@ class App extends Component {
                 </div>
 
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+
                   <div className="icon-box" data-aos="fade-up" data-aos-delay="400">
+
                     <div class="icon"><Icofont icon="graduate-alt" /></div>
                     <h3 class="title"><a href="">Final Work</a></h3>
                     <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
@@ -454,11 +463,6 @@ class App extends Component {
                     <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                     <div class="validate"></div>
                   </div>
-                  <div class="mb-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-                  </div>
                   <div class="text-center">
                     <Button
                       className="bttn-hover color-9 btn-lg "  >
@@ -475,6 +479,8 @@ class App extends Component {
           <br></br>
 
         </section>
+
+
         <Footer />
       </div>
 

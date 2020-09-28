@@ -80,6 +80,32 @@ const getinvites = async () => {
   })
 }
 
+const getinfo = async () => {
+  let url = 'http://localhost:8000/profiles/student/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'get',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+          };
+  
+  await axios(options).then(res => {
+      const response = res.data;
+      setfname(response.data['0'].first_name)
+      setlname(response.data['0'].last_name)
+
+  })
+  .catch(function (error) {
+    history.push('/Forbiden')
+    }
+  )
+}
+
+
   function Loginbutton(props){
     const logged = props.logged
     if (logged===null){
@@ -117,13 +143,21 @@ const getinvites = async () => {
                         style={{minHeight:"600px"}}
                       >
                     {notifications.map((notif,index) => {
-                      return  <div style={{width: "500px",height:"100px"}}>
+                      return  <div >
+                        
                        <DropdownItem>
-                           <div class='box'>
-                              <h3 class='notif-card' >{notif.title}</h3>
-                              <h4 class='notif-card' >{notif.body}</h4>
-                              <h5 class='notif-card' >{notif.created_on}</h5>
-                        </div>
+		          
+		                  <div class="box">
+		                     <span class="highlight">
+                         <h3 class='notif-card' >{notif.title}</h3>
+                         <h4 class='notif-card' >{notif.body}</h4>
+                         <h5 class='notif-card' >{notif.created_on}</h5>
+
+                         </span>
+		                  </div>
+		               
+		         
+                           
                       </DropdownItem>
                     </div>
                     })}
@@ -145,8 +179,13 @@ const getinvites = async () => {
                         role="button"
                         className="bttn-hover color-8"
                       >
-                         <Icofont icon="user-alt-7" /> : name name
+                      <Icofont icon="user-alt-7"/> : {first_name} {last_name} 
                       </DropdownToggle>
+                      <DropdownMenu
+                        aria-labelledby="dropdownMenuButton"
+                        className="dropdown-info"
+                      >
+                      </DropdownMenu>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
                         className="dropdown-info"
@@ -177,7 +216,10 @@ const getinvites = async () => {
     }
   }
 
+
+
   useEffect(()=> {
+    getinfo();
     getnotifs();
     getinvites();
       const updateNavbarColor = () => {
@@ -238,19 +280,19 @@ const getinvites = async () => {
           isOpen={navbarCollapse}
         >
     <Nav navbar>
+      
     <NavItem
-                      name='Home'
+                      name='ChooseProjects'
                       >
               <NavLink
                 target="_blank"
-          active={activeItem === 'Home'}
-          onClick={()=>{history.push("/")}}
+          active={activeItem === 'ChooseProject'}
+          onClick={()=>{history.push("/student/ChooseProject")}}
               >
-                 Home
+                 Choose Project
                 </NavLink>
            
       </NavItem>
-      
       <NavItem
                       name='AllProjects'
                       >
@@ -274,7 +316,7 @@ const getinvites = async () => {
               >
                  Add Project
                 </NavLink>
-           
+            
       </NavItem>
 
         <NavItem

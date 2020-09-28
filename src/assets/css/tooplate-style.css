@@ -291,7 +291,7 @@ a:hover, a:active, a:focus {
   left: 0;
   height: 100%;
   width: 100%; 
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(13, 2, 37, 0.678);
 }
 #home .image-overlay{
   overflow: hidden;
@@ -630,75 +630,23 @@ a:hover, a:active, a:focus {
   font-size: 14px;
 }
 
-.contact .php-email-form .validate {
-  display: none;
-  color: red;
-  margin: 0 0 15px 0;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #ed3c0d;
-  text-align: left;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .error-message br + br {
-  margin-top: 25px;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
+.contact .icon {
+  margin: 0 auto 20px auto;
+  padding-top: 10px;
   display: inline-block;
+  text-align: center;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form input, .contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-}
-
-.contact .php-email-form button[type="submit"] {
+  width: 60px;
+  height: 60px;
   background: #3498db;
-  border: 0;
-  padding: 10px 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact .icon i {
+  font-size: 36px;
+  line-height: 1;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 50px;
 }
-
-.contact .php-email-form button[type="submit"]:hover {
-  background: #2383c4;
-}
-
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);
@@ -964,13 +912,13 @@ footer .copyright-text {
   -ms-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
   transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease; }
   .card:not(.card-plain):hover {
-    box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);
+  box-shadow: 20px 20px 30px 0 rgba(11, 39, 163, 0.144);
     transform: translateY(-10px);
     -webkit-transform: translateY(-10px);
     -ms-transform: translateY(-10px);
     -moz-transform: translateY(-10px); }
   .card.no-transition:hover, .card.page-carousel:hover, .card.card-refine:hover, .card.card-register:hover {
-    box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+    box-shadow: 20px 20px 30px 0 rgba(11, 39, 163, 0.144);
     transform: none;
     -webkit-transform: none;
     -ms-transform: none;
@@ -1439,6 +1387,8 @@ footer .copyright-text {
 
   .cardone{
     background-image: url('../images/ens.jpg');
+    box-shadow: 20px 20px 30px 0 rgba(11, 39, 163, 0.144);
+
   }
   
   .cardtwo{
@@ -3877,8 +3827,7 @@ textarea.form-control {
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   z-index: 1;
-  box-shadow: 0 4px 15px 0 rgba(115, 167, 250, 0.75);
-
+  box-shadow: 20px 20px 30px 0 rgba(11, 39, 163, 0.144);
 }
 
 .services .icon-box::before {
@@ -3903,14 +3852,14 @@ textarea.form-control {
   text-align:center;
   border: none;
   background-size: 300% 100%;
-   border-radius: 50px;
-   background: #3498db;
-   right: 0;
+  border-radius: 50px;
+  background-image: linear-gradient(to right,  #4481eb, #3f86ed);
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+  right: 0;
   top: 0;
   width: 100%;
   height: 100%;
   border-radius: 0px;
-  
   background-position: 100% 0;
   moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
@@ -3981,13 +3930,15 @@ textarea.form-control {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  box-shadow: 20px 20px 30px 0 rgba(11, 39, 163, 0.144);
+
 }
 
 .more-services .card-body {
   z-index: 10;
   background: rgba(255, 255, 255, 0.9);
   padding: 15px 30px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 50px 50px 30px 0 rgba(11, 39, 163, 0.144);
   transition: 0.3s;
   transition: ease-in-out 0.4s;
   border-radius: 5px;
@@ -4027,8 +3978,11 @@ textarea.form-control {
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  background: #3498db;
+
+  background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
   right: 0;
+  
   top: 0;
   width: 100%;
   height: 100%;
@@ -4549,8 +4503,7 @@ a .material-icons {
   margin-bottom: 25px;
   min-height: 32px;
   color: #3C4858;
-  font-weight: 700;
-  font-family: "Roboto Slab","Times New Roman",serif;
+  font-weight: 800;
 }
 
 .profile-page .description {
@@ -4826,4 +4779,64 @@ img.rounded {
      background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
 }
 
+
+
+#section07 a {
+  padding-top: 80px;
+  height: 100vh;
+  position: center;
+}
+#section07 a span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb07 2s infinite;
+  animation: sdb07 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+#section07 a span:nth-of-type(1) {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+#section07 a span:nth-of-type(2) {
+  top: 16px;
+  -webkit-animation-delay: .15s;
+  animation-delay: .15s;
+}
+#section07 a span:nth-of-type(3) {
+  top: 32px;
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+}
+@-webkit-keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
