@@ -166,7 +166,7 @@ const refuseInv = async (grp) => {
                         style={{minHeight:"600px"}}
                       >
                     {notifications.map((notif,index) => {
-                      return  <div style={{width: "500px",height:"100px"}}>
+                      return  <div style={{minHeight:"60px" , minWidth:"210px"}}>
                        <DropdownItem>
                            <div class='box'>
                               <h3 class='notif-card' >{notif.title}</h3>
@@ -199,7 +199,7 @@ const refuseInv = async (grp) => {
                         style={{miaxHeight:"100px"}}
                       >
                     {invitations.map((inv,index) => {
-                      return  <div style={{width: "500px",height:"100px"}}>
+                      return  <div style={{minHeight:"60px" , minWidth:"210px", width: "60px",height:"1000px"}}>
                        <DropdownItem>
                            <div class='box'>
                               <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
@@ -225,11 +225,8 @@ const refuseInv = async (grp) => {
                         id="dropdownMenuButton"
                         nav
                         onClick={e => e.preventDefault()}
-                        role="button"
-                        className="bttn-hover color-8"
-
-                      >
-                         <Icofont icon="user-alt-7"/> : name name
+                        >
+                         <Icofont icon="user-alt-7"/>
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"

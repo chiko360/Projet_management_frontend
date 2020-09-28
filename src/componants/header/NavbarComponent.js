@@ -28,15 +28,12 @@ function IndexNavbar(props) {
     document.documentElement.classList.toggle("nav-open");
   };
   
-  const [first_name, setfname] = useState(null);
-  const [last_name, setlname] = useState(null);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
   const [invitations, setInv] = useState([]);
   const type = props.type
   const logged = props.islogged
   let history = useHistory();
-  const handleItemClick = (e, { name }) => setAItem(name)
 
   function Truncate(str, n){
     return (str.length > n) ? str.substr(0, n-1) + '...' : str;
@@ -61,6 +58,9 @@ function IndexNavbar(props) {
         setNotif(response)
     })
 }
+
+
+
 const getinvites = async () => {
   let url = 'http://localhost:8000/groups/invitations/';
   let token = localStorage.getItem("token")
@@ -80,31 +80,42 @@ const getinvites = async () => {
   })
 }
 
-const getinfo = async () => {
-  let url = 'http://localhost:8000/profiles/student/';
+const acceptInv = async (grp) => {
+  let url = 'http://localhost:8000/groups/handleinvite/';
   let token = localStorage.getItem("token")
   let options = {
-              method: 'get',
+              method: 'Post',
               url: url,
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json;charset=UTF-8',
                   'Authorization' : 'Bearer '+ token
               },
+              data: { 'grp':grp,'accepted': true}
           };
-  
   await axios(options).then(res => {
       const response = res.data;
-      setfname(response.data['0'].first_name)
-      setlname(response.data['0'].last_name)
-
+      //TODO : message that he joing the groupe
   })
-  .catch(function (error) {
-    history.push('/Forbiden')
-    }
-  )
 }
-
+const refuseInv = async (grp) => {
+  let url = 'http://localhost:8000/groups/handleinvite/';
+  let token = localStorage.getItem("token")
+  let options = {
+              method: 'Post',
+              url: url,
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization' : 'Bearer '+ token
+              },
+              data: {'grp':grp,'accepted':false },
+          };
+  await axios(options).then(res => {
+      const response = res.data;
+      //TODO : message that he refused to join the groupe
+  })
+}
 
   function Loginbutton(props){
     const logged = props.logged
@@ -128,7 +139,7 @@ const getinfo = async () => {
                 <NavItem 
                   name='Notifications'
                   active={activeItem === 'Notifications'}
-                  onClick={handleItemClick}>
+                  >
                   <Dropdown scrolling nav inNavbar >
                     <DropdownToggle
                         caret
@@ -140,11 +151,15 @@ const getinfo = async () => {
                        <Icofont icon="alarm"/>
                        </DropdownToggle>
                       <DropdownMenu
-                        style={{minHeight:"600px"}}
+                        style={{minHeight:"60px" , minWidth:"210px"}}
                       >
-                    {notifications.map((notif,index) => {
+                      
+                      {notifications.map((notif,index) => {
+
                       return  <div >
-                        
+                        <DropdownToggle>
+                          notifications
+                          </DropdownToggle>
                        <DropdownItem>
 		          
 		                  <div class="box">
@@ -155,9 +170,6 @@ const getinfo = async () => {
 
                          </span>
 		                  </div>
-		               
-		         
-                           
                       </DropdownItem>
                     </div>
                     })}
@@ -165,6 +177,41 @@ const getinfo = async () => {
                     </Dropdown>
                      </NavItem>
 
+                     <NavItem 
+                  name='invitations'
+                  active={activeItem === 'invitations'}
+                  //onClick={handleItemClick}
+                  >
+
+                  <Dropdown scrolling nav inNavbar >
+                    <DropdownToggle
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        nav
+                        role="button"
+                      >
+                       <Icofont icon="users-alt-3"/>
+                       </DropdownToggle>
+                      <DropdownMenu
+                        style={{miaxHeight:"100px"}}
+                      >
+                    {invitations.map((inv,index) => {
+                      return  <div style={{minHeight:"60px" , minWidth:"210px", width: "60px",height:"1000px"}}>
+                       <DropdownItem>
+                           <div class='box'>
+                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
+                              <h4 class='notif-card' >{inv.timestamp}</h4>
+                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
+                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
+                        </div>
+                      </DropdownItem>
+                    </div>
+                    })}
+                     </DropdownMenu>
+                    </Dropdown>
+                     </NavItem>
+                     
                      <NavItem
                 name='Log out'
                 >
@@ -177,9 +224,11 @@ const getinfo = async () => {
                         nav
                         onClick={e => e.preventDefault()}
                         role="button"
-                        className="bttn-hover color-8"
                       >
-                      <Icofont icon="user-alt-7"/> : {first_name} {last_name} 
+
+
+
+                      <Icofont icon="user-alt-7"/>  
                       </DropdownToggle>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
@@ -200,13 +249,19 @@ const getinfo = async () => {
                         >
                           My Profile
                           </DropdownItem>
-                          
+                          <DropdownItem
+              onClick={()=>{history.push("/changepassword")}}
+              target="_blank"
+                        >
+                          change password
+                                          </DropdownItem>
                           <DropdownItem
               onClick={()=>{history.push("/logout")}}
               target="_blank"
                         >
                           Log Out
-                                          </DropdownItem>
+                        </DropdownItem>
+                          
 
                         <DropdownItem divider />
                         </DropdownMenu>
@@ -219,7 +274,6 @@ const getinfo = async () => {
 
 
   useEffect(()=> {
-    getinfo();
     getnotifs();
     getinvites();
       const updateNavbarColor = () => {
