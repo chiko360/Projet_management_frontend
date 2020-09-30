@@ -137,14 +137,6 @@ return <div className="container">
 
         })} 
 
-<ul class="pagination justify-content-center mb-4">
-          <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
-          </li>
-        </ul>
 
                 </div>
 
@@ -169,22 +161,13 @@ return <div className="container">
 
         
         <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
+          <h5 class="card-header">Read me </h5>
           <div class="card-body">
-          what you see in this page are all the projects we put in display to our students to choose from one that suits them the most
+          These are the projects that are available for this year so our students will work on them. If you are a 3CS student, you are able to suggest your own project, <a href="/student/addproject"><span style={{color:'#3498db'}}> click here</span> </a>
           </div>
         </div>
 
-        <div class="card my-4">
-          <h5 class="card-header">Read me</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-8">
-              
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
 
                     </div>

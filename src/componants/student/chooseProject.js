@@ -34,7 +34,6 @@ import AsyncSelect from 'react-select/async';
 
 
 function ChooseProject() {
-
   const [posts, setPost] = useState([]);
   const [title, setTitle] = useState(null);
   const [Leader, setLeader] = useState(false);
@@ -233,9 +232,8 @@ function ChooseProject() {
                   </Button>
 
                       </center><br />
-                      <br />
-
-                    </div>
+                      <br /> 
+                      </div>
                   </div>
                 </div>
               </Container>

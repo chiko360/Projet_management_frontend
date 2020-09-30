@@ -12,6 +12,8 @@ import {
   Row,
   Col
 } from "reactstrap";
+import IndexNavbar from './header/NavbarComponent';
+
 import NavSimple from './header/NavSimple';
 import ContactHeader from './header/ContactHeader';
 import Icofont from 'react-icofont';
@@ -33,11 +35,13 @@ import test5 from '../assets/images/testimonials/testimonials-5.jpg';
 
 
 class ContactUsPage extends Component {
+  
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     document.documentElement.classList.remove("nav-open");
+
 
     AOS.init(); 
  
@@ -70,7 +74,7 @@ class ContactUsPage extends Component {
 
   return (
     <>
-<NavSimple/>
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
 <ContactHeader />
 
 <section id="headersmall" class="parallax-section">
@@ -130,7 +134,7 @@ class ContactUsPage extends Component {
            <Form className="contact-form" onSubmit={this.handleSubmit} data-aos="fade-up">
              <Row>
                <Col md="6" data-aos="fade-up" data-aos-delay="250">
-                 <label>Name</label>
+                 <h6 style={{color: "white"}}>Name</h6>
                  <InputGroup>
                    <InputGroupAddon addonType="prepend">
                      <InputGroupText>
@@ -141,7 +145,7 @@ class ContactUsPage extends Component {
                  </InputGroup>
                </Col>
                <Col md="6" data-aos="fade-up" data-aos-delay="350">
-                 <label>Email</label>
+                 <h6 style={{color: "white"}}>Email</h6>
                  <InputGroup>
                    <InputGroupAddon addonType="prepend">
                      <InputGroupText>
@@ -153,7 +157,10 @@ class ContactUsPage extends Component {
                </Col>
              </Row>
              <div data-aos="fade-up" data-aos-delay="450">
-             <label>Subject</label>
+          
+
+<br/>
+             <h6 style={{color: "white"}}>Subject</h6>
                  <InputGroup>
                    <InputGroupAddon addonType="prepend">
                      <InputGroupText>
@@ -165,7 +172,8 @@ class ContactUsPage extends Component {
                  </div>
 
                  <div data-aos="fade-up" data-aos-delay="550">
-             <label>Message</label>
+                 <br/>
+             <h6 style={{color: "white"}}>Message</h6>
              <Input
                placeholder="Dites-nous vos pensées et vos suggestions..."
                type="textarea"

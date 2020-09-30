@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Icofont from 'react-icofont';
 import classnames from "classnames";
+
 // reactstrap components
 import {
   Button,
@@ -150,7 +151,6 @@ const refuseInv = async (grp) => {
                 <NavItem 
                   name='Notifications'
                   active={activeItem === 'Notifications'}
-                  //onClick={handleItemClick}
                   >
                   <Dropdown scrolling nav inNavbar >
                     <DropdownToggle
@@ -160,25 +160,45 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                       <Icofont icon="alarm"/>
+
+<span class="badge-danger">{notifications.length}</span>
+                       <Icofont icon="alarm" class="btn-notify" >
+                      
+                       </Icofont>
                        </DropdownToggle>
-                      <DropdownMenu
-                        style={{minHeight:"600px"}}
+                       
+                       <DropdownMenu
+                        style={{minHeight:"50px" , minWidth:"220px"}}
                       >
-                    {notifications.map((notif,index) => {
-                      return  <div style={{minHeight:"60px" , minWidth:"210px"}}>
-                       <DropdownItem>
-                           <div class='box'>
-                              <h3 class='notif-card' >{notif.title}</h3>
-                              <h4 class='notif-card' >{notif.body}</h4>
-                              <h5 class='notif-card' >{notif.created_on}</h5>
-                        </div>
+                       {(() => {
+                                                if (notifications.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                no notifications yet.
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+
+                      {notifications.map((notif,index) => {
+
+                      return  <div >
+                        <DropdownItem>
+                         
+                       <h5> {notif.title}</h5>
+                             
+                             {notif.body}
+                             <br/>
+                            {notif.created_on}
+                            
                       </DropdownItem>
+                      
                     </div>
                     })}
                      </DropdownMenu>
                     </Dropdown>
                      </NavItem>
+
                      <NavItem 
                   name='invitations'
                   active={activeItem === 'invitations'}
@@ -193,13 +213,28 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                       <Icofont icon="users-alt-3"/>
+                      <span class="badge-danger">{invitations.length}</span>
+
+                       <Icofont icon="users-alt-3">
+                       </Icofont>
+
                        </DropdownToggle>
                       <DropdownMenu
-                        style={{miaxHeight:"100px"}}
+                        style={{minHeight:"50px" , minWidth:"210px"}}
                       >
+
+{(() => {
+                                                if (invitations.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                There is no invitation yet
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+                                            
                     {invitations.map((inv,index) => {
-                      return  <div style={{minHeight:"60px" , minWidth:"210px", width: "60px",height:"1000px"}}>
+                      return  <div >
                        <DropdownItem>
                            <div class='box'>
                               <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
@@ -213,6 +248,7 @@ const refuseInv = async (grp) => {
                      </DropdownMenu>
                     </Dropdown>
                      </NavItem>
+                     
                      <NavItem
                 name='Log out'
                 >
@@ -220,14 +256,22 @@ const refuseInv = async (grp) => {
                       <DropdownToggle
                         aria-expanded={false}
                         caret
-                        color="default"
                         data-toggle="dropdown"
                         id="dropdownMenuButton"
                         nav
                         onClick={e => e.preventDefault()}
-                        >
-                         <Icofont icon="user-alt-7"/>
+                        role="button"
+                      >
+
+
+
+                      <Icofont icon="user-alt-7"/>  
                       </DropdownToggle>
+                      <DropdownMenu
+                        aria-labelledby="dropdownMenuButton"
+                        className="dropdown-info"
+                      >
+                      </DropdownMenu>
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
                         className="dropdown-info"
@@ -254,20 +298,17 @@ const refuseInv = async (grp) => {
                         >
                           Log Out
                         </DropdownItem>
-                       
-                        
+                          
 
                         <DropdownItem divider />
-                        
-                        
-                      </DropdownMenu>
+                        </DropdownMenu>
                     </UncontrolledDropdown>
-                    
-             
               </NavItem>
               </Nav>
     }
   }
+
+
 
   useEffect(()=> {
     getnotifs();
@@ -330,6 +371,10 @@ const refuseInv = async (grp) => {
           isOpen={navbarCollapse}
         >
     <Nav navbar>
+
+  
+
+
     <NavItem
                       name='ChooseProjects'
                       >
@@ -358,19 +403,7 @@ const refuseInv = async (grp) => {
            
       </NavItem>
 
-      <NavItem
-                      name='AddProject'
-                      >
-              <NavLink
-                target="_blank"
-          active={activeItem === 'AddProject'}
-          onClick={()=>{history.push("/student/addProject")}}
-              >
-                 Add Project
-                </NavLink>
-           
-      </NavItem>
-    
+      
         <NavItem
           name='My group'
           >
@@ -383,6 +416,19 @@ const refuseInv = async (grp) => {
                 </NavLink>
 
           </NavItem>
+
+          <NavItem
+                      name='cantactus'
+                      >
+              <NavLink
+                target="_blank"
+          active={activeItem === 'contactus'}
+          onClick={()=>{history.push("/contactus")}}
+              >
+                Contact Us
+                </NavLink>
+           
+      </NavItem>
        
           <Loginbutton logged={logged}/>
           </Nav>
@@ -427,22 +473,8 @@ else if (type ==='teacher'){
           navbar
           isOpen={navbarCollapse}
         >
-    <Nav navbar>
+    <Nav navbar> 
     <NavItem
-        name='Home'
-      >
-        <NavLink
-                target="_blank"
-                active={activeItem === 'Home'}
-                onClick={()=>{history.push("/")}}
-              >
-        Home
-                </NavLink>
-        </NavItem>
-
-       
-
-      <NavItem
         name='My Themes'
         >
            <NavLink
@@ -473,5 +505,6 @@ else if (type ==='teacher'){
 
   )
 }
+else { return null;}
 }
 export default  NavBlack;

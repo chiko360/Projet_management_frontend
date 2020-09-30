@@ -34,6 +34,9 @@ import avatar from '../../assets/images/avatar.jpg';
 function CreateGroup() {
 
 
+  const [posts, setPost] = useState([]);
+  const [title, setTitle] = useState(null);
+
 
   const [groupName, setGname] = useState('');
   const [members, setMembers] = useState([]);
@@ -42,6 +45,7 @@ function CreateGroup() {
   const [Grp, setGrp] = useState('');
   const [Leader, setLeader] = useState(false);
   const [mem, setmem] = useState([]);
+  const [memm, setmemm] = useState([]);
   const [leadername, setLN] = useState([]);
   let history = useHistory();
   const [modal, setModal] = React.useState(false);
@@ -59,6 +63,93 @@ function CreateGroup() {
       setActiveTab(tab);
     }
   };
+
+
+
+
+  const getprojects = async () => {
+    let url = 'http://localhost:8000/posts/';
+    let token = localStorage.getItem("token")
+    let options = {
+      method: 'get',
+      url: url,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    };
+    await axios(options).then(res => {
+      const response = res.data;
+      console.log(response)
+      setPost(response)
+    })
+  }
+
+
+  const handleCreationProject = async (props) => {
+    const isLeader = props.Leader;
+    if (isLeader === false) {
+      return null
+    }
+    else if (isLeader === true) {
+      for (var i = 0; i < posts.length; i++) {
+        var postslist = posts[i].label.split(' ');
+        const title = postslist[0]
+        Addprojects(title);
+      }
+    }
+  }
+
+
+  const Addprojects = async (title) => {
+    let url = 'http://localhost:8000/groups/addproject/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
+      .request({
+        url: url,
+        method: "post",
+        data: { title },
+      })
+      .then((res) => {
+        console.log(title + ' was added')
+      }
+      )
+      .catch(() => {
+        console.log('error');
+      })
+  }
+
+
+  const addproject = posts => {
+    setPost(posts);
+  }
+
+  const loadOptionsProject = async (callback) => {
+    let url = 'http://localhost:8000/groups/lookupposts/';
+    let token = localStorage.getItem("token")
+    let options = {
+      method: 'GET',
+      url: url,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    };
+    const response = await fetch(url, options)
+    const json = await response.json()
+    callback(json.map(i => ({ label: i.title, value: i.title })));
+  }
+
+
+
+
   const getMembers = async () => {
     let url = 'http://localhost:8000/groups/getMembers/';
     let token = localStorage.getItem("token");
@@ -108,7 +199,7 @@ function CreateGroup() {
     const isValid = validate();
     if (isValid === true && Grp === '') {
       setNE(null);
-      createGroup();
+      createGroup(groupName);
     }
     else if (Grp !== '') {
       for (var i = 0; i < members.length; i++) {
@@ -204,6 +295,7 @@ function CreateGroup() {
         }
       });
   }
+
   const validate = () => {
     let nameError = "";
     if (groupName === '') {
@@ -237,23 +329,190 @@ function CreateGroup() {
     const json = await response.json()
     callback(json.map(i => ({ label: i.first_name + ' ' + i.last_name, value: i.last_name + ' ' + i.last_name })));
   }
- 
+  
+  
+  const getfinalresult = async () => {
+    let url = 'http://localhost:8000/groups/finalresults/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
+      .request({
+        url: url,
+        method: "get",
+      })
+      .then((res) => {
+        setmemm(res.data);
+      }
+      )
+      .catch(() => {
+        console.log('there is no results yet');
+      })
+  }
+  
  
   useEffect(() => {
-   
+    getfinalresult();
     havegrp();
     getMembers();
+    getprojects();
     AOS.init(); 
     AOS.refresh(); 
   }, []);
 
+  
 
+  function ChooseProject(props){
+    const isLeader = props.Leader;
+    if (isLeader) {
+  
+      return (
+        <>  
+          <div>
+          <h3 data-aos="fade-up" data-aos-delay="200">
+                        Enter the project's titles from the
+                        most wanted to the least wanted.   <br />
+                          </h3>
+                  <Container>
+                    <div data-aos="fade-up" data-aos-delay="600">
+                          <br />
+    
+                          <h5>Add your first choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br /><br />
+    
+                          <h5>Add your second choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br /><br />
+    
+    
+                          <h5>Add your third choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br />
+                          <br />
+                          <br /> <center>
+    
+                            <Button
+                              block
+                              className="btn-hover color-1"
+                              onClick={() => { handleCreationProject() }}>
+                              Submit choices
+                      </Button>
+    
+                          </center><br />
+                          <br />
+    
+                        </div>
+               
+                  </Container>
+                </div>
+              
+     
+        </>
+      );
+  
+    }
+    else return null;
+  }
 
+  
 
+  function HeaderR(props) {
+    const havegrp = props.grp;
+    if (havegrp !== '') {
+      return ( <div className="container">
+      <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
+         Your team's final results
+  <br/>
+  <p>If you want to check on the results of the whole promo, 
+                  <a href="/student/results"> <span style={{color:'#000000'}}>
+                    click here </span> </a></p>
+</h3>
+<br/>
+           
+  </div>
+  
+      );
+    }
+    else return null;
+  }
+
+  
+
+  function HeaderM(props) {
+    const havegrp = props.grp;
+    if (havegrp !== '') {
+      return ( <div className="container">
+      
+       
+          <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
+          Current Members
+  <br/>
+  <small>Leader: {leadername}</small>
+</h3>
+<br/>
+<br/>          <br /> 
+           
+  </div>
+  
+      );
+    }
+    else return null;
+  }
+
+  function HeaderG(props) {
+    const havegrp = props.grp;
+    if (havegrp !== '') {
+      return ( <div className="container">
+      <div class="card my-4">
+        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+          <br />
+          Current Group "{Grp}" Infos
+          <br /> 
+           <br /> 
+        </h2>
+  </div>
+  </div>
+      );
+    }
+    else return(
+      <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+          <br />
+          Create Your team now.
+          <br /> 
+           <br /> 
+        </h2>
+         );
+  }
+    
   function InputGN(props) {
     const havegrp = props.grp;
     if (havegrp === '') {
-      return (
+      return (  
         <div>
           <Form name="form"  data-aos="fade-up" data-aos-delay="400" >
             <br />
@@ -282,8 +541,7 @@ function CreateGroup() {
             <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
 
           </Form>
-          
-        </div>
+          </div>
       )
     }
     else return null;
@@ -295,9 +553,12 @@ function CreateGroup() {
       return (
         <div>
           <br/>
+          
           <Form name="form"  data-aos="fade-up"  >
-            <h4 >Enter the name of the member you want to add to your group. </h4>
+            <h3  >
+              Enter the name of the member you want to add to your group. </h3>
             <br />
+            <br/>
             <Container>
 
             <Row>
@@ -423,26 +684,23 @@ function CreateGroup() {
                 <hr />
                 <div className="container">
                   <div class="card my-4">
-                    <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
-                      <br />
-                      Current Group "{Grp}" Infos
-                      <br /> 
-       <br /> 
-                    </h2>
+                   <HeaderG grp={Grp}/>
 
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <div>
+                      
                         <AddFeild Leader={Leader} />
                         <br />
+                       
+                        <br/>
                         <InputGN grp={Grp} />
                         <br />
-                        <h3 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
-                      Current Members
-                      <br/>
-                      <small>Leader: {leadername}</small>
-                    </h3>
-                    <br/>
-                    <br/>
+                        
+                        <ChooseProject Leader={Leader} />
+                        <br />
+                        
+                        <br/>
+                        <HeaderM grp={Grp}/>
 <div data-aos="fade-up" data-aos-delay="400">
                         {mem.map((mem, index) => {
                           return <Row>
@@ -484,15 +742,42 @@ function CreateGroup() {
                         })}
                         </div>
                     
+                        <HeaderR grp={Grp}/>
+                        <Row>
+            <Col lg="9" md="12">
+                        {memm.map((memm, index) => {
+                          if(Grp==memm.groupfiche){
+                          return  <Col>
+                          <p>
+                          <h5>  Your Group : 
+                            <span style={{color:'#3498db'}}> 
+                            {memm.groupfiche}
+                             </span></h5>
+                          <hr/>
+                          
+                          <h5> The Project's That Your Group is Concerned With : 
+                          <span  style={{color:'#3498db'}}>
+                            {memm.selected_project}
+                            </span>
+                             </h5>
+                          </p>
+                          </Col>
+                        }
+                         })}
+                         <br/>
+                           
+                         </Col>
+                         </Row>
+                        </div>
+                        </div>
+              
                       </div>
 
 
                     </div>
                     <br/>
       
-      
-                  </div>
-                </div>
+         
               </Container>
 
               <br/>

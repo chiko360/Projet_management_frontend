@@ -7,19 +7,19 @@ import './assets/css/font-awesome.min.css';
 import './assets/css/smthing.css';
 import './assets/css/tooplate-style.css';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Redirect,  Switch } from "react-router-dom";
 import Login from './componants/LoginPage';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Studentprofile from './componants/student/studentprofile'
-import Teacherprofile from './componants/teacher/teacherprofile'
-import AddProject from './componants/teacher/addProject'
-import MyProjects from './componants/teacher/myProjects'
-import StudentAddProject from './componants/student/addProject'
-import StudentMyProjects from './componants/student/myProjects'
-import ApprovedProjects from './componants/student/approvedprojects'
-import ChooseProject from './componants/student/chooseProject'
-import ChangePassword from './componants/changePassword'
+import Studentprofile from './componants/student/studentprofile';
+import Teacherprofile from './componants/teacher/teacherprofile';
+import AddProject from './componants/teacher/addProject';
+import MyProjects from './componants/teacher/myProjects';
+import StudentAddProject from './componants/student/addProject';
+import StudentMyProjects from './componants/student/myProjects';
+import ApprovedProjects from './componants/student/approvedprojects';
+import ChooseProject from './componants/student/chooseProject';
+import ChangePassword from './componants/changePassword';
 import CreateGroup from './componants/student/createGroupe';
 import Forbiden from './componants/Forbiden';
 import Logout from './componants/logout';
@@ -32,12 +32,13 @@ import SortPage from './componants/sortPage';
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
+              <Route exact path="/" component={App} />
+              <Route exact path="/changepassword" component={ChangePassword} />
+
           <Route exact path="/login" component={Login} />
-          <Route exact path="/changepassword" component={ChangePassword} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/contactus" component={ContactUsPage} />
           <Route exact path="/aboutus" component={AboutUsPage} />
-          <Route exact path="/" component={App} />
           <Route exact path="/student" component={Studentprofile} />
           <Route exact path="/teacher" component={Teacherprofile} />
           <Route exact path="/teacher/addProject" component={AddProject} />

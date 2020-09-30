@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-
-import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+import { Button, Card, Form, Container, Row, Col } from "reactstrap";
 import Footer from './Footer';
+import AOS from 'aos';
+
 
 function ChangePassword() {
-
     const [old_password, setOpass] = useState('');
     const [new_password, setNpass] = useState('');
     const [confirm_password, setCpass] = useState('');
@@ -75,8 +75,6 @@ function ChangePassword() {
       else if (new_password.length<6) {
         NPError = 'password is too weak';
       }
-      else{ return null;}
-    
 
   
       if (OPError || NPError || CPError) {
@@ -85,13 +83,21 @@ function ChangePassword() {
         setECP(CPError);
         return false;
       }
-      
   
       return true;
     }
-
-    return(
+    
+    useEffect(()=> {
+      
+      AOS.init();
+      AOS.refresh();
+      
+      },[]);
+  
+    return (
       <>
+      
+      <div>
       <section id="home" class="parallax-section">
        <div class="overlay"></div>
        <div class="image-overlay">    
@@ -150,7 +156,10 @@ function ChangePassword() {
         </div>
   </section> 
   <Footer/>
+  </div>
       </>
     );
 }
+
+
 export default ChangePassword;

@@ -128,16 +128,7 @@ function Teacherprofile() {
                     <h5 data-aos="fade-up" data-aos-delay="600">Gender: {gender}</h5>
                     <h5 data-aos="fade-up" data-aos-delay="700">I'm a {grade} Student at ESI SBA</h5>
 
-              <Button
-               data-aos="fade-up" 
-               data-aos-delay="800" size="lg"  
-               className="bttn-hover color-4" 
-               style={{width:'250px'}}
-               onClick={() => { history.push("/changePassword") }}
-
-               >
-                           <Icofont icon="ssl-security"/> Change Password
-                        </Button>
+              
             
        </Col>
        </Row>
