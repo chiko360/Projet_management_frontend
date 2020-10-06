@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 
-
 function Logout(){
     let history = useHistory();
 

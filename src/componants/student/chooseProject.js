@@ -15,7 +15,10 @@ import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 
 function ChooseProject() {
+<<<<<<< HEAD
   const [postCount, setPC] = useState(0);
+=======
+>>>>>>> 5f6cf84e402b5c3a4110c26a05ca5af51567bb9f
   const [posts, setPost] = useState([]);
   const [title, setTitle] = useState(null);
   const [Leader, setLeader] = useState(false);
@@ -188,6 +191,7 @@ function ChooseProject() {
                     </h2>
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <br />
+<<<<<<< HEAD
                       {(() => {for (var i = 0; i <= postCount; i++) {
                         return <>
                            <h5>Add your first choice..</h5>
@@ -213,6 +217,56 @@ function ChooseProject() {
                       }})}
                         </div>
                       </div>
+=======
+
+                      <h5>Add your first choice..</h5>
+
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br /><br />
+
+                      <h5>Add your second choice..</h5>
+
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br /><br />
+
+
+                      <h5>Add your third choice..</h5>
+
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br />
+                      <br />
+                      <br /> <center>
+
+                        <Button
+                          block
+                          className="btn-hover color-1"
+                          onClick={() => { handleCreation() }}>
+                          Submit choices
+                  </Button>
+
+                      </center><br />
+                      <br /> 
+                      </div>
+                  </div>
+>>>>>>> 5f6cf84e402b5c3a4110c26a05ca5af51567bb9f
                 </div>
               </Container>
               <br />

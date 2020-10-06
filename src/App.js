@@ -21,7 +21,8 @@ import {
   Container,
   Row, Col
 } from "reactstrap";
-import NavSimple from './componants/header/NavSimple';
+import IndexNavbar from './componants/header/NavbarComponent';
+
 import Icofont from 'react-icofont';
 
 
@@ -34,26 +35,49 @@ console.log(two);
 console.log(three);
 console.log(four);
 
+function App (props) {
+ 
+  const logged = props.islogged
 
-class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-    AOS.init();
+  useEffect(() => {
+  
+    AOS.init(); 
+    AOS.refresh(); 
+  }, []);
+
+  function Join(props){
+    const logged = props.logged
+    if (logged !==null){
+      return (<Button
+  
+        className="bttn-hover color-9 btn-lg "
+        href="/login"
+        outline
+        target="_blank"
+      >
+        Go To Dashboard
+  </Button>)}
+  
+   else { return <Button
+    
+    className="bttn-hover color-9 btn-lg "
+    href="/login"
+    outline
+    target="_blank"
+  >
+  Join Us Now
+  </Button>}
   }
-
-
-  componentWillReceiveProps() {
-    AOS.refresh();
-  }
-
-  render() {
-
+ 
+    
     document.documentElement.classList.remove("nav-open");
+
+   
 
     return (
 
       <div className="App">
-        <NavSimple />
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
         <section id="home" class="parallax-section">
           <div class="overlay"></div>
           <div id="slideshow">
@@ -72,15 +96,9 @@ class App extends Component {
                  </p>
                 <br />
                 <div class="side" data-aos="fade-up" data-aos-delay="1200">
-                  <Button
 
-                    className="bttn-hover color-9 btn-lg "
-                    href="/login"
-                    outline
-                    target="_blank"
-                  >
-                    Join Us Now
-              </Button>
+                  
+                <Join  logged={logged} />
              
                 </div>
                 <div  >
@@ -488,6 +506,6 @@ class App extends Component {
 
     );
   }
-}
+
 
 export default App;

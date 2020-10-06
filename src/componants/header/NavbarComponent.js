@@ -148,29 +148,39 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                       <Icofont icon="alarm"/>
-                       </DropdownToggle>
-                      <DropdownMenu
-                        style={{minHeight:"60px" , minWidth:"210px"}}
-                      >
+
+<span class="badge-danger">{notifications.length}</span>
+                       <Icofont icon="alarm" class="btn-notify" >
                       
+                       </Icofont>
+                       </DropdownToggle>
+                       
+                       <DropdownMenu
+                        style={{minHeight:"50px" , minWidth:"220px"}}
+                      >
+                       {(() => {
+                                                if (notifications.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                no notifications yet.
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+
                       {notifications.map((notif,index) => {
 
                       return  <div >
-                        <DropdownToggle>
-                          notifications
-                          </DropdownToggle>
-                       <DropdownItem>
-		          
-		                  <div class="box">
-		                     <span class="highlight">
-                         <h3 class='notif-card' >{notif.title}</h3>
-                         <h4 class='notif-card' >{notif.body}</h4>
-                         <h5 class='notif-card' >{notif.created_on}</h5>
-
-                         </span>
-		                  </div>
+                        <DropdownItem>
+                         
+                       <h5> {notif.title}</h5>
+                             
+                             {notif.body}
+                             <br/>
+                            {notif.created_on}
+                            
                       </DropdownItem>
+                      
                     </div>
                     })}
                      </DropdownMenu>
@@ -191,13 +201,28 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                       <Icofont icon="users-alt-3"/>
+                      <span class="badge-danger">{invitations.length}</span>
+
+                       <Icofont icon="users-alt-3">
+                       </Icofont>
+
                        </DropdownToggle>
                       <DropdownMenu
-                        style={{miaxHeight:"100px"}}
+                        style={{minHeight:"50px" , minWidth:"210px"}}
                       >
+
+{(() => {
+                                                if (invitations.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                There is no invitation yet
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+                                            
                     {invitations.map((inv,index) => {
-                      return  <div style={{minHeight:"60px" , minWidth:"210px", width: "60px",height:"1000px"}}>
+                      return  <div >
                        <DropdownItem>
                            <div class='box'>
                               <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
@@ -310,7 +335,8 @@ const refuseInv = async (grp) => {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/"
+            active={activeItem === 'home'}
+            onClick={()=>{history.push("/")}}
             title="make it easy"
           >
             PFE esi-sba
@@ -334,8 +360,8 @@ const refuseInv = async (grp) => {
           isOpen={navbarCollapse}
         >
     <Nav navbar>
-      
-    <NavItem
+   
+      <NavItem
                       name='ChooseProjects'
                       >
               <NavLink
@@ -360,18 +386,7 @@ const refuseInv = async (grp) => {
            
       </NavItem>
 
-      <NavItem
-                      name='AddProject'
-                      >
-              <NavLink
-                target="_blank"
-          active={activeItem === 'AddProject'}
-          onClick={()=>{history.push("/student/addProject")}}
-              >
-                 Add Project
-                </NavLink>
-            
-      </NavItem>
+    
 
         <NavItem
           name='My group'
@@ -385,6 +400,21 @@ const refuseInv = async (grp) => {
                 </NavLink>
 
           </NavItem>
+
+          <NavItem
+                      name='cantactus'
+                      >
+              <NavLink
+                target="_blank"
+          active={activeItem === 'contactus'}
+          onClick={()=>{history.push("/contactus")}}
+              >
+                Contact Us
+                </NavLink>
+           
+      </NavItem>
+
+     
        
           <Loginbutton logged={logged}/>
           </Nav>
@@ -430,17 +460,20 @@ else if (type ==='teacher'){
           isOpen={navbarCollapse}
         >
     <Nav navbar>
+
     <NavItem
-        name='Home'
-      >
-        <NavLink
+        name='Submit'
+        >
+                     <NavLink
                 target="_blank"
-                active={activeItem === 'Home'}
-                onClick={()=>{history.push("/")}}
+                active={activeItem === 'Submit'}
+                onClick={()=>{history.push("/teacher/addProject")}}
               >
-        Home
+        Add Project
                 </NavLink>
         </NavItem>
+
+
       <NavItem
         name='My Themes'
         >
@@ -452,17 +485,22 @@ else if (type ==='teacher'){
         My Projects
                 </NavLink>
         </NavItem>
-      <NavItem
-        name='Submit'
-        >
-                     <NavLink
+    
+
+        <NavItem
+                      name='cantactus'
+                      >
+              <NavLink
                 target="_blank"
-                active={activeItem === 'Submit'}
-                onClick={()=>{history.push("/teacher/addProject")}}
+          active={activeItem === 'contactus'}
+          onClick={()=>{history.push("/contactus")}}
               >
-        Add Project
+                Contact Us
                 </NavLink>
-        </NavItem>
+           
+      </NavItem>
+
+    
         <Loginbutton logged={logged}/>
         </Nav>
   </Collapse>
@@ -472,5 +510,80 @@ else if (type ==='teacher'){
 
   )
 }
+else { return  <Navbar
+    className={classnames("fixed-top", navbarColor)}
+    color-on-scroll="100"
+    expand="lg"
+  >
+
+    <Container>
+      <div className="navbar-translate">
+        <NavbarBrand
+          data-placement="bottom"
+          to="/"
+          title="make it easy"
+        >
+          PFE esi-sba
+        </NavbarBrand>
+
+        <button
+          aria-expanded={navbarCollapse}
+          className={classnames("navbar-toggler navbar-toggler", {
+            toggled: navbarCollapse
+          })}
+          onClick={toggleNavbarCollapse}
+        >
+          <span className="navbar-toggler-bar bar1" />
+          <span className="navbar-toggler-bar bar2" />
+          <span className="navbar-toggler-bar bar3" />
+        </button>
+      </div>
+      <Collapse
+        className="justify-content-end"
+        navbar
+        isOpen={navbarCollapse}
+      >
+        <Nav navbar>
+
+          
+          <NavItem>
+            <NavLink
+              href="/"
+            >
+           Home
+            </NavLink>
+          </NavItem>
+
+          <NavItem>
+            <NavLink
+              href="/contactus"
+            >
+              Contact Us 
+           </NavLink>
+          </NavItem>
+        
+                  <NavItem>
+            <NavLink
+              href="/aboutus"
+            >
+              About Us 
+           </NavLink>
+          </NavItem>
+
+          <NavItem>
+          
+            <Button     
+            style={{width:"100%"}}          
+             className="bttn-hover color-9 btn-lg "  
+             href="/login">
+                  Login Now
+                </Button>
+          </NavItem>
+        
+        </Nav>
+      </Collapse>
+    </Container>
+  </Navbar>
+  }
 }
 export default  IndexNavbar;

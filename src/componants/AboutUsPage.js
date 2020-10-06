@@ -12,7 +12,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import NavSimple from './header/NavSimple';
+import IndexNavbar from './header/NavbarComponent';
 import AboutHeader from './header/AboutHeader';
 import Icofont from 'react-icofont';
 import AOS from 'aos';
@@ -70,7 +70,7 @@ class AboutUsPage extends Component {
 
   return (
     <>
-<NavSimple/>
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
 <AboutHeader />
         <section id="about" class="about">
 <Container>

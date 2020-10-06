@@ -87,7 +87,6 @@ function Studentprofile() {
         )
     }
   
-  
    const getfinalresult = async () => {
   let url = 'http://localhost:8000/groups/finalresults/';
   let token = localStorage.getItem("token");
@@ -168,68 +167,7 @@ function Studentprofile() {
 
        <br />
        <br />
-          <div className="nav-tabs-navigation">
-            <div className="nav-tabs-wrapper">
-              <Nav role="tablist" tabs>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "1" ? "active" : ""}
-                    onClick={() => {
-                      toggle("1");
-                    }}
-                  >
-                   Final results
-                  </NavLink>
-                </NavItem>
-             
-              </Nav>
-            </div>
-          </div>
-
-          <TabContent className="following" activeTab={activeTab}>
-            <TabPane tabId="1" id="follows">
-              <Row>
-              <Col className="ml-auto mr-auto" >
-                <ul className="list-unstyled follows">
-                    <li>
-                    <div class="card my-4">
-                    <div class="card-body" data-aos="fade-up" data-aos-delay="600">
-                        {mem.map((mem, index) => {
-                          if(Grp==mem.groupfiche){
-                          return  <Col>
-                          <p>
-                          <h5>  Your Group : 
-                            <span style={{color:'#3498db'}}> 
-                            {mem.groupfiche}
-                             </span></h5>
-                          <hr/>
-                          
-                          <h5> The Project's That Your Group is Concerned With : 
-                          <span  style={{color:'#3498db'}}>
-                            {mem.selected_project}
-                            </span>
-                             </h5>
-                          </p>
-                          </Col>
-                        }
-                         })}
-                        </div>
-                        </div>
-                <p>If you want to check on the rests of the you whole promo, 
-                  <a href="/student/results"> <span style={{color:'#3498db'}}>
-                    click here </span> </a></p>
-                      
-                    </li>
-                
-                    
-                  </ul>
-                </Col>
-              </Row>
-            </TabPane>
-           
-          </TabContent>
-        
-	                    </div>
+        </div>
                         
     	            </div>
                 </div>
@@ -243,7 +181,9 @@ function Studentprofile() {
             </div>
         </div>
 	</div>
-	   
+  <br></br>
+				<br></br>
+				<br></br>
 
           <Footer/>
 

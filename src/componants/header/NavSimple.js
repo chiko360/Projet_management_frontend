@@ -128,6 +128,7 @@ return function cleanup() {
       </Container>
     </Navbar>
     
+    
   );
 }                       
 export default NavSimple;
