@@ -41,7 +41,7 @@ function TeacherMyProjects() {
     };
 
     const getprojects = async () => {
-        let url = 'http://localhost:8000/posts/myprojects/';
+        let url = 'http://localhost:8001/posts/myprojects/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'get',
@@ -59,7 +59,7 @@ function TeacherMyProjects() {
     }
 
     const deleteProject = async (index) => {
-        let url = 'http://localhost:8000/posts/'+index+'/delete/';
+        let url = 'http://localhost:8001/posts/'+index+'/delete/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'DELETE',
@@ -77,7 +77,7 @@ function TeacherMyProjects() {
         }
     }
     const editProject = async (index) => {
-        let url = 'http://localhost:8000/posts/'+index+'/edit/';
+        let url = 'http://localhost:8001/posts/'+index+'/edit/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'PUT',
@@ -141,7 +141,7 @@ function TeacherMyProjects() {
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h2>Check All Your Projects.</h2>
                                             <ol>
-                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/">home</a></li>
                                                 <li><a href="/teacher">teacher</a></li>
                                                 <li>my project</li>
                                             </ol>

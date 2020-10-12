@@ -42,7 +42,7 @@ function Resultspage() {
     };
 
     const havegrp = async () => {
-        let url = 'http://localhost:8000/profiles/getgroup/';
+        let url = 'http://localhost:8001/profiles/getgroup/';
         let token = localStorage.getItem("token");
         axios.create({
           headers: {
@@ -62,7 +62,7 @@ function Resultspage() {
     
     
      const getfinalresult = async () => {
-    let url = 'http://localhost:8000/groups/finalresults/';
+    let url = 'http://localhost:8001/groups/finalresults/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -110,7 +110,7 @@ function Resultspage() {
                                     <div class="d-flex justify-content-between align-items-center">
                                             <h2>Showing all results.</h2>
                                             <ol>
-                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/">home</a></li>
                                                 <li><a href="/sort">results</a></li>
                                                
                                             </ol>

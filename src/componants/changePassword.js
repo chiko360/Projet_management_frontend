@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import Footer from './Footer';
 
@@ -29,7 +28,7 @@ function ChangePassword() {
     }
 
     const changepass = async () => {
-        let url = 'http://localhost:8000/auth/change_password/';
+        let url = 'http://localhost:8001/auth/change_password/';
         let token = localStorage.getItem("token")
         axios.create({
           headers: {

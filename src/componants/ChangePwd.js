@@ -6,7 +6,7 @@ import Footer from './Footer';
 import AOS from 'aos';
 
 
-function ChangePassword() {
+function ChangePassword1() {
     const [old_password, setOpass] = useState('');
     const [new_password, setNpass] = useState('');
     const [confirm_password, setCpass] = useState('');
@@ -29,7 +29,7 @@ function ChangePassword() {
     }
 
     const changepass = async () => {
-        let url = 'http://localhost:8000/auth/change_password/';
+        let url = 'http://localhost:8001/auth/change_password/';
         let token = localStorage.getItem("token")
         axios.create({
           headers: {
@@ -162,4 +162,4 @@ function ChangePassword() {
 }
 
 
-export default ChangePassword;
+export default ChangePassword1;

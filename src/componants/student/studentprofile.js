@@ -42,7 +42,7 @@ function Studentprofile() {
     let history = useHistory();
 
     const getinfo = async () => {
-        let url = 'http://localhost:8000/profiles/student/';
+        let url = 'http://localhost:8001/profiles/student/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'get',
@@ -69,7 +69,7 @@ function Studentprofile() {
     }
 
     const havegrp = async () => {
-      let url = 'http://localhost:8000/profiles/getgroup/';
+      let url = 'http://localhost:8001/profiles/getgroup/';
       let token = localStorage.getItem("token");
       axios.create({
         headers: {
@@ -88,7 +88,7 @@ function Studentprofile() {
     }
   
    const getfinalresult = async () => {
-  let url = 'http://localhost:8000/groups/finalresults/';
+  let url = 'http://localhost:8001/groups/finalresults/';
   let token = localStorage.getItem("token");
   axios.create({
     headers: {

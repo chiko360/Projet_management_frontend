@@ -42,7 +42,7 @@ function HorNavbar(props) {
   };
 
   const getinfo = async () => {
-    let url = 'http://localhost:8000/profiles/student/';
+    let url = 'http://localhost:8001/profiles/student/';
     let token = localStorage.getItem("token")
     let options = {
                 method: 'get',
@@ -68,7 +68,7 @@ function HorNavbar(props) {
 
 
   const getnotifs = async () => {
-    let url = 'http://localhost:8000/api/notifications/';
+    let url = 'http://localhost:8001/api/notifications/';
     let token = localStorage.getItem("token")
     let options = {
                 method: 'get',

@@ -10,7 +10,7 @@ function ApprovedProjects() {
     const [posts, setPost] = useState([]);
 
     const getprojects = async () => {
-        let url = 'http://localhost:8000/posts/';
+        let url = 'http://localhost:8001/posts/';
         let token = localStorage.getItem("token")
         let options = {
             method: 'get',
@@ -66,7 +66,7 @@ function ApprovedProjects() {
                                             <h2  
                                             >Check All Submited Projects.</h2>
                                             <ol >
-                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/">home</a></li>
                                                 <li><a href="/student">student</a></li>
                                                 <li>all projects</li>
                                             </ol>

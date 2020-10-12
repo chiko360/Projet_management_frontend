@@ -26,7 +26,7 @@ function AddProject() {
     }
 
     const loadOptions = async (inputText,callback)=> {
-      let url = 'http://localhost:8000/members/'+inputText;
+      let url = 'http://localhost:8001/members/'+inputText;
       let token = localStorage.getItem("token")
       let options = {
         method: 'get',
@@ -43,7 +43,7 @@ function AddProject() {
     }
 
     const Post = async () => {
-        let url = 'http://localhost:8000/posts/addpost/';
+        let url = 'http://localhost:8001/posts/addpost/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'POST',
@@ -86,7 +86,7 @@ function AddProject() {
                     <div class="d-flex justify-content-between align-items-center">
                       <h2>Add Project</h2>
                       <ol>
-                        <li><a href="/index">home</a></li>
+                        <li><a href="/">home</a></li>
                         <li><a href="/teacher">teacher</a></li>
                         <li>add project</li>
                       </ol>

@@ -39,7 +39,7 @@ function Teacherprofile() {
   let history = useHistory();
 
   const getinfoteacher = async () => {
-      let url = 'http://localhost:8000/profiles/teacher/';
+      let url = 'http://localhost:8001/profiles/teacher/';
       let token = localStorage.getItem("token")
       let options = {
                   method: 'get',
@@ -73,7 +73,7 @@ function Teacherprofile() {
     AOS.init();
     AOS.refresh();
       //const pusher = new Pusher("269da359d7787125ca29", {cluster: "eu",
-      //authEndpoint: "http://localhost:8000/api/pusher/auth",
+      //authEndpoint: "http://localhost:8001/api/pusher/auth",
       //  });
       //  var channel = pusher.subscribe("my-channel");
       //  channel.bind('my-event', function(data) {

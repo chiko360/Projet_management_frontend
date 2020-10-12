@@ -63,7 +63,7 @@ function ChooseProject() {
   });
 
   const getprojects = async () => {
-    let url = 'http://localhost:8000/posts/';
+    let url = 'http://localhost:8001/posts/';
     let token = localStorage.getItem("token")
     let options = {
       method: 'get',
@@ -98,7 +98,7 @@ function ChooseProject() {
 
 
   const Addprojects = async (title) => {
-    let url = 'http://localhost:8000/groups/addproject/';
+    let url = 'http://localhost:8001/groups/addproject/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -126,7 +126,7 @@ function ChooseProject() {
   }
 
   const loadOptions = async (callback) => {
-    let url = 'http://localhost:8000/groups/lookupposts/';
+    let url = 'http://localhost:8001/groups/lookupposts/';
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',

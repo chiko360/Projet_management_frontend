@@ -42,7 +42,7 @@ function IndexNavbar(props) {
 
 
   const getnotifs = async () => {
-    let url = 'http://localhost:8000/api/notifications/';
+    let url = 'http://localhost:8001/api/notifications/';
     let token = localStorage.getItem("token")
     let options = {
                 method: 'get',
@@ -62,7 +62,7 @@ function IndexNavbar(props) {
 
 
 const getinvites = async () => {
-  let url = 'http://localhost:8000/groups/invitations/';
+  let url = 'http://localhost:8001/groups/invitations/';
   let token = localStorage.getItem("token")
   let options = {
               method: 'get',
@@ -81,7 +81,7 @@ const getinvites = async () => {
 }
 
 const acceptInv = async (grp) => {
-  let url = 'http://localhost:8000/groups/handleinvite/';
+  let url = 'http://localhost:8001/groups/handleinvite/';
   let token = localStorage.getItem("token")
   let options = {
               method: 'Post',
@@ -99,7 +99,7 @@ const acceptInv = async (grp) => {
   })
 }
 const refuseInv = async (grp) => {
-  let url = 'http://localhost:8000/groups/handleinvite/';
+  let url = 'http://localhost:8001/groups/handleinvite/';
   let token = localStorage.getItem("token")
   let options = {
               method: 'Post',

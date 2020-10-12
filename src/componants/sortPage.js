@@ -47,7 +47,7 @@ function Sortpage() {
     };
 
      const getfinalresult = async () => {
-    let url = 'http://localhost:8000/groups/finalresults/';
+    let url = 'http://localhost:8001/groups/finalresults/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -69,7 +69,7 @@ function Sortpage() {
   }
 
   const sortleader = async (listLeaders) => {
-    let url = 'http://localhost:8000/groups/leader/';
+    let url = 'http://localhost:8001/groups/leader/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -88,7 +88,7 @@ function Sortpage() {
   }
 
   const sortgroup = async (listLeaders) => {
-    let url = 'http://localhost:8000/groups/teammarks/';
+    let url = 'http://localhost:8001/groups/teammarks/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -131,7 +131,7 @@ function Sortpage() {
                                     <div class="d-flex justify-content-between align-items-center">
                                             <h2>Showing all results.</h2>
                                             <ol>
-                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/">home</a></li>
                                                 <li><a href="/sort">results</a></li>
                                                
                                             </ol>

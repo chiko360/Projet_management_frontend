@@ -32,9 +32,8 @@ import SortPage from './componants/sortPage';
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
-              <Route exact path="/" component={App} />
-              <Route exact path="/changepassword" component={ChangePassword} />
-
+          <Route exact path="/changepassword" component={ChangePassword} />
+          <Route exact path="/" component={App} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/contactus" component={ContactUsPage} />

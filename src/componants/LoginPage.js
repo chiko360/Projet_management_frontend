@@ -36,7 +36,7 @@ function Login() {
   }
 
   const login = async () => {
-        let url = 'http://localhost:8000/auth/login/';
+        let url = 'http://localhost:8001/auth/login/';
         axios.create({
           headers: {
               "Content-Type": "application/json",

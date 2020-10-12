@@ -68,7 +68,7 @@ function CreateGroup() {
 
 
   const getprojects = async () => {
-    let url = 'http://localhost:8000/posts/';
+    let url = 'http://localhost:8001/posts/';
     let token = localStorage.getItem("token")
     let options = {
       method: 'get',
@@ -103,7 +103,7 @@ function CreateGroup() {
 
 
   const Addprojects = async (title) => {
-    let url = 'http://localhost:8000/groups/addproject/';
+    let url = 'http://localhost:8001/groups/addproject/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -131,7 +131,7 @@ function CreateGroup() {
   }
 
   const loadOptionsProject = async (callback) => {
-    let url = 'http://localhost:8000/groups/lookupposts/';
+    let url = 'http://localhost:8001/groups/lookupposts/';
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -151,7 +151,7 @@ function CreateGroup() {
 
 
   const getMembers = async () => {
-    let url = 'http://localhost:8000/groups/getMembers/';
+    let url = 'http://localhost:8001/groups/getMembers/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -173,7 +173,7 @@ function CreateGroup() {
   }
 
   const havegrp = async () => {
-    let url = 'http://localhost:8000/profiles/getgroup/';
+    let url = 'http://localhost:8001/profiles/getgroup/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -212,7 +212,7 @@ function CreateGroup() {
   }
 
   const deletemember = async (first_name, last_name) => {
-    let url = 'http://localhost:8000/groups/deletemember/';
+    let url = 'http://localhost:8001/groups/deletemember/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -239,7 +239,7 @@ function CreateGroup() {
 
 
   const Addmembers = async (first_name, last_name) => {
-    let url = 'http://localhost:8000/groups/addmember/';
+    let url = 'http://localhost:8001/groups/addmember/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -263,7 +263,7 @@ function CreateGroup() {
   }
 
   const createGroup = async () => {
-    let url = 'http://localhost:8000/groups/creategroup/';
+    let url = 'http://localhost:8001/groups/creategroup/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -314,7 +314,7 @@ function CreateGroup() {
   }
 
   const loadOptions = async (callback, inputText) => {
-    let url = 'http://localhost:8000/members/'+inputText;
+    let url = 'http://localhost:8001/members/'+inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -332,7 +332,7 @@ function CreateGroup() {
   
   
   const getfinalresult = async () => {
-    let url = 'http://localhost:8000/groups/finalresults/';
+    let url = 'http://localhost:8001/groups/finalresults/';
     let token = localStorage.getItem("token");
     axios.create({
       headers: {
@@ -674,7 +674,7 @@ function CreateGroup() {
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h2>All Your Group's Inormations.</h2>
                                             <ol>
-                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/">home</a></li>
                                                 <li><a href="/student">student</a></li>
                                                 <li>my group</li>
                                             </ol>
