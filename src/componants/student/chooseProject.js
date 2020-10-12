@@ -2,6 +2,23 @@ import React, { useEffect, useState } from 'react';
 // reactstrap components
 import {
   Button,
+  FormGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Modal,
+  UncontrolledTooltip,
+  PopoverBody,
+  PopoverHeader,
+  UncontrolledPopover,
+  Label,
+  Input,
+  Form,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
   Container,
   Row,
   Col
@@ -14,11 +31,9 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import AsyncSelect from 'react-select/async';
 
+
+
 function ChooseProject() {
-<<<<<<< HEAD
-  const [postCount, setPC] = useState(0);
-=======
->>>>>>> 5f6cf84e402b5c3a4110c26a05ca5af51567bb9f
   const [posts, setPost] = useState([]);
   const [title, setTitle] = useState(null);
   const [Leader, setLeader] = useState(false);
@@ -61,27 +76,8 @@ function ChooseProject() {
     };
     await axios(options).then(res => {
       const response = res.data;
-      setPost(response)
-    })
-  }
-
-  const getCount = async () => {
-    let url = 'http://localhost:8000/groups/getMaxChoices/';
-    let token = localStorage.getItem("token")
-    let options = {
-      method: 'get',
-      url: url,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': 'Bearer ' + token
-      },
-    };
-    await axios(options).then(res => {
-      const response = parseInt(res.data["maxchoices"]);
-      setPC(response)
       console.log(response)
-      console.log(postCount)
+      setPost(response)
     })
   }
 
@@ -129,8 +125,8 @@ function ChooseProject() {
     setPost(posts);
   }
 
-  const loadOptions = async (inputValue,callback) => {
-    let url = 'http://localhost:8000/groups/lookupposts/'+inputValue;
+  const loadOptions = async (callback) => {
+    let url = 'http://localhost:8000/groups/lookupposts/';
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -149,7 +145,6 @@ function ChooseProject() {
 
   useEffect(() => {
     getprojects();
-    getCount();
     AOS.init();
     AOS.refresh();
   }, []);
@@ -182,42 +177,16 @@ function ChooseProject() {
                   </div>
                 </section>
                 <hr />
+
                 <div className="container">
                   <div class="card my-4">
                     <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
                       <br />
-                          Enter the projects from the most wanted to the least wanted.   <br />
+    Enter the projects from the most wanted to the least wanted.   <br />
                       <br />
                     </h2>
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <br />
-<<<<<<< HEAD
-                      {(() => {for (var i = 0; i <= postCount; i++) {
-                        return <>
-                           <h5>Add your first choice..</h5>
-                          <AsyncSelect
-                            options={posts}
-                            isSearchable
-                            isClearable
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptions}
-                          />
-                          <br /><br /> <center>
-                            <Button
-                              block
-                              className="btn-hover color-1"
-                              onClick={() => { handleCreation() }}>
-                              Submit choices
-                      </Button>
-                          </center><br />
-                          <br />
-                          </>
-                      }})}
-                        </div>
-                      </div>
-=======
 
                       <h5>Add your first choice..</h5>
 
@@ -266,7 +235,6 @@ function ChooseProject() {
                       <br /> 
                       </div>
                   </div>
->>>>>>> 5f6cf84e402b5c3a4110c26a05ca5af51567bb9f
                 </div>
               </Container>
               <br />

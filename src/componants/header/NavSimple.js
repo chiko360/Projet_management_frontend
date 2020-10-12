@@ -91,7 +91,7 @@ return function cleanup() {
             
             <NavItem>
               <NavLink
-                href="/"
+                href="/index"
               >
              Home
               </NavLink>

@@ -257,6 +257,7 @@ function CreateGroup() {
       }
       )
       .catch(() => {
+        console.log('error');
         setSE('you don\'t have a groupe')
       })
   }
@@ -312,9 +313,8 @@ function CreateGroup() {
     setMembers(members);
   }
 
-  const loadOptions = async (inputValue,callback) => {
-    console.log(inputValue)
-    let url = 'http://localhost:8000/members/'+inputValue;
+  const loadOptions = async (callback, inputText) => {
+    let url = 'http://localhost:8000/members/'+inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -547,7 +547,7 @@ function CreateGroup() {
     else return null;
   }
 
-  function AddField(props) {
+  function AddFeild(props) {
     const isLeader = props.Leader;
     if (isLeader) {
       return (
@@ -688,12 +688,8 @@ function CreateGroup() {
 
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <div>
-<<<<<<< HEAD
-                        <AddField Leader={Leader} />
-=======
                       
                         <AddFeild Leader={Leader} />
->>>>>>> 5f6cf84e402b5c3a4110c26a05ca5af51567bb9f
                         <br />
                        
                         <br/>
