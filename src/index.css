@@ -12,3 +12,7 @@ code {
     monospace;
 }
 
+.dropdown-menu {
+  max-height: 700px;
+  overflow-y: scroll;
+}
