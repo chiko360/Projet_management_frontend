@@ -1,9 +1,13 @@
-import React, { useEffect,useState} from 'react';
+import React, { useEffect,useState,   View } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Icofont from 'react-icofont';
 import classnames from "classnames";
+<<<<<<< HEAD
 import '../../index.css'
+=======
+
+>>>>>>> ea6f774fe7e9e9c4055979b6e8c965f0b51efea6
 // reactstrap components
 import {
   Button,
@@ -18,8 +22,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  UncontrolledDropdown
+  UncontrolledDropdown,
+  Badge
 } from "reactstrap";
+
 function IndexNavbar(props) {
   
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -149,10 +155,15 @@ function formatdate(date){
                         role="button"
                       >
 
-<span class="badge-danger">{notifications.length}</span>
-                       <Icofont icon="alarm" class="btn-notify" >
-                      
-                       </Icofont>
+<div class="notif">
+     <span class="badge">
+       {notifications.length}
+       </span>
+       <Icofont icon="alarm"/> 
+</div>
+    
+      
+
                        </DropdownToggle>
                        
                        <DropdownMenu
@@ -201,11 +212,16 @@ function formatdate(date){
                         nav
                         role="button"
                       >
-                      <span class="badge-danger">{invitations.length}</span>
 
-                       <Icofont icon="users-alt-3">
-                       </Icofont>
+                     
 
+                       <div class="notif">
+     <span class="badge">
+     {invitations.length}
+       </span>
+       <Icofont icon="users-alt-3"/> 
+</div>
+    
                        </DropdownToggle>
                       <DropdownMenu
                         style={{minHeight:"50px" , minWidth:"210px"}}
@@ -275,7 +291,7 @@ function formatdate(date){
                           My Profile
                           </DropdownItem>
                           <DropdownItem
-              onClick={()=>{history.push("/changepassword")}}
+              onClick={()=>{history.push("/changePassword")}}
               target="_blank"
                         >
                           change password
@@ -436,7 +452,7 @@ else if (type ==='teacher'){
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/"
+            onClick={()=>{history.push("/")}}
             title="make it easy"
           >
             PFE esi-sba

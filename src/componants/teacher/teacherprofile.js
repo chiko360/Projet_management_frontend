@@ -126,7 +126,7 @@ function Teacherprofile() {
             <Col className="ml-auto mr-auto text-center" md="12">
                     <h5 data-aos="fade-up" data-aos-delay="500">Date of Birth: {date_of_birth}</h5>
                     <h5 data-aos="fade-up" data-aos-delay="600">Gender: {gender}</h5>
-                    <h5 data-aos="fade-up" data-aos-delay="700">I'm a {grade} Student at ESI SBA</h5>
+                    <h5 data-aos="fade-up" data-aos-delay="700">I'm a {grade} teacher at ESI SBA</h5>
 
               
             

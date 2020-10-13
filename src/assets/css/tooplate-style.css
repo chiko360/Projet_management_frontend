@@ -4842,3 +4842,25 @@ img.rounded {
     opacity: 0;
   }
 }
+
+
+
+
+.notif {
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  padding: 0px 10px;
+  position: relative;
+  display: inline-block;
+}
+
+ .badge {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  padding: 2px 4px;
+  border-radius: 50%;
+  background: rgb(245, 28, 28);
+  color: white;
+}

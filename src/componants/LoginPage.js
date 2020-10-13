@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "reactstrap";
 import Footer from './Footer'; 
 import { Form } from "semantic-ui-react";
-import NavSimple from './header/NavSimple';
+import IndexNavbar from './header/NavbarComponent';
 import AOS from 'aos';
 
 function Login() {
@@ -102,9 +102,10 @@ function Login() {
       }
     },[]);
 
+
     return (
     <>
-<NavSimple/>   
+<IndexNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
  <section id="home" class="parallax-section">
      <div class="overlay"></div>
      <div class="image-overlay">    
@@ -113,7 +114,7 @@ function Login() {
         <div className="filter" />
         <Container>
           <Row>
-            <Col className="ml-auto mr-auto" lg="4">
+            <Col className="ml-auto mr-auto" lg="6">
               <Card className="card-register ml-auto mr-auto" data-aos="fade-up" data-aos-delay="100">
                 <center>
                 <h3  data-aos="fade-up" data-aos-delay="200" >Welcome Back</h3>

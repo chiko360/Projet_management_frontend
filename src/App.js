@@ -1,5 +1,7 @@
 import React from 'react';
 import { Component, useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/aos/dist/aos.css';
 import './App.css';
@@ -22,9 +24,7 @@ import {
   Row, Col
 } from "reactstrap";
 import IndexNavbar from './componants/header/NavbarComponent';
-
 import Icofont from 'react-icofont';
-
 
 console.log(etud);
 console.log(ens);
@@ -38,6 +38,7 @@ console.log(four);
 function App (props) {
  
   const logged = props.islogged
+  let history = useHistory();
 
   useEffect(() => {
   
@@ -46,7 +47,7 @@ function App (props) {
   }, []);
 
   function Join(props){
-    const logged = props.logged
+
     if (logged !==null){
       return (<Button
   
@@ -58,18 +59,17 @@ function App (props) {
         Go To Dashboard
   </Button>)}
   
-   else { return <Button
-    
+  if (logged===null) { return (<Button
     className="bttn-hover color-9 btn-lg "
     href="/login"
     outline
     target="_blank"
   >
   Join Us Now
-  </Button>}
+  </Button>)}
+  
   }
  
-    
     document.documentElement.classList.remove("nav-open");
 
    
@@ -98,7 +98,7 @@ function App (props) {
                 <div class="side" data-aos="fade-up" data-aos-delay="1200">
 
                   
-                <Join  logged={logged} />
+                <Join islogged={logged} />
              
                 </div>
                 <div  >
