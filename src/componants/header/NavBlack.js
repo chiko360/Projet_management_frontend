@@ -161,10 +161,14 @@ const refuseInv = async (grp) => {
                         role="button"
                       >
 
-<span class="badge-danger">{notifications.length}</span>
-                       <Icofont icon="alarm" class="btn-notify" >
-                      
-                       </Icofont>
+  <div class="notif">
+     <span class="badge">
+     {notifications.length}
+       </span>
+       <Icofont icon="alarm"/> 
+</div>
+
+
                        </DropdownToggle>
                        
                        <DropdownMenu
@@ -213,10 +217,13 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                      <span class="badge-danger">{invitations.length}</span>
 
-                       <Icofont icon="users-alt-3">
-                       </Icofont>
+                      <div class="notif">
+     <span class="badge">
+     {invitations.length}
+       </span>
+       <Icofont icon="users-alt-3"/> 
+</div>
 
                        </DropdownToggle>
                       <DropdownMenu
@@ -287,7 +294,7 @@ const refuseInv = async (grp) => {
                           My Profile
                           </DropdownItem>
                           <DropdownItem
-              onClick={()=>{history.push("/changepassword")}}
+              onClick={()=>{history.push("/changePassword")}}
               target="_blank"
                         >
                           change password

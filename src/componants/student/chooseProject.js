@@ -190,7 +190,6 @@ function ChooseProject() {
 
                       <h5>Add your first choice..</h5>
 
-
                       <AsyncSelect
                         value={title}
                         onChange={addproject}

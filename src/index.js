@@ -19,7 +19,7 @@ import StudentAddProject from './componants/student/addProject';
 import StudentMyProjects from './componants/student/myProjects';
 import ApprovedProjects from './componants/student/approvedprojects';
 import ChooseProject from './componants/student/chooseProject';
-import ChangePassword from './componants/changePassword';
+import ChangePassword from './componants/changePassword'
 import CreateGroup from './componants/student/createGroupe';
 import Forbiden from './componants/Forbiden';
 import Logout from './componants/logout';
@@ -32,13 +32,12 @@ import SortPage from './componants/sortPage';
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
-              <Route exact path="/" component={App} />
-              <Route exact path="/changepassword" component={ChangePassword} />
-
+          <Route exact path="/" component={App} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/contactus" component={ContactUsPage} />
           <Route exact path="/aboutus" component={AboutUsPage} />
+          <Route exact path="/changePassword" component={ChangePassword} />
           <Route exact path="/student" component={Studentprofile} />
           <Route exact path="/teacher" component={Teacherprofile} />
           <Route exact path="/teacher/addProject" component={AddProject} />
@@ -51,13 +50,10 @@ ReactDOM.render(
           <Route exact path="/student/group" component={CreateGroup} />
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/Forbiden" component={Forbiden} />
+
     </Switch>
 
 </BrowserRouter>,
 
 document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();

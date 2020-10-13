@@ -18,7 +18,6 @@ import {
   UncontrolledPopover,
   Label,
   Input,
-  Form,
   NavItem,
   NavLink,
   Nav,
@@ -28,6 +27,8 @@ import {
   Row,
   Col
 } from "reactstrap";
+import { Form } from "semantic-ui-react";
+
 import avatar from '../../assets/images/avatar.jpg';
 
 
@@ -37,8 +38,8 @@ function CreateGroup() {
   const [posts, setPost] = useState([]);
   const [title, setTitle] = useState(null);
 
+  const [groupName, setGroupname] = useState('');
 
-  const [groupName, setGname] = useState('');
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
   const [ServerError, setSE] = useState(null);
@@ -63,9 +64,6 @@ function CreateGroup() {
       setActiveTab(tab);
     }
   };
-
-
-
 
   const getprojects = async () => {
     let url = 'http://localhost:8000/posts/';
@@ -195,13 +193,18 @@ function CreateGroup() {
 
 
 
-  const handleCreation = async () => {
+
+  const handleCreationgroup = async () => {
     const isValid = validate();
     if (isValid === true && Grp === '') {
       setNE(null);
       createGroup(groupName);
     }
-    else if (Grp !== '') {
+    }
+  
+
+  const handleCreationmem = async () => {
+   if (Grp !== '') {
       for (var i = 0; i < members.length; i++) {
         var memlist = members[i].label.split(' ');
         const first_name = memlist[0]
@@ -210,6 +213,8 @@ function CreateGroup() {
       }
     }
   }
+
+
 
   const deletemember = async (first_name, last_name) => {
     let url = 'http://localhost:8000/groups/deletemember/';
@@ -276,6 +281,7 @@ function CreateGroup() {
         method: "post",
         data: { groupName },
       })
+
       .then((res) => {
         console.log('created')
         for (var i = 0; i < members.length; i++) {
@@ -489,7 +495,7 @@ function CreateGroup() {
     if (havegrp !== '') {
       return ( <div className="container">
       <div class="card my-4">
-        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up">
           <br />
           Current Group "{Grp}" Infos
           <br /> 
@@ -512,27 +518,29 @@ function CreateGroup() {
   function InputGN(props) {
     const havegrp = props.grp;
     if (havegrp === '') {
+
       return (  
         <div>
-          <Form name="form"  data-aos="fade-up" data-aos-delay="400" >
+          <Form  data-aos="fade-up" data-aos-delay="400" >
             <br />
-            <h3>Add the name of your group </h3>
+            <h3>Creat a group now </h3>
             <br />
             <Row>
             <Col lg="9" md="12">
-            <input placeholder="Enter name of your group.. "
+
+
+            <Form.Input
+             placeholder="Enter name of your group.. "
              data-aos="fade-up" data-aos-delay="200"
-              type="text"
-              className="form-control"
-              name="Gname"
-              onChange={(event) => { setGname(event.target.value) }} />
+              onChange={(event) => { setGroupname(event.target.value) }} />
             <br />
+
             </Col>
             <Col>
             <Button
               block
               className="btn-hover color-1"
-              onClick={() => { handleCreation() }}>
+              onClick={() => { handleCreationgroup() }}>
               Validate Group
                </Button>
                </Col>
@@ -579,7 +587,7 @@ function CreateGroup() {
               style={{ float: 'right' }}
               block
               className="btn-hover color-1"
-              onClick={() => { handleCreation() }}>Validate Member</Button>
+              onClick={() => { handleCreationmem() }}>Validate Member</Button>
               </Col>
 
 </Row>
@@ -610,6 +618,7 @@ function CreateGroup() {
     if (first_name === leaderFN && last_name === leaderLN) {
       return null;
     }
+
     else if (isLeader) {
       return (
         <>

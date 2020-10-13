@@ -1,8 +1,9 @@
-import React, { useEffect,useState} from 'react';
+import React, { useEffect,useState,   View } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Icofont from 'react-icofont';
 import classnames from "classnames";
+
 // reactstrap components
 import {
   Button,
@@ -17,8 +18,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  UncontrolledDropdown
+  UncontrolledDropdown,
+  Badge
 } from "reactstrap";
+
 function IndexNavbar(props) {
   
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -149,10 +152,15 @@ const refuseInv = async (grp) => {
                         role="button"
                       >
 
-<span class="badge-danger">{notifications.length}</span>
-                       <Icofont icon="alarm" class="btn-notify" >
-                      
-                       </Icofont>
+<div class="notif">
+     <span class="badge">
+       {notifications.length}
+       </span>
+       <Icofont icon="alarm"/> 
+</div>
+    
+      
+
                        </DropdownToggle>
                        
                        <DropdownMenu
@@ -201,11 +209,16 @@ const refuseInv = async (grp) => {
                         nav
                         role="button"
                       >
-                      <span class="badge-danger">{invitations.length}</span>
 
-                       <Icofont icon="users-alt-3">
-                       </Icofont>
+                     
 
+                       <div class="notif">
+     <span class="badge">
+     {invitations.length}
+       </span>
+       <Icofont icon="users-alt-3"/> 
+</div>
+    
                        </DropdownToggle>
                       <DropdownMenu
                         style={{minHeight:"50px" , minWidth:"210px"}}
@@ -275,7 +288,7 @@ const refuseInv = async (grp) => {
                           My Profile
                           </DropdownItem>
                           <DropdownItem
-              onClick={()=>{history.push("/changepassword")}}
+              onClick={()=>{history.push("/changePassword")}}
               target="_blank"
                         >
                           change password
@@ -436,7 +449,7 @@ else if (type ==='teacher'){
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/"
+            onClick={()=>{history.push("/")}}
             title="make it easy"
           >
             PFE esi-sba
