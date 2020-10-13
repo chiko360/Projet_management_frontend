@@ -7,10 +7,6 @@ import Footer from '../Footer';
 import AOS from 'aos';
 import {
   Button,
-  FormGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Modal,
   UncontrolledTooltip,
   PopoverBody,
@@ -36,8 +32,6 @@ function CreateGroup() {
 
   const [posts, setPost] = useState([]);
   const [title, setTitle] = useState(null);
-
-
   const [groupName, setGname] = useState('');
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
@@ -53,10 +47,10 @@ function CreateGroup() {
   const [activeTab, setActiveTab] = React.useState("1");
 
   const toggleModal = () => {
-      setModal(!modal);
-  } 
+    setModal(!modal);
+  }
   const toggleModalDelete = () => {
-      setModalDelete(!modaldelete);
+    setModalDelete(!modaldelete);
   }
   const toggle = tab => {
     if (activeTab !== tab) {
@@ -314,7 +308,7 @@ function CreateGroup() {
   }
 
   const loadOptions = async (callback, inputText) => {
-    let url = 'http://localhost:8001/members/'+inputText;
+    let url = 'http://localhost:8001/members/' + inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -329,8 +323,8 @@ function CreateGroup() {
     const json = await response.json()
     callback(json.map(i => ({ label: i.first_name + ' ' + i.last_name, value: i.last_name + ' ' + i.last_name })));
   }
-  
-  
+
+
   const getfinalresult = async () => {
     let url = 'http://localhost:8001/groups/finalresults/';
     let token = localStorage.getItem("token");
@@ -352,133 +346,133 @@ function CreateGroup() {
         console.log('there is no results yet');
       })
   }
-  
- 
+
+
   useEffect(() => {
+    AOS.init();
+    AOS.refresh();
     getfinalresult();
     havegrp();
     getMembers();
     getprojects();
-    AOS.init(); 
-    AOS.refresh(); 
   }, []);
 
-  
 
-  function ChooseProject(props){
+
+  function ChooseProject(props) {
     const isLeader = props.Leader;
     if (isLeader) {
-  
+
       return (
-        <>  
+        <>
           <div>
-          <h3 data-aos="fade-up" data-aos-delay="200">
-                        Enter the project's titles from the
+            <h3 data-aos="fade-up" data-aos-delay="200">
+              Enter the project's titles from the
                         most wanted to the least wanted.   <br />
-                          </h3>
-                  <Container>
-                    <div data-aos="fade-up" data-aos-delay="600">
-                          <br />
-    
-                          <h5>Add your first choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-                          <h5>Add your second choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-    
-                          <h5>Add your third choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br />
-                          <br />
-                          <br /> <center>
-    
-                            <Button
-                              block
-                              className="btn-hover color-1"
-                              onClick={() => { handleCreationProject() }}>
-                              Submit choices
+            </h3>
+            <Container>
+              <div data-aos="fade-up" data-aos-delay="600">
+                <br />
+
+                <h5>Add your first choice..</h5>
+
+
+                <AsyncSelect
+                  value={title}
+                  onChange={addproject}
+                  placeholder='enter the title of the project..'
+                  loadOptions={loadOptionsProject}
+                />
+                <br /><br />
+
+                <h5>Add your second choice..</h5>
+
+
+                <AsyncSelect
+                  value={title}
+                  onChange={addproject}
+                  placeholder='enter the title of the project..'
+                  loadOptions={loadOptionsProject}
+                />
+                <br /><br />
+
+
+                <h5>Add your third choice..</h5>
+
+
+                <AsyncSelect
+                  value={title}
+                  onChange={addproject}
+                  placeholder='enter the title of the project..'
+                  loadOptions={loadOptionsProject}
+                />
+                <br />
+                <br />
+                <br /> <center>
+
+                  <Button
+                    block
+                    className="btn-hover color-1"
+                    onClick={() => { handleCreationProject() }}>
+                    Submit choices
                       </Button>
-    
-                          </center><br />
-                          <br />
-    
-                        </div>
-               
-                  </Container>
-                </div>
-              
-     
+
+                </center><br />
+                <br />
+
+              </div>
+
+            </Container>
+          </div>
+
+
         </>
       );
-  
+
     }
     else return null;
   }
 
-  
+
 
   function HeaderR(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return ( <div className="container">
-      <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
-         Your team's final results
-  <br/>
-  <p>If you want to check on the results of the whole promo, 
-                  <a href="/student/results"> <span style={{color:'#000000'}}>
-                    click here </span> </a></p>
-</h3>
-<br/>
-           
-  </div>
-  
+      return (<div className="container">
+        <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
+          Your team's final results
+  <br />
+          <p>If you want to check on the results of the whole promo,
+                  <a href="/student/results"> <span style={{ color: '#000000' }}>
+              click here </span> </a></p>
+        </h3>
+        <br />
+
+      </div>
+
       );
     }
     else return null;
   }
 
-  
+
 
   function HeaderM(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return ( <div className="container">
-      
-       
-          <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
+      return (<div className="container">
+
+
+        <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
           Current Members
-  <br/>
-  <small>Leader: {leadername}</small>
-</h3>
-<br/>
-<br/>          <br /> 
-           
-  </div>
-  
+  <br />
+          <small>Leader: {leadername}</small>
+        </h3>
+        <br />
+        <br />          <br />
+
+      </div>
+
       );
     }
     else return null;
@@ -487,61 +481,61 @@ function CreateGroup() {
   function HeaderG(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return ( <div className="container">
-      <div class="card my-4">
-        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
-          <br />
+      return (<div className="container">
+        <div class="card my-4">
+          <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+            <br />
           Current Group "{Grp}" Infos
-          <br /> 
-           <br /> 
-        </h2>
-  </div>
-  </div>
+          <br />
+            <br />
+          </h2>
+        </div>
+      </div>
       );
     }
-    else return(
+    else return (
       <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
-          <br />
+        <br />
           Create Your team now.
-          <br /> 
-           <br /> 
-        </h2>
-         );
+        <br />
+        <br />
+      </h2>
+    );
   }
-    
+
   function InputGN(props) {
     const havegrp = props.grp;
     if (havegrp === '') {
-      return (  
+      return (
         <div>
-          <Form name="form"  data-aos="fade-up" data-aos-delay="400" >
+          <Form name="form">
             <br />
             <h3>Add the name of your group </h3>
             <br />
             <Row>
-            <Col lg="9" md="12">
-            <input placeholder="Enter name of your group.. "
-             data-aos="fade-up" data-aos-delay="200"
-              type="text"
-              className="form-control"
-              name="Gname"
-              onChange={(event) => { setGname(event.target.value) }} />
-            <br />
-            </Col>
-            <Col>
-            <Button
-              block
-              className="btn-hover color-1"
-              onClick={() => { handleCreation() }}>
-              Validate Group
+              <Col lg="9" md="12">
+                <input placeholder="Enter name of your group.. "
+                  //data-aos="fade-up" data-aos-delay="200"
+                  type="text"
+                  className="form-control"
+                  name="Gname"
+                  onChange={(event) => {setGname(event.target.value);console.log(groupName)}} />
+                <br />
+              </Col>
+              <Col>
+                <Button
+                  block
+                  className="btn-hover color-1"
+                  onClick={() => { handleCreation() }}>
+                  Validate Group
                </Button>
-               </Col>
-               </Row>
+              </Col>
+            </Row>
 
             <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
 
           </Form>
-          </div>
+        </div>
       )
     }
     else return null;
@@ -552,38 +546,38 @@ function CreateGroup() {
     if (isLeader) {
       return (
         <div>
-          <br/>
-          
-          <Form name="form"  data-aos="fade-up"  >
+          <br />
+
+          <Form name="form" data-aos="fade-up"  >
             <h3  >
               Enter the name of the member you want to add to your group. </h3>
             <br />
-            <br/>
+            <br />
             <Container>
 
-            <Row>
-            <Col lg="8" md="10" style={{height : "60px" }}>
+              <Row>
+                <Col lg="8" md="10" style={{ height: "60px" }}>
 
-            <AsyncSelect
-              isMulti
-              value={members}
-              onChange={addmember}
-              placeholder='enter members names..'
-              loadOptions={loadOptions}
-            />
-            <br />
-            </Col>
-            
-<Col >
-            <Button
-              style={{ float: 'right' }}
-              block
-              className="btn-hover color-1"
-              onClick={() => { handleCreation() }}>Validate Member</Button>
-              </Col>
+                  <AsyncSelect
+                    isMulti
+                    value={members}
+                    onChange={addmember}
+                    placeholder='enter members names..'
+                    loadOptions={loadOptions}
+                  />
+                  <br />
+                </Col>
 
-</Row>
-</Container>
+                <Col >
+                  <Button
+                    style={{ float: 'right' }}
+                    block
+                    className="btn-hover color-1"
+                    onClick={() => { handleCreation() }}>Validate Member</Button>
+                </Col>
+
+              </Row>
+            </Container>
 
             <div style={{ fontSize: 12, color: "red" }}>{ServerError}</div>
 
@@ -613,43 +607,43 @@ function CreateGroup() {
     else if (isLeader) {
       return (
         <>
-        <Button className="btn-hover color-11"
-         onClick={toggleModalDelete}>
-          delete member
+          <Button className="btn-hover color-11"
+            onClick={toggleModalDelete}>
+            delete member
         </Button>
           <Modal class="modal-dialog modal-xs" isOpen={modaldelete} toggle={toggleModalDelete}>
-              <div className="modal-body">
-              <div class="text-center mr-auto"> 
-              <Col style={{ height:"100px"}}>
-                <br/>
-              <h3>
-              Do you really want to delete this member?
+            <div className="modal-body">
+              <div class="text-center mr-auto">
+                <Col style={{ height: "100px" }}>
+                  <br />
+                  <h3>
+                    Do you really want to delete this member?
               </h3>
-              </Col>
+                </Col>
               </div>
-              </div>
-              <div className="modal-footer">
-                  <Button      
-                  style={{width:"100px"}}
-                  className="btn-hover color-11"
-                  onClick={() => { deletemember(first_name, last_name) }}                  >
-                  Delete
+            </div>
+            <div className="modal-footer">
+              <Button
+                style={{ width: "100px" }}
+                className="btn-hover color-11"
+                onClick={() => { deletemember(first_name, last_name) }}                  >
+                Delete
                   </Button>
               <div className="divider" />
               <div className="right-side">
-                  <Button 
+                <Button
                   outline
-                  style={{width:"100%"}}
+                  style={{ width: "100%" }}
                   className="btn-hover color-8"
                   type="button"
                   onClick={toggleModalDelete}
-                      >
+                >
                   Cancel
                   </Button>
               </div>
-              </div>
+            </div>
           </Modal>
-          </>
+        </>
       )
     }
     else {
@@ -661,129 +655,123 @@ function CreateGroup() {
 
     <>
       <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
-      <br/>
-        <br/>
-<br/>
+      <br />
+      <br />
+      <br />
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div className="section about">
               <Container>
-              <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
-                                    <div class="container">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h2>All Your Group's Inormations.</h2>
-                                            <ol>
-                                                <li><a href="/">home</a></li>
-                                                <li><a href="/student">student</a></li>
-                                                <li>my group</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </section>
+                <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+                  <div class="container">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2>All Your Group's Inormations.</h2>
+                      <ol>
+                        <li><a href="/">home</a></li>
+                        <li><a href="/student">student</a></li>
+                        <li>my group</li>
+                      </ol>
+                    </div>
+                  </div>
+                </section>
                 <hr />
                 <div className="container">
                   <div class="card my-4">
-                   <HeaderG grp={Grp}/>
+                    <HeaderG grp={Grp} />
 
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <div>
-                      
+
                         <AddFeild Leader={Leader} />
                         <br />
-                       
-                        <br/>
+
+                        <br />
                         <InputGN grp={Grp} />
                         <br />
-                        
+
                         <ChooseProject Leader={Leader} />
                         <br />
-                        
-                        <br/>
-                        <HeaderM grp={Grp}/>
-<div data-aos="fade-up" data-aos-delay="400">
-                        {mem.map((mem, index) => {
-                          return <Row>
-                <Col className="ml-auto mr-auto" md="7">
-                  <ul className="list-unstyled follows">
 
-                    <li>
-                      <Row>
+                        <br />
+                        <HeaderM grp={Grp} />
+                        <div data-aos="fade-up" data-aos-delay="400">
+                          {mem.map((mem, index) => {
+                            return <Row>
+                              <Col className="ml-auto mr-auto" md="7">
+                                <ul className="list-unstyled follows">
 
-                        <Col className="ml-auto mr-auto" lg="2" md="4" xs="4">
-                        
-                              <img src={avatar} alt="Circle Image" class="img-raised rounded-circle img-fluid" />
-                            </Col>
-                           
-                        <Col className="ml-auto mr-auto" lg="7" md="4" xs="4">
-                          <p>
-                            <h4>
-                            {mem.first_name} {mem.last_name} 
-                            </h4>
+                                  <li>
+                                    <Row>
+
+                                      <Col className="ml-auto mr-auto" lg="2" md="4" xs="4">
+
+                                        <img src={avatar} alt="Circle Image" class="img-raised rounded-circle img-fluid" />
+                                      </Col>
+
+                                      <Col className="ml-auto mr-auto" lg="7" md="4" xs="4">
+                                        <p>
+                                          <h4>
+                                            {mem.first_name} {mem.last_name}
+                                          </h4>
                              Gender : {mem.gender}
-                            <br/>
+                                          <br />
                             Birth Date : {mem.birth_date}
-                          <br />
-                          </p>
-                          <DltButton Leader={Leader} LN={leadername} first_name={mem.first_name} last_name={mem.last_name} />
-
-                        </Col>
-                       
-                      </Row>
-                    </li>
-                    <hr />
-                  
-                  </ul>
-                </Col>
-              </Row>
-                          
-                          
-                         
-                        })}
+                                          <br />
+                                        </p>
+                                        <DltButton Leader={Leader} LN={leadername} first_name={mem.first_name} last_name={mem.last_name} />
+                                      </Col>
+                                    </Row>
+                                  </li>
+                                  <hr />
+                                </ul>
+                              </Col>
+                            </Row>
+                          })}
                         </div>
-                    
-                        <HeaderR grp={Grp}/>
+
+                        <HeaderR grp={Grp} />
                         <Row>
-            <Col lg="9" md="12">
-                        {memm.map((memm, index) => {
-                          if(Grp==memm.groupfiche){
-                          return  <Col>
-                          <p>
-                          <h5>  Your Group : 
-                            <span style={{color:'#3498db'}}> 
-                            {memm.groupfiche}
-                             </span></h5>
-                          <hr/>
-                          
-                          <h5> The Project's That Your Group is Concerned With : 
-                          <span  style={{color:'#3498db'}}>
-                            {memm.selected_project}
-                            </span>
-                             </h5>
-                          </p>
+                          <Col lg="9" md="12">
+                            {memm.map((memm, index) => {
+                              if (Grp == memm.groupfiche) {
+                                return <Col>
+                                  <p>
+                                    <h5>  Your Group :
+                            <span style={{ color: '#3498db' }}>
+                                        {memm.groupfiche}
+                                      </span></h5>
+                                    <hr />
+
+                                    <h5> The Project's That Your Group is Concerned With :
+                          <span style={{ color: '#3498db' }}>
+                                        {memm.selected_project}
+                                      </span>
+                                    </h5>
+                                  </p>
+                                </Col>
+                              }
+                            })}
+                            <br />
+
                           </Col>
-                        }
-                         })}
-                         <br/>
-                           
-                         </Col>
-                         </Row>
-                        </div>
-                        </div>
-              
+                        </Row>
                       </div>
-
-
                     </div>
-                    <br/>
-      
-         
+
+                  </div>
+
+
+                </div>
+                <br />
+
+
               </Container>
 
-              <br/>
-        <br/>
-        <br/>
-<br/>
+              <br />
+              <br />
+              <br />
+              <br />
             </div>
           </div>
         </div>

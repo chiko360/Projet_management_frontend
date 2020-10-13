@@ -36,12 +36,6 @@ function IndexNavbar(props) {
   const logged = props.islogged
   let history = useHistory();
 
-  function Truncate(str, n){
-    return (str.length > n) ? str.substr(0, n-1) + '...' : str;
-  };
-
-
-
   const getnotifs = async () => {
     let url = 'http://localhost:8001/api/notifications/';
     let token = localStorage.getItem("token")
@@ -117,7 +111,12 @@ const refuseInv = async (grp) => {
       //TODO : message that he refused to join the groupe
   })
 }
-
+function formatdate(date){
+  var date = new Date(date * 1000);
+  var dates = date.toLocaleDateString("fr-FR")
+  var times = date.toLocaleTimeString("fr-FR")
+  return(dates+' '+times);
+}
   function Loginbutton(props){
     const logged = props.logged
     if (logged===null){
@@ -178,7 +177,7 @@ const refuseInv = async (grp) => {
                              
                              {notif.body}
                              <br/>
-                            {notif.created_on}
+                            {formatdate(notif.created_on)}
                             
                       </DropdownItem>
                       
