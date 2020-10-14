@@ -128,6 +128,7 @@ function Login() {
                     placeholder="Email"
                     onChange={(event)=>{setEmail(event.target.value)}}
                   />
+                  
                   <center><div style={{ fontSize: 15, color: "red" }}>{emailError}</div></center>
                   <label data-aos="fade-up" data-aos-delay="500">Password</label>
                   <Form.Input

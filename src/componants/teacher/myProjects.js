@@ -148,8 +148,9 @@ function TeacherMyProjects() {
                                         </div>
                                     </div>
                                 </section>
+
                                             <hr/>
-                                            {(() => {
+                                              {(() => {
                                                 if (posts.length===0){
                                                  return <div className="container">
                                                  <div class="card my-4">

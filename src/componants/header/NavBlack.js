@@ -31,6 +31,7 @@ function NavBlack(props) {
   
   const [first_name, setfname] = useState(null);
   const [last_name, setlname] = useState(null);
+  const [Leader, setLeader] = useState(false);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
   const [invitations, setInv] = useState([]);
@@ -115,7 +116,6 @@ const refuseInv = async (grp) => {
           };
   await axios(options).then(res => {
       const response = res.data;
-      //TODO : message that he refused to join the groupe
   })
 }
 
@@ -203,58 +203,7 @@ const refuseInv = async (grp) => {
                     </Dropdown>
                      </NavItem>
 
-                     <NavItem 
-                  name='invitations'
-                  active={activeItem === 'invitations'}
-                  //onClick={handleItemClick}
-                  >
-
-                  <Dropdown scrolling nav inNavbar >
-                    <DropdownToggle
-                        caret
-                        color="default"
-                        data-toggle="dropdown"
-                        nav
-                        role="button"
-                      >
-
-                      <div class="notif">
-     <span class="badge">
-     {invitations.length}
-       </span>
-       <Icofont icon="users-alt-3"/> 
-</div>
-
-                       </DropdownToggle>
-                      <DropdownMenu
-                        style={{minHeight:"50px" , minWidth:"210px"}}
-                      >
-
-{(() => {
-                                                if (invitations.length===0){
-                                                 return <div >
-                                                 <DropdownItem>
-                                                There is no invitation yet
-                                                 </DropdownItem>
-                                              </div>
-                                                }
-                                            })()}
-                                            
-                    {invitations.map((inv,index) => {
-                      return  <div >
-                       <DropdownItem>
-                           <div class='box'>
-                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
-                              <h4 class='notif-card' >{inv.timestamp}</h4>
-                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
-                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
-                        </div>
-                      </DropdownItem>
-                    </div>
-                    })}
-                     </DropdownMenu>
-                    </Dropdown>
-                     </NavItem>
+                   
                      
                      <NavItem
                 name='Log out'
@@ -316,6 +265,31 @@ const refuseInv = async (grp) => {
   }
 
 
+  function Choosep(props) {
+    const isLeader = props.Leader
+
+    if (isLeader === false) {
+      return null
+    }
+    
+    else if (isLeader===true ) {
+      return ( <NavItem
+      name='ChooseProjects'
+      >
+  <NavLink
+  target="_blank"
+  active={activeItem === 'ChooseProject'}
+  onClick={()=>{history.push("/student/ChooseProject")}}
+  >
+  Choose Project
+  </NavLink>
+  
+  </NavItem>)
+  }
+  else  return  null;
+  }
+
+  
 
   useEffect(()=> {
     getnotifs();
@@ -379,24 +353,20 @@ const refuseInv = async (grp) => {
         >
     <Nav navbar>
 
-  
-
+    <Choosep Leader={Leader}/>
 
     <NavItem
-                      name='ChooseProjects'
-                      >
-              <NavLink
-                target="_blank"
-          active={activeItem === 'ChooseProject'}
-          onClick={()=>{history.push("/student/ChooseProject")}}
-              >
-                 Choose Project
-                </NavLink>
-           
-      </NavItem>
-     
-
-
+      name='ChooseProjects'
+      >
+  <NavLink
+  target="_blank"
+  active={activeItem === 'ChooseProject'}
+  onClick={()=>{history.push("/student/ChooseProject")}}
+  >
+  Choose Project
+  </NavLink>
+  
+  </NavItem>
       <NavItem
                       name='AllProjects'
                       >
@@ -437,6 +407,58 @@ const refuseInv = async (grp) => {
            
       </NavItem>
        
+      <NavItem 
+                  name='invitations'
+                  active={activeItem === 'invitations'}
+                  //onClick={handleItemClick}
+                  >
+
+                  <Dropdown scrolling nav inNavbar >
+                    <DropdownToggle
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        nav
+                        role="button"
+                      >
+
+                      <div class="notif">
+     <span class="badge">
+     {invitations.length}
+       </span>
+       <Icofont icon="users-alt-3"/> 
+</div>
+
+                       </DropdownToggle>
+                      <DropdownMenu
+                        style={{minHeight:"50px" , minWidth:"210px"}}
+                      >
+
+{(() => {
+                                                if (invitations.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                There is no invitation yet
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+                                            
+                    {invitations.map((inv,index) => {
+                      return  <div >
+                       <DropdownItem>
+                           <div class='box'>
+                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
+                              <h4 class='notif-card' >{inv.timestamp}</h4>
+                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
+                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
+                        </div>
+                      </DropdownItem>
+                    </div>
+                    })}
+                     </DropdownMenu>
+                    </Dropdown>
+                     </NavItem>
           <Loginbutton logged={logged}/>
           </Nav>
   </Collapse>

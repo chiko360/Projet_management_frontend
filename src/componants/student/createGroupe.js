@@ -319,6 +319,7 @@ function CreateGroup() {
     setMembers(members);
   }
 
+
   const loadOptions = async (callback, inputText) => {
     let url = 'http://localhost:8000/members/'+inputText;
     let token = localStorage.getItem("token")
@@ -370,80 +371,6 @@ function CreateGroup() {
   }, []);
 
   
-
-  function ChooseProject(props){
-    const isLeader = props.Leader;
-    if (isLeader) {
-  
-      return (
-        <>  
-          <div>
-          <h3 data-aos="fade-up" data-aos-delay="200">
-                        Enter the project's titles from the
-                        most wanted to the least wanted.   <br />
-                          </h3>
-                  <Container>
-                    <div data-aos="fade-up" data-aos-delay="600">
-                          <br />
-    
-                          <h5>Add your first choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-                          <h5>Add your second choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-    
-                          <h5>Add your third choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br />
-                          <br />
-                          <br /> <center>
-    
-                            <Button
-                              block
-                              className="btn-hover color-1"
-                              onClick={() => { handleCreationProject() }}>
-                              Submit choices
-                      </Button>
-    
-                          </center><br />
-                          <br />
-    
-                        </div>
-               
-                  </Container>
-                </div>
-              
-     
-        </>
-      );
-  
-    }
-    else return null;
-  }
 
   
 
@@ -519,9 +446,8 @@ function CreateGroup() {
     const havegrp = props.grp;
     if (havegrp === '') {
 
-      return (  
-        <div>
-          <Form  data-aos="fade-up" data-aos-delay="400" >
+      return (  <div>
+          <Form >
             <br />
             <h3>Creat a group now </h3>
             <br />
@@ -531,7 +457,6 @@ function CreateGroup() {
 
             <Form.Input
              placeholder="Enter name of your group.. "
-             data-aos="fade-up" data-aos-delay="200"
               onChange={(event) => { setGroupname(event.target.value) }} />
             <br />
 
@@ -705,7 +630,6 @@ function CreateGroup() {
                         <InputGN grp={Grp} />
                         <br />
                         
-                        <ChooseProject Leader={Leader} />
                         <br />
                         
                         <br/>
