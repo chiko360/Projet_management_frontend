@@ -33,7 +33,7 @@ function ChangePassword() {
   }
 
   const Chgpass = async () => {
-      let url = 'http://localhost:8000/auth/change_password/';
+      let url = 'http://localhost:8001/auth/change_password/';
       let token = localStorage.getItem("token")
       axios.create({
         headers: {

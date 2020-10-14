@@ -3,11 +3,6 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Icofont from 'react-icofont';
 import classnames from "classnames";
-<<<<<<< HEAD
-import '../../index.css'
-=======
-
->>>>>>> ea6f774fe7e9e9c4055979b6e8c965f0b51efea6
 // reactstrap components
 import {
   Button,

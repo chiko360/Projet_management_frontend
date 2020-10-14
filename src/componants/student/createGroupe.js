@@ -35,7 +35,6 @@ function CreateGroup() {
   const [title, setTitle] = useState(null);
 
   const [groupName, setGroupname] = useState('');
-
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
   const [ServerError, setSE] = useState(null);
@@ -124,8 +123,8 @@ function CreateGroup() {
     setPost(posts);
   }
 
-  const loadOptionsProject = async (callback) => {
-    let url = 'http://localhost:8001/groups/lookupposts/';
+  const loadOptionsProject = async (inputText,callback) => {
+    let url = 'http://localhost:8001/posts/'+ inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -315,7 +314,7 @@ function CreateGroup() {
     setMembers(members);
   }
 
-  const loadOptions = async (callback, inputText) => {
+  const loadOptions = async (inputText,callback) => {
     let url = 'http://localhost:8001/members/' + inputText;
     let token = localStorage.getItem("token")
     let options = {
@@ -387,6 +386,7 @@ function CreateGroup() {
 
                 <AsyncSelect
                   value={title}
+                  cacheOptions
                   onChange={addproject}
                   placeholder='enter the title of the project..'
                   loadOptions={loadOptionsProject}
@@ -398,6 +398,7 @@ function CreateGroup() {
 
                 <AsyncSelect
                   value={title}
+                  cacheOptions
                   onChange={addproject}
                   placeholder='enter the title of the project..'
                   loadOptions={loadOptionsProject}
@@ -410,6 +411,7 @@ function CreateGroup() {
 
                 <AsyncSelect
                   value={title}
+                  cacheOptions
                   onChange={addproject}
                   placeholder='enter the title of the project..'
                   loadOptions={loadOptionsProject}
@@ -585,15 +587,6 @@ function CreateGroup() {
               className="btn-hover color-1"
               onClick={() => { handleCreationmem() }}>Validate Member</Button>
               </Col>
-
-                <Col >
-                  <Button
-                    style={{ float: 'right' }}
-                    block
-                    className="btn-hover color-1"
-                    onClick={() => { handleCreation() }}>Validate Member</Button>
-                </Col>
-
               </Row>
             </Container>
 

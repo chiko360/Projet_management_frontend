@@ -43,7 +43,7 @@ function AddProject() {
     }
 
     const Post = async () => {
-        let url = 'http://localhost:8001/posts/addpost/';
+        let url = 'http://localhost:8001/posts/addpost/teacher/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'POST',
@@ -125,8 +125,10 @@ function AddProject() {
     <select onChange={(event)=>{setPromo(event.target.value)}}>
                 <option>2CPI</option>
                 <option>1CS</option>
-                <option>2CS</option>
-                <option>3CS</option>
+                <option>2CS / ISI</option>
+                <option>2CS / SIW</option>
+                <option>3CS / ISI</option>
+                <option>3CS / SIW</option>
             </select></form>
     
                   <textarea

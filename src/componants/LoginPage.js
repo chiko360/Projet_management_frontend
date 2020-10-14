@@ -60,8 +60,10 @@ function Login() {
             history.replace('/teacher');
           }
         })
-        .catch(() => {
-          setLerror('wrong email or password');
+        .catch(function (error) {
+          if (error.response){
+            setLerror(error.response.data.non_field_errors[0]);
+          }
         });
     }
 

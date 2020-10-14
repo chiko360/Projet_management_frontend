@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import NavBlack from  '../header/NavBlack';
+import NavBlack from '../header/NavBlack';
 import AOS from 'aos';
 import {
     Form,
     Button,
     Modal,
-  Label,
-  Input,
-  Container,
-  Row,
-  Col
+    Label,
+    Input,
+    Container,
+    Row,
+    Col
 } from "reactstrap";
 import Footer from '../Footer';
 function TeacherMyProjects() {
@@ -30,28 +30,28 @@ function TeacherMyProjects() {
 
     const toggleModal = () => {
         setModal(!modal);
-    } 
+    }
     const toggleModalDelete = () => {
         setModalDelete(!modaldelete);
     }
     const toggle = tab => {
-      if (activeTab !== tab) {
-        setActiveTab(tab);
-      }
+        if (activeTab !== tab) {
+            setActiveTab(tab);
+        }
     };
 
     const getprojects = async () => {
-        let url = 'http://localhost:8001/posts/myprojects/';
+        let url = 'http://localhost:8001/posts/myprojects/teacher/';
         let token = localStorage.getItem("token")
         let options = {
-                    method: 'get',
-                    url: url,
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Authorization' : 'Bearer '+ token
-                    },
-                };
+            method: 'get',
+            url: url,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token
+            },
+        };
         await axios(options).then(res => {
             const response = res.data;
             setPost(response)
@@ -59,84 +59,86 @@ function TeacherMyProjects() {
     }
 
     const deleteProject = async (index) => {
-        let url = 'http://localhost:8001/posts/'+index+'/delete/';
+        let url = 'http://localhost:8001/posts/' + index + '/delete/';
         let token = localStorage.getItem("token")
         let options = {
-                    method: 'DELETE',
-                    url: url,
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Authorization' : 'Bearer '+ token
-                    },
-                };
+            method: 'DELETE',
+            url: url,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token
+            },
+        };
         let response = await axios(options);
-        let responseOK = response && response.status === 200 ;
+        let responseOK = response && response.status === 200;
         if (responseOK) {
             getprojects();
         }
     }
     const editProject = async (index) => {
-        let url = 'http://localhost:8001/posts/'+index+'/edit/';
+        let url = 'http://localhost:8001/posts/' + index + '/edit/';
         let token = localStorage.getItem("token")
         let options = {
-                    method: 'PUT',
-                    url: url,
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Authorization' : 'Bearer '+ token
-                    },
-                };
+            method: 'PUT',
+            url: url,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token
+            },
+            data: {title,promo,introduction,tags,tools,details}
+        };
         let response = await axios(options);
-        let responseOK = response && response.status === 200 ;
+        let responseOK = response && response.status === 200;
         if (responseOK) {
-            history.replace('/teacher/MyProjects');
+            toggleModal();
+            history.go('/teacher/MyProjects');
         }
     }
 
-    const EditButton = (props) =>{
-        if (props.approuved!=='true'){
+    const EditButton = (props) => {
+        if (props.approuved !== 'true') {
             return <Button
-            type="button"  
-            className="btn-round" 
-            color="primary"
-            onClick={()=>{
-                toggleModal();
-                setTitle(props.title);
-                setPromo(props.promo);
-                setIntro(props.introduction);
-                setTools(props.tools);
-                setTags(props.tags);
-                setDetails(props.details);
-            }}
+                type="button"
+                className="btn-round"
+                color="primary"
+                onClick={() => {
+                    toggleModal();
+                    setTitle(props.title);
+                    setPromo(props.promo);
+                    setIntro(props.introduction);
+                    setTools(props.tools);
+                    setTags(props.tags);
+                    setDetails(props.details);
+                }}
             >
-            Edit topic
+                Edit topic
             </Button>
         }
-        else {return null}
+        else { return null }
     }
 
-    useEffect(()=> {
-        if (localStorage.getItem('type')!=='teacher'){
+    useEffect(() => {
+        if (localStorage.getItem('type') !== 'teacher') {
             history.push('/Forbiden')
         }
         getprojects();
         AOS.init();
         AOS.refresh();
-    },[]);
-    return(
+    }, []);
+    return (
         <>
-    <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
-    <br/>
-        <br/>
-<br/>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div className="section about">
-                    <Container>  
-                    <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+            <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
+            <br />
+            <br />
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div className="section about">
+                            <Container>
+                                <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
                                     <div class="container">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h2>Check All Your Projects.</h2>
@@ -148,153 +150,156 @@ function TeacherMyProjects() {
                                         </div>
                                     </div>
                                 </section>
-                                            <hr/>
-                                            {(() => {
-                                                if (posts.length===0){
-                                                 return <div className="container">
-                                                 <div class="card my-4">
-                                                 <div class="card-body" data-aos="fade-up" data-aos-delay="400">
-                                                 <br/><br/><br/><br/><br/><br/><br/><br/>
-                                                    <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/teacher/addproject"> add one now !</a></h1></center>
-                                                    <br/><br/><br/><br/><br/><br/><br/>
-                                                 </div>
-                                                 </div>
-                                                 </div>
-                                                }
-                                            })()}
-                                        {posts.map((post,index) => {
-                                            return <div className="container">
+                                <hr />
+                                {(() => {
+                                    if (posts.length === 0) {
+                                        return <div className="container">
                                             <div class="card my-4">
-                                                <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{post.title}</h5>
-                                                <div class="card-body" data-aos="fade-up" data-aos-delay="600">
-                                                    <h3>promo : {post.promo}</h3>
-                                                    <h3>created at : {post.creating_date}</h3>
-                                                    <h3>introduction : {post.introduction}</h3>
-                                                    <h3>tools : {post.tools}</h3>
-                                                    <h3>tags : {post.tags}</h3>
-                                                    <h3>details :{post.details}</h3>
-                                                    <h3>approuved : {String(post.approved)}</h3>
+                                                <div class="card-body" data-aos="fade-up" data-aos-delay="400">
+                                                    <br /><br /><br /><br /><br /><br /><br /><br />
+                                                    <center><h1 > you haven't submited any projects yet, <a style={{ color: '#3498db' }} href="/teacher/addproject"> add one now !</a></h1></center>
+                                                    <br /><br /><br /><br /><br /><br /><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                })()}
+                                {posts.map((post, index) => {
+                                    return <div className="container">
+                                        <div class="card my-4">
+                                            <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{post.title}</h5>
+                                            <div class="card-body" data-aos="fade-up" data-aos-delay="600">
+                                                <h3>promo : {post.promo}</h3>
+                                                <h3>created at : {post.creating_date}</h3>
+                                                <h3>introduction : {post.introduction}</h3>
+                                                <h3>tools : {post.tools}</h3>
+                                                <h3>tags : {post.tags}</h3>
+                                                <h3>details :{post.details}</h3>
+                                                <h3>approuved : {String(post.approved)}</h3>
                                                 <Button className="btn-round" color="danger" onClick={toggleModalDelete} >delete topic</Button>
                                                 <Modal class="modal-dialog modal-xs" isOpen={modaldelete} toggle={toggleModalDelete}>
                                                     <div className="modal-body">
-                                                    <div class="text-center mr-auto"> 
-                                                    <Col>
-                                                    Do you really want to delete this project?
+                                                        <div class="text-center mr-auto">
+                                                            <Col>
+                                                                Do you really want to delete this project?
                                                     </Col>
-                                                    </div>
+                                                        </div>
                                                     </div>
                                                     <div className="modal-footer">
                                                         <Button
-                                                        outline
-                                                        className="btn-round"
-                                                        color="danger"
-                                                        type="button"
-                                                        onClick={()=>{deleteProject(post.id)}}
+                                                            outline
+                                                            className="btn-round"
+                                                            color="danger"
+                                                            type="button"
+                                                            onClick={() => { deleteProject(post.id) }}
                                                         >
-                                                        Delete
+                                                            Delete
                                                         </Button>
-                                                    <div className="divider" />
-                                                    <div className="right-side">
-                                                        <Button 
-                                                        outline
-                                                        className="btn-round"
-                                                        color="default"
-                                                        type="button"
-                                                        onClick={toggleModalDelete}
+                                                        <div className="divider" />
+                                                        <div className="right-side">
+                                                            <Button
+                                                                outline
+                                                                className="btn-round"
+                                                                color="default"
+                                                                type="button"
+                                                                onClick={toggleModalDelete}
                                                             >
-                                                        Cancel
+                                                                Cancel
                                                         </Button>
-                                                    </div>
+                                                        </div>
                                                     </div>
                                                 </Modal>
                                                 <EditButton approuved={String(post.approved)} id={post.id} title={post.title} promo={post.promo} tools={post.tools} tags={post.tags} details={post.details} introduction={post.introduction} />
-                            <Modal  className="modal-dialog modal-lg" isOpen={modal} toggle={toggleModal}>
-                                <div className="modal-header">
-                                    <h3>Edit Your Project</h3>
-                                    <button
-                                      aria-label="Close"
-                                      className="close"
-                                      type="button"
-                                      onClick={toggleModal}
-                                    >
-                                    <span aria-hidden={true}>×</span>
-                                    </button>   
-                                </div>
-                                <div className="modal-body">
-                                    <Col>
-                                        <Form>
-                                            <Input
-                                              className="form-control my-3"
-                                              type="text"
-                                              name="title"
-                                              value={title}
-                                              onChange={(event)=>{setTitle(event.target.value)}}
-                                            />
-                                            <form class="ui form">
-                                            <select name="select-titlethree" value={promo} onChange={(event)=>{setPromo(event.target.value)}}>
-                                                    <option>2CPI</option>
-                                                    <option>1CS</option>
-                                                    <option>2CS</option>
-                                                    <option>3CS</option>
-                                                </select></form>
-                                            <br/>
-                                            <textarea
-                                              className="form-control my-3"
-                                              name="introduction"  value={introduction} onChange={(event)=>{setIntro(event.target.value)}}
-                                              >
-                                            </textarea>
+                                                <Modal className="modal-dialog modal-lg" isOpen={modal} toggle={toggleModal}>
+                                                    <div className="modal-header">
+                                                        <h3>Edit Your Project</h3>
+                                                        <button
+                                                            aria-label="Close"
+                                                            className="close"
+                                                            type="button"
+                                                            onClick={toggleModal}
+                                                        >
+                                                            <span aria-hidden={true}>×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <Col>
+                                                            <Form>
+                                                                <Input
+                                                                    className="form-control my-3"
+                                                                    type="text"
+                                                                    name="title"
+                                                                    value={title}
+                                                                    onChange={(event) => { setTitle(event.target.value) }}
+                                                                />
+                                                                <form class="ui form">
+                                                                    <select name="select-titlethree" value={promo} onChange={(event) => { setPromo(event.target.value) }}>
+                                                                        <option>2CPI</option>
+                                                                        <option>1CS</option>
+                                                                        <option>2CS / ISI</option>
+                                                                        <option>2CS / SIW</option>
+                                                                        <option>3CS / ISI</option>
+                                                                        <option>3CS / SIW</option>
+                                                                    </select></form>
+                                                                <br />
+                                                                <textarea
+                                                                    className="form-control my-3"
+                                                                    name="introduction" value={introduction} onChange={(event) => { setIntro(event.target.value) }}
+                                                                >
+                                                                </textarea>
 
-                                            <textarea
-                                              className="form-control my-3"
-                                              name="tools"  value={tools} onChange={(event)=>{setTools(event.target.value)}}
-                                             >
-                                            </textarea>
+                                                                <textarea
+                                                                    className="form-control my-3"
+                                                                    name="tools" value={tools} onChange={(event) => { setTools(event.target.value) }}
+                                                                >
+                                                                </textarea>
 
-                                            <textarea
-                                              className="form-control my-3"
-                                              name="details" value={details} onChange={(event)=>{setDetails(event.target.value)}}
-                                              >
-                                            </textarea>
-                                            <input className="form-control my-3" type="text" name="keywords" value={tags} onChange={(event)=>{setTags(event.target.value)}} /> <br/>
-                                        <br/>
-                                            </Form>
-                                    </Col>
-                                </div>
-                                <div className="modal-footer">
-                                    <div className="left-side">
-                                        <Button
-                                          className="btn-link"
-                                          color="default"
-                                          type="button"
-                                          onClick={toggleModal}
-                                        >
-                                        Exit
+                                                                <textarea
+                                                                    className="form-control my-3"
+                                                                    name="details" value={details} onChange={(event) => { setDetails(event.target.value) }}
+                                                                >
+                                                                </textarea>
+                                                                <input className="form-control my-3" type="text" name="keywords" value={tags} onChange={(event) => { setTags(event.target.value) }} /> <br />
+                                                                <br />
+                                                            </Form>
+                                                        </Col>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <div className="left-side">
+                                                            <Button
+                                                                className="btn-link"
+                                                                color="default"
+                                                                type="button"
+                                                                onClick={toggleModal}
+                                                            >
+                                                                Exit
                                         </Button>
-                                    </div>
-                                    <div className="divider" />
-                                    <div className="left-side">
-                                        <Button className="btn-round" color="info" type="button" onClick={()=>{editProject(post.id)}}>
-                                         Save
+                                                        </div>
+                                                        <div className="divider" />
+                                                        <div className="left-side">
+                                                            <Button className="btn-round" color="info" type="button" onClick={() => { editProject(post.id) }}>
+                                                                Save
                                         </Button>
+                                                        </div>
+                                                    </div>
+                                                </Modal>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </Modal>
-                            </div>
-                            </div>
-                            </div>  })}    
-                        </Container>
+                                })}
+                            </Container>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                     </div>
-                    <br/>
-        <br/>
-        <br/>
-<br/>
                 </div>
             </div>
-        </div>
-        <Footer/>  
-        </>            
-        );
-    }
+            <Footer />
+        </>
+    );
+}
 
 export default TeacherMyProjects;
 //
