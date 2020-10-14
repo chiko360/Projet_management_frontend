@@ -518,11 +518,10 @@ function CreateGroup() {
               <Col lg="9" md="12">
 
 
-                <Form.Input
-                  placeholder="Enter name of your group.. "
-                  data-aos="fade-up" data-aos-delay="200"
-                  onChange={(event) => { setGroupname(event.target.value); console.log(groupName) }} />
-                <br />
+            <Form.Input
+             placeholder="Enter name of your group.. "
+              onChange={(event) => { setGroupname(event.target.value) }} />
+            <br />
 
               </Col>
               <Col>
@@ -692,8 +691,7 @@ function CreateGroup() {
                         <br />
                         <InputGN grp={Grp} />
                         <br />
-
-                        <ChooseProject Leader={Leader} />
+                        
                         <br />
 
                         <br />

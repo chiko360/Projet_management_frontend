@@ -31,6 +31,7 @@ function NavBlack(props) {
 
   const [first_name, setfname] = useState(null);
   const [last_name, setlname] = useState(null);
+  const [Leader, setLeader] = useState(false);
   const [activeItem, setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
   const [invitations, setInv] = useState([]);
@@ -179,7 +180,7 @@ function NavBlack(props) {
                   return <div >
                     <DropdownItem>
                       no notifications yet.
-                    </DropdownItem>
+                                                 </DropdownItem>
                   </div>
                 }
               })()}
@@ -202,59 +203,8 @@ function NavBlack(props) {
             </DropdownMenu>
           </Dropdown>
         </NavItem>
-    
-        <NavItem
-          name='invitations'
-          active={activeItem === 'invitations'}
-        //onClick={handleItemClick}
-        >
 
-          <Dropdown scrolling nav inNavbar >
-            <DropdownToggle
-              caret
-              color="default"
-              data-toggle="dropdown"
-              nav
-              role="button"
-            >
 
-              <div class="notif">
-                <span class="badge">
-                  {invitations.length}
-                </span>
-                <Icofont icon="users-alt-3" />
-              </div>
-
-            </DropdownToggle>
-            <DropdownMenu
-              style={{ minHeight: "50px", minWidth: "210px" }}
-            >
-
-              {(() => {
-                if (invitations.length === 0) {
-                  return <div >
-                    <DropdownItem>
-                      There is no invitation yet
-                                                 </DropdownItem>
-                  </div>
-                }
-              })()}
-
-              {invitations.map((inv, index) => {
-                return <div >
-                  <DropdownItem>
-                    <div class='box'>
-                      <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
-                      <h4 class='notif-card' >{inv.timestamp}</h4>
-                      <Button size="lg" className="btn-round" color="green" onClick={() => { acceptInv(inv.grp) }}> Accept </Button>
-                      <Button size="lg" className="btn-round" color="red" onClick={() => { refuseInv(inv.grp) }}> refuse </Button>
-                    </div>
-                  </DropdownItem>
-                </div>
-              })}
-            </DropdownMenu>
-          </Dropdown>
-        </NavItem>
 
         <NavItem
           name='Log out'
@@ -316,6 +266,31 @@ function NavBlack(props) {
   }
 
 
+  function Choosep(props) {
+    const isLeader = props.Leader
+
+    if (isLeader === false) {
+      return null
+    }
+
+    else if (isLeader === true) {
+      return (<NavItem
+        name='ChooseProjects'
+      >
+        <NavLink
+          target="_blank"
+          active={activeItem === 'ChooseProject'}
+          onClick={() => { history.push("/student/ChooseProject") }}
+        >
+          Choose Project
+  </NavLink>
+
+      </NavItem>)
+    }
+    else return null;
+  }
+
+
 
   useEffect(() => {
     getnotifs();
@@ -348,104 +323,149 @@ function NavBlack(props) {
       <Navbar
         className={classnames("fixed-top")}
         expand="lg"
-      >
+      />
 
-        <Container>
-          <div className="navbar-translate">
-            <NavbarBrand
-              data-placement="bottom"
-              to="/"
-              title="make it easy"
-            >
-              PFE esi-sba
+      <Container>
+        <div className="navbar-translate">
+          <NavbarBrand
+            data-placement="bottom"
+            to="/"
+            title="make it easy"
+          >
+            PFE esi-sba
           </NavbarBrand>
 
-            <button
-              aria-expanded={navbarCollapse}
-              className={classnames("navbar-toggler navbar-toggler", {
-                toggled: navbarCollapse
-              })}
-              onClick={toggleNavbarCollapse}
-            >
-              <span className="navbar-toggler-bar bar1" />
-              <span className="navbar-toggler-bar bar2" />
-              <span className="navbar-toggler-bar bar3" />
-            </button>
-          </div>
-          <Collapse
-            className="justify-content-end"
-            navbar
-            isOpen={navbarCollapse}
+          <button
+            aria-expanded={navbarCollapse}
+            className={classnames("navbar-toggler navbar-toggler", {
+              toggled: navbarCollapse
+            })}
+            onClick={toggleNavbarCollapse}
           >
-            <Nav navbar>
+            <span className="navbar-toggler-bar bar1" />
+            <span className="navbar-toggler-bar bar2" />
+            <span className="navbar-toggler-bar bar3" />
+          </button>
+        </div>
+        <Collapse
+          className="justify-content-end"
+          navbar
+          isOpen={navbarCollapse}
+        >
+          <Nav navbar>
 
+            <Choosep Leader={Leader} />
 
-
-
-              <NavItem
-                name='ChooseProjects'
+            <NavItem
+              name='ChooseProjects'
+            >
+              <NavLink
+                target="_blank"
+                active={activeItem === 'ChooseProject'}
+                onClick={() => { history.push("/student/ChooseProject") }}
               >
-                <NavLink
-                  target="_blank"
-                  active={activeItem === 'ChooseProject'}
-                  onClick={() => { history.push("/student/ChooseProject") }}
-                >
-                  Choose Project
+                Choose Project
+  </NavLink>
+
+            </NavItem>
+            <NavItem
+              name='AllProjects'
+            >
+
+              <NavLink
+                target="_blank"
+                active={activeItem === 'AllProjects'}
+                onClick={() => { history.push("/student/themes") }}
+              >
+                All Projects
                 </NavLink>
 
-              </NavItem>
+            </NavItem>
 
 
-
-              <NavItem
-                name='AllProjects'
+            <NavItem
+              name='My group'
+            >
+              <NavLink
+                target="_blank"
+                active={activeItem === 'My group'}
+                onClick={() => { history.push("/student/group") }}
               >
-                <NavLink
-                  target="_blank"
-                  active={activeItem === 'AllProjects'}
-                  onClick={() => { history.push("/student/themes") }}
-                >
-                  All Projects
+                My Group
                 </NavLink>
 
-              </NavItem>
+            </NavItem>
 
-
-              <NavItem
-                name='My group'
+            <NavItem
+              name='cantactus'
+            >
+              <NavLink
+                target="_blank"
+                active={activeItem === 'contactus'}
+                onClick={() => { history.push("/contactus") }}
               >
-                <NavLink
-                  target="_blank"
-                  active={activeItem === 'My group'}
-                  onClick={() => { history.push("/student/group") }}
-                >
-                  My Group
+                Contact Us
                 </NavLink>
 
-              </NavItem>
+            </NavItem>
 
-              <NavItem
-                name='cantactus'
-              >
-                <NavLink
-                  target="_blank"
-                  active={activeItem === 'contactus'}
-                  onClick={() => { history.push("/contactus") }}
+            <NavItem
+              name='invitations'
+              active={activeItem === 'invitations'}
+            //onClick={handleItemClick}
+            >
+
+              <Dropdown scrolling nav inNavbar >
+                <DropdownToggle
+                  caret
+                  color="default"
+                  data-toggle="dropdown"
+                  nav
+                  role="button"
                 >
-                  Contact Us
-                </NavLink>
 
-              </NavItem>
+                  <div class="notif">
+                    <span class="badge">
+                      {invitations.length}
+                    </span>
+                    <Icofont icon="users-alt-3" />
+                  </div>
 
-              <Loginbutton logged={logged} />
-            </Nav>
-          </Collapse>
-        </Container>
-      </Navbar>
+                </DropdownToggle>
+                <DropdownMenu
+                  style={{ minHeight: "50px", minWidth: "210px" }}
+                >
 
+                  {(() => {
+                    if (invitations.length === 0) {
+                      return <div >
+                        <DropdownItem>
+                          There is no invitation yet
+                                                 </DropdownItem>
+                      </div>
+                    }
+                  })()}
 
-    )
-  }
+                  {invitations.map((inv, index) => {
+                    return <div >
+                      <DropdownItem>
+                        <div class='box'>
+                          <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
+                          <h4 class='notif-card' >{inv.timestamp}</h4>
+                          <Button size="lg" className="btn-round" color="green" onClick={() => { acceptInv(inv.grp) }}> Accept </Button>
+                          <Button size="lg" className="btn-round" color="red" onClick={() => { refuseInv(inv.grp) }}> refuse </Button>
+                        </div>
+                      </DropdownItem>
+                    </div>
+                  })}
+                </DropdownMenu>
+              </Dropdown>
+            </NavItem>
+            <Loginbutton logged={logged} />
+          </Nav>
+        </Collapse>
+      </Container>
+      </Navbar>}
   else if (type === 'teacher') {
     return (
       <Navbar

@@ -29,7 +29,9 @@ function IndexNavbar(props) {
     setNavbarCollapse(!navbarCollapse);
     document.documentElement.classList.toggle("nav-open");
   };
-  
+
+
+  const [Leader, setLeader] = useState(false);
   const [activeItem,setAItem] = useState(null);
   const [notifications, setNotif] = useState([]);
   const [invitations, setInv] = useState([]);
@@ -193,60 +195,6 @@ function formatdate(date){
                     </Dropdown>
                      </NavItem>
 
-                     <NavItem 
-                  name='invitations'
-                  active={activeItem === 'invitations'}
-                  //onClick={handleItemClick}
-                  >
-
-                  <Dropdown scrolling nav inNavbar >
-                    <DropdownToggle
-                        caret
-                        color="default"
-                        data-toggle="dropdown"
-                        nav
-                        role="button"
-                      >
-
-                     
-
-                       <div class="notif">
-     <span class="badge">
-     {invitations.length}
-       </span>
-       <Icofont icon="users-alt-3"/> 
-</div>
-    
-                       </DropdownToggle>
-                      <DropdownMenu
-                        style={{minHeight:"50px" , minWidth:"210px"}}
-                      >
-
-{(() => {
-                                                if (invitations.length===0){
-                                                 return <div >
-                                                 <DropdownItem>
-                                                There is no invitation yet
-                                                 </DropdownItem>
-                                              </div>
-                                                }
-                                            })()}
-                                            
-                    {invitations.map((inv,index) => {
-                      return  <div >
-                       <DropdownItem>
-                           <div class='box'>
-                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
-                              <h4 class='notif-card' >{inv.timestamp}</h4>
-                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
-                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
-                        </div>
-                      </DropdownItem>
-                    </div>
-                    })}
-                     </DropdownMenu>
-                    </Dropdown>
-                     </NavItem>
                      
                      <NavItem
                 name='Log out'
@@ -308,6 +256,24 @@ function formatdate(date){
   }
 
 
+function Choose(props){
+  const isLeader = props.Leader
+  if (isLeader===true){
+    return   <NavItem
+    name='ChooseProjects'
+    >
+<NavLink
+target="_blank"
+active={activeItem === 'ChooseProject'}
+onClick={()=>{history.push("/student/ChooseProject")}}
+>
+Choose Project
+</NavLink>
+
+</NavItem>
+}
+else  return  null;
+}
 
   useEffect(()=> {
     getnotifs();
@@ -371,19 +337,19 @@ function formatdate(date){
           isOpen={navbarCollapse}
         >
     <Nav navbar>
-   
-      <NavItem
-                      name='ChooseProjects'
-                      >
-              <NavLink
-                target="_blank"
-          active={activeItem === 'ChooseProject'}
-          onClick={()=>{history.push("/student/ChooseProject")}}
-              >
-                 Choose Project
-                </NavLink>
-           
-      </NavItem>
+   <Choose Leader={Leader}/>
+   <NavItem
+      name='ChooseProjects'
+      >
+  <NavLink
+  target="_blank"
+  active={activeItem === 'ChooseProject'}
+  onClick={()=>{history.push("/student/ChooseProject")}}
+  >
+  Choose Project
+  </NavLink>
+  
+  </NavItem>
       <NavItem
                       name='AllProjects'
                       >
@@ -425,7 +391,58 @@ function formatdate(date){
            
       </NavItem>
 
-     
+      <NavItem 
+                  name='invitations'
+                  active={activeItem === 'invitations'}
+                  //onClick={handleItemClick}
+                  >
+
+                  <Dropdown scrolling nav inNavbar >
+                    <DropdownToggle
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        nav
+                        role="button"
+                      >
+      <div class="notif">
+     <span class="badge">
+     {invitations.length}
+       </span>
+       <Icofont icon="users-alt-3"/> 
+</div>
+    
+                       </DropdownToggle>
+                      <DropdownMenu
+                        style={{minHeight:"50px" , minWidth:"210px"}}
+                      >
+
+{(() => {
+                                                if (invitations.length===0){
+                                                 return <div >
+                                                 <DropdownItem>
+                                                There is no invitation yet
+                                                 </DropdownItem>
+                                              </div>
+                                                }
+                                            })()}
+                                            
+                    {invitations.map((inv,index) => {
+                      return  <div >
+                       <DropdownItem>
+                           <div class='box'>
+                              <h3 class='notif-card' >you have been invited to join group {inv.grp}</h3>
+                              <h4 class='notif-card' >{inv.timestamp}</h4>
+                              <Button size="lg" className="btn-round" color="green" onClick={()=>{acceptInv(inv.grp)}}> Accept </Button>
+                              <Button size="lg" className="btn-round" color="red" onClick={()=>{refuseInv(inv.grp)}}> refuse </Button>
+                        </div>
+                      </DropdownItem>
+                    </div>
+                    })}
+                     </DropdownMenu>
+                    </Dropdown>
+                     </NavItem>
+                     
        
           <Loginbutton logged={logged}/>
           </Nav>
