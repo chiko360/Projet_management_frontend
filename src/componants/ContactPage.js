@@ -92,8 +92,8 @@ class ContactUsPage extends Component {
           <div class="col-lg-7 col-md-6" data-aos="fade-up" data-aos-delay="50">
             <div class="contact-about">
               <h3>PFE ESI</h3>
-              <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
-              <div class="social-links">
+              <p>Established in 1945, École Supérieure en Informatique (Graduate School of Computer Science) is a higher-education institution located in Sidi Bel Abbès. Officially recognized by the Ministry of Higher Education and Scientific Research of Algeria, ESI is a coeducational Algerian higher education institution. ESI offers courses and programs leading to officially recognized higher education degrees in several areas of study.
+                </p><div class="social-links">
                 <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
                 <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
                 <a href="#" class="instagram"><i class="icofont-instagram"></i></a>

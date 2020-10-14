@@ -434,7 +434,7 @@ function CreateGroup() {
     else return null;
   }
 
-
+  
 
   function HeaderR(props) {
     const havegrp = props.grp;
@@ -461,19 +461,17 @@ function CreateGroup() {
   function HeaderM(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return (<div className="container">
-
-
-        <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
+      return ( <div className="container">
+      
+          <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
           Current Members
-  <br />
-          <small>Leader: {leadername}</small>
-        </h3>
-        <br />
-        <br />          <br />
-
-      </div>
-
+  <br/>
+  <small>Leader: {leadername}</small>
+</h3>
+<br/>
+<br/>                    
+  </div>
+  
       );
     }
     else return null;
@@ -482,21 +480,19 @@ function CreateGroup() {
   function HeaderG(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return (<div className="container">
-        <div class="card my-4">
-          <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up">
-            <br />
-          Current Group "{Grp}" Infos
+      return (
+        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
           <br />
-            <br />
-          </h2>
-        </div>
-      </div>
+          Current Group "{Grp}" Infos
+          <br /> 
+           <br /> 
+        </h2>
+
       );
     }
-    else return (
-      <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
-        <br />
+    else return(
+      <h2 class="card-header headerrr headerrr-hover" >
+          <br />
           Create Your team now.
         <br />
         <br />

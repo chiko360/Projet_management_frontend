@@ -80,20 +80,17 @@ class AboutUsPage extends Component {
              <Row className="content">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+Esi SBA is one of the best edicutional instituts in algeria, we provide lot of mission, and these are the main ones            </p>
             <ul>
-              <li><Icofont icon="check"/>  Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><Icofont icon="check"/> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><Icofont icon="check"/>  Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><Icofont icon="check"/>We offer courses and programs in several areas of study</li>
+              <li><Icofont icon="check"/>We provide several academic and non-academic facilities </li>
+              <li><Icofont icon="check"/>We services to students including as well as administrative services</li>
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="250">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+            Established in 1945, École Supérieure en Informatique (Graduate School of Computer Science) is a higher-education institution located in Sidi Bel Abbès. Officially recognized by the Ministry of Higher Education and Scientific Research of Algeria, ESI is a coeducational Algerian higher education institution. ESI offers courses and programs leading to officially recognized higher education degrees in several areas of study.
+
             </p>
             <Button
             href="#"  
@@ -152,8 +149,10 @@ class AboutUsPage extends Component {
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
+          <center>
           <h2>Testimonials</h2>
           <p>Check Out The Opinion of Some of Our Testers</p>
+          </center>
         </div>
 
           <div class="testimonial-wrap" data-aos="fade-up" data-aos-delay="200">

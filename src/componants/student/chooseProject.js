@@ -102,7 +102,7 @@ function ChooseProject() {
     })
   }
 
-  const handleCreationProject = async (props) => {
+  const handleCreation = async (props) => {
     const isLeader = props.Leader;
     if (isLeader === false) {
       return null
@@ -115,6 +115,27 @@ function ChooseProject() {
       }
     }
   }
+
+  
+const LeaderOrNo = async () => {
+  let url = 'http://localhost:8000/profiles/getgroup/';
+  let token = localStorage.getItem("token");
+  axios.create({
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    },
+  })
+    .request({
+      url: url,
+      method: "get",
+    })
+    .then((res) => {
+      setLeader(res.data.leader)
+    }
+    )
+}
+
 
 
   const Addprojects = async (title) => {
@@ -166,6 +187,7 @@ function ChooseProject() {
 
 
   useEffect(() => {
+    LeaderOrNo();
     getprojects();
     AOS.init();
     AOS.refresh();
@@ -180,66 +202,63 @@ function ChooseProject() {
   
       return (
         <>  
-          <div>
-          <h3 data-aos="fade-up" data-aos-delay="200">
-                        Enter the project's titles from the
-                        most wanted to the least wanted.   <br />
-                          </h3>
-                  <Container>
-                    <div data-aos="fade-up" data-aos-delay="600">
-                          <br />
-    
-                          <h5>Add your first choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-                          <h5>Add your second choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br /><br />
-    
-    
-                          <h5>Add your third choice..</h5>
-    
-    
-                          <AsyncSelect
-                            value={title}
-                            onChange={addproject}
-                            placeholder='enter the title of the project..'
-                            loadOptions={loadOptionsProject}
-                          />
-                          <br />
-                          <br />
-                          <br /> <center>
-    
-                            <Button
-                              block
-                              className="btn-hover color-1"
-                              onClick={() => { handleCreationProject() }}>
-                              Submit choices
-                      </Button>
-    
-                          </center><br />
-                          <br />
-    
-                        </div>
-               
-                  </Container>
-                </div>
-              
+            <div className="container">
+                  <div class="card my-4">
+                    <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+                      <br />
+    Enter the projects from the most wanted to the least wanted.   <br />
+                      <br />
+                    </h2>
+                    <div class="card-body" data-aos="fade-up" data-aos-delay="600">
+                      <br />
+
+                      <h5>Add your first choice..</h5>
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br /><br />
+
+                      <h5>Add your second choice..</h5>
+
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br /><br />
+
+
+                      <h5>Add your third choice..</h5>
+
+
+                      <AsyncSelect
+                        value={title}
+                        onChange={addproject}
+                        placeholder='enter the title of the project..'
+                        loadOptions={loadOptions}
+                      />
+                      <br />
+                      <br />
+                      <br /> <center>
+
+                        <Button
+                          block
+                          className="btn-hover color-1"
+                          onClick={() => { handleCreation() }}>
+                          Submit choices
+                  </Button>
+
+                      </center><br />
+                      <br /> 
+                      </div>
+</div>
+</div>              
      
         </>
       );
@@ -258,17 +277,43 @@ function ChooseProject() {
 
 
 
-  return (
-    <>
-      <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
-    
-      <br/>
-    <br/><br/>
-    <br/><br/>
-    <br/>
-      <ChooseProject Leader={Leader} />
-<br/>
-<br/>
+  return (<>
+    <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div className="section about">
+              <br />
+              <br />
+              <br />
+              <Container>
+
+                <section class="breadcrumbs" data-aos="fade-up" data-aos-delay="200">
+                  <div class="container">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h2>Choose a Project to Work on.</h2>
+                      <ol>
+                        <li><a href="/home">home</a></li>
+                        <li><a href="/student">student</a></li>
+                        <li>choose project</li>
+                      </ol>
+                    </div>
+                  </div>
+                </section>
+                <hr />
+<ChooseProject Leader={Leader}/>
+              
+                  
+              </Container>
+              <br />
+              <br />
+              <br />
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );
