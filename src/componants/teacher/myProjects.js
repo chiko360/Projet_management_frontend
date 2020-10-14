@@ -165,17 +165,6 @@ function TeacherMyProjects() {
                                                  </div>
                                                 }
                                             })()}
-                                        {posts.map((post,index) => {
-                                            return <div className="container">
-                                            <div class="card my-4">
-                                                <div class="card-body" data-aos="fade-up" data-aos-delay="400">
-                                                    <br /><br /><br /><br /><br /><br /><br /><br />
-                                                    <center><h1 > you haven't submited any projects yet, <a style={{ color: '#3498db' }} href="/teacher/addproject"> add one now !</a></h1></center>
-                                                    <br /><br /><br /><br /><br /><br /><br />
-                                                </div>
-                                            </div>
-                                        </div>
-                                })()}
                                 {posts.map((post, index) => {
                                     return <div className="container">
                                         <div class="card my-4">

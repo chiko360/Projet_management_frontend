@@ -56,11 +56,32 @@ function ChooseProject() {
   React.useEffect(() => {
     AOS.init();
     AOS.refresh();
+    havegrp();
     document.body.classList.add("landing-page");
     return function cleanup() {
       document.body.classList.remove("landing-page");
     };
   });
+
+
+  const havegrp = async () => {
+    let url = 'http://localhost:8001/profiles/getgroup/';
+    let token = localStorage.getItem("token");
+    axios.create({
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'Bearer ' + token
+      },
+    })
+      .request({
+        url: url,
+        method: "get",
+      })
+      .then((res) => {
+        setLeader(res.data.leader)
+      }
+      )
+  }
 
   const getprojects = async () => {
     let url = 'http://localhost:8001/posts/';
@@ -119,17 +140,12 @@ function ChooseProject() {
       })
   }
 
-  const addproject = posts => {
-    setPost(posts);
+  const addproject = post => {
+    setPost(post);
   }
 
-<<<<<<< HEAD
-  const loadOptions = async (callback) => {
-    let url = 'http://localhost:8001/groups/lookupposts/';
-=======
-  const loadOptionsProject = async (callback) => {
-    let url = 'http://localhost:8000/groups/lookupposts/';
->>>>>>> 3b95d88fd395b2305d6028e42e85ba5b0028c4cf
+  const loadOptionsProject = async (inputText,callback) => {
+    let url = 'http://localhost:8001/posts/'+ inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -232,9 +248,9 @@ function ChooseProject() {
     else return <div className="container">
     <div class="card my-4">
     <div class="card-body" data-aos="fade-up" data-aos-delay="400">
-    <br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
        <center><h1 > Tou have to be a leader to be able to submit</h1></center>
-       <br/><br/><br/><br/><br/><br/><br/>
+       <br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
     </div>
     </div>
