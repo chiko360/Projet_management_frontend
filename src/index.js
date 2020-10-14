@@ -29,6 +29,8 @@ import {AboutUsPage} from './componants/AboutUsPage';
 import Resultspage from './componants/student/resultsPage';
 import SortPage from './componants/sortPage';
 import NotFound from './componants/404';
+import FinalResults from './componants/teacher/finalResults';
+
 
 
 ReactDOM.render(
@@ -51,6 +53,7 @@ ReactDOM.render(
           <Route exact path="/student/themes" component={ApprovedProjects} />
           <Route exact path="/student/results" component={Resultspage} />
           <Route exact path="/student/group" component={CreateGroup} />
+          <Route exact path="/teacher/results " component={FinalResults} />
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/Forbiden" component={Forbiden} />
           <Route exact path="/500" component={InternalError} />
