@@ -37,6 +37,7 @@ function CreateGroup() {
   const [groupName, setGroupname] = useState('');
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
+  const [MemStat, setStat] = useState('');
   const [ServerError, setSE] = useState(null);
   const [Grp, setGrp] = useState('');
   const [Leader, setLeader] = useState(false);
@@ -123,8 +124,8 @@ function CreateGroup() {
     setPost(posts);
   }
 
-  const loadOptionsProject = async (inputText,callback) => {
-    let url = 'http://localhost:8001/posts/'+ inputText;
+  const loadOptionsProject = async (inputText, callback) => {
+    let url = 'http://localhost:8001/posts/' + inputText;
     let token = localStorage.getItem("token")
     let options = {
       method: 'GET',
@@ -194,12 +195,13 @@ function CreateGroup() {
     if (isValid === true && Grp === '') {
       setNE(null);
       createGroup(groupName);
+      history.go('/student/group')
     }
-    }
-  
+  }
+
 
   const handleCreationmem = async () => {
-   if (Grp !== '') {
+    if (Grp !== '') {
       for (var i = 0; i < members.length; i++) {
         var memlist = members[i].label.split(' ');
         const first_name = memlist[0]
@@ -254,6 +256,7 @@ function CreateGroup() {
       })
       .then((res) => {
         console.log(first_name + ':' + last_name + ' was added')
+        window.location.reload();
       }
       )
       .catch(() => {
@@ -278,22 +281,10 @@ function CreateGroup() {
       })
 
       .then((res) => {
-        console.log('created')
-        for (var i = 0; i < members.length; i++) {
-          var memlist = members[i].label.split(' ');
-          const first_name = memlist[0]
-          const last_name = memlist[1]
-          Addmembers(first_name, last_name);
-        }
+        window.location.reload();
       })
       .catch(() => {
-        console.log('already exist')
-        for (var i = 0; i < members.length; i++) {
-          var memlist = members[i].label.split(' ');
-          const first_name = memlist[0]
-          const last_name = memlist[1]
-          Addmembers(first_name, last_name);
-        }
+        setNE('group wasn\'t created');
       });
   }
 
@@ -314,7 +305,7 @@ function CreateGroup() {
     setMembers(members);
   }
 
-  const loadOptions = async (inputText,callback) => {
+  const loadOptions = async (inputText, callback) => {
     let url = 'http://localhost:8001/members/' + inputText;
     let token = localStorage.getItem("token")
     let options = {
@@ -491,10 +482,10 @@ function CreateGroup() {
   function HeaderG(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return ( <div className="container">
-      <div class="card my-4">
-        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up">
-          <br />
+      return (<div className="container">
+        <div class="card my-4">
+          <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up">
+            <br />
           Current Group "{Grp}" Infos
           <br />
             <br />
@@ -517,29 +508,29 @@ function CreateGroup() {
     const havegrp = props.grp;
     if (havegrp === '') {
 
-      return (  
+      return (
         <div>
-          <Form  data-aos="fade-up" data-aos-delay="400" >
+          <Form data-aos="fade-up" data-aos-delay="400" >
             <br />
             <h3>Creat a group now </h3>
             <br />
             <Row>
-            <Col lg="9" md="12">
+              <Col lg="9" md="12">
 
 
-            <Form.Input
-             placeholder="Enter name of your group.. "
-             data-aos="fade-up" data-aos-delay="200"
-              onChange={(event) => { setGroupname(event.target.value) }} />
-            <br />
+                <Form.Input
+                  placeholder="Enter name of your group.. "
+                  data-aos="fade-up" data-aos-delay="200"
+                  onChange={(event) => { setGroupname(event.target.value); console.log(groupName) }} />
+                <br />
 
-            </Col>
-            <Col>
-            <Button
-              block
-              className="btn-hover color-1"
-              onClick={() => { handleCreationgroup() }}>
-              Validate Group
+              </Col>
+              <Col>
+                <Button
+                  block
+                  className="btn-hover color-1"
+                  onClick={() => { handleCreationgroup() }}>
+                  Validate Group
                </Button>
               </Col>
             </Row>
@@ -567,26 +558,26 @@ function CreateGroup() {
             <br />
             <Container>
 
-            <Row>
-            <Col lg="8" md="10" style={{height : "60px" }}>
+              <Row>
+                <Col lg="8" md="10" style={{ height: "60px" }}>
 
-            <AsyncSelect
-              isMulti
-              value={members}
-              onChange={addmember}
-              placeholder='enter members names..'
-              loadOptions={loadOptions}
-            />
-            <br />
-            </Col>
-            
-<Col >
-            <Button
-              style={{ float: 'right' }}
-              block
-              className="btn-hover color-1"
-              onClick={() => { handleCreationmem() }}>Validate Member</Button>
-              </Col>
+                  <AsyncSelect
+                    isMulti
+                    value={members}
+                    onChange={addmember}
+                    placeholder='enter members names..'
+                    loadOptions={loadOptions}
+                  />
+                  <br />
+                </Col>
+
+                <Col >
+                  <Button
+                    style={{ float: 'right' }}
+                    block
+                    className="btn-hover color-1"
+                    onClick={() => { handleCreationmem() }}>Validate Member</Button>
+                </Col>
               </Row>
             </Container>
 
