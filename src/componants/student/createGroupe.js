@@ -372,6 +372,80 @@ function CreateGroup() {
 
   
 
+  function ChooseProject(props){
+    const isLeader = props.Leader;
+    if (isLeader) {
+  
+      return (
+        <>  
+          <div>
+          <h3 data-aos="fade-up" data-aos-delay="200">
+                        Enter the project's titles from the
+                        most wanted to the least wanted.   <br />
+                          </h3>
+                  <Container>
+                    <div data-aos="fade-up" data-aos-delay="600">
+                          <br />
+    
+                          <h5>Add your first choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br /><br />
+    
+                          <h5>Add your second choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br /><br />
+    
+    
+                          <h5>Add your third choice..</h5>
+    
+    
+                          <AsyncSelect
+                            value={title}
+                            onChange={addproject}
+                            placeholder='enter the title of the project..'
+                            loadOptions={loadOptionsProject}
+                          />
+                          <br />
+                          <br />
+                          <br /> <center>
+    
+                            <Button
+                              block
+                              className="btn-hover color-1"
+                              onClick={() => { handleCreationProject() }}>
+                              Submit choices
+                      </Button>
+    
+                          </center><br />
+                          <br />
+    
+                        </div>
+               
+                  </Container>
+                </div>
+              
+     
+        </>
+      );
+  
+    }
+    else return null;
+  }
+
   
 
   function HeaderR(props) {
@@ -381,9 +455,10 @@ function CreateGroup() {
       <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
          Your team's final results
   <br/>
-  <p>If you want to check on the results of the whole promo, 
+ 
+  <h5>If you want to check on the results of the whole promo, 
                   <a href="/student/results"> <span style={{color:'#000000'}}>
-                    click here </span> </a></p>
+                    click here </span> </a></h5>
 </h3>
 <br/>
            
@@ -401,15 +476,13 @@ function CreateGroup() {
     if (havegrp !== '') {
       return ( <div className="container">
       
-       
           <h3 class="card-header headerr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
           Current Members
   <br/>
   <small>Leader: {leadername}</small>
 </h3>
 <br/>
-<br/>          <br /> 
-           
+<br/>                    
   </div>
   
       );
@@ -420,20 +493,18 @@ function CreateGroup() {
   function HeaderG(props) {
     const havegrp = props.grp;
     if (havegrp !== '') {
-      return ( <div className="container">
-      <div class="card my-4">
-        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up">
+      return (
+        <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="200">
           <br />
           Current Group "{Grp}" Infos
           <br /> 
            <br /> 
         </h2>
-  </div>
-  </div>
+
       );
     }
     else return(
-      <h2 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">
+      <h2 class="card-header headerrr headerrr-hover" >
           <br />
           Create Your team now.
           <br /> 
@@ -619,6 +690,7 @@ function CreateGroup() {
                 <div className="container">
                   <div class="card my-4">
                    <HeaderG grp={Grp}/>
+                   
 
                     <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                       <div>

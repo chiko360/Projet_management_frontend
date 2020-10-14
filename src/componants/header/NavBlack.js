@@ -265,6 +265,28 @@ const refuseInv = async (grp) => {
   }
 
 
+  
+const LeaderOrNo = async () => {
+  let url = 'http://localhost:8000/profiles/getgroup/';
+  let token = localStorage.getItem("token");
+  axios.create({
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    },
+  })
+    .request({
+      url: url,
+      method: "get",
+    })
+    .then((res) => {
+      setLeader(res.data.leader)
+    }
+    )
+}
+
+
+
   function Choosep(props) {
     const isLeader = props.Leader
 
@@ -292,6 +314,7 @@ const refuseInv = async (grp) => {
   
 
   useEffect(()=> {
+    LeaderOrNo();
     getnotifs();
     getinvites();
 
@@ -355,18 +378,7 @@ const refuseInv = async (grp) => {
 
     <Choosep Leader={Leader}/>
 
-    <NavItem
-      name='ChooseProjects'
-      >
-  <NavLink
-  target="_blank"
-  active={activeItem === 'ChooseProject'}
-  onClick={()=>{history.push("/student/ChooseProject")}}
-  >
-  Choose Project
-  </NavLink>
-  
-  </NavItem>
+   
       <NavItem
                       name='AllProjects'
                       >

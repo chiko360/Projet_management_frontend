@@ -85,9 +85,13 @@ function ApprovedProjects() {
                                                 <li>all projects</li>
                                             </ol>
                                         </div>
+                                        <br/>
+                                        <h5>If you are a 3Cs student, weather your in SIW or ISI, you can propose you own project, <a style={{color:'#3498db'}} href="/student/addProject"> Click here</a></h5>
                                     </div>
                                 </section>
+
                                             <hr/>
+                                           
                                             {(() => {
                                                 if (posts.length===0){
                                                  return <div className="container" data-aos="fade-up" data-aos-delay="400">

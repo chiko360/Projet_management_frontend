@@ -19,7 +19,8 @@ import {
   DropdownMenu,
   DropdownToggle,
   UncontrolledDropdown,
-  Badge
+  Badge,
+  Col
 } from "reactstrap";
 
 function IndexNavbar(props) {
@@ -122,6 +123,45 @@ const refuseInv = async (grp) => {
   })
 }
 
+const LeaderOrNo = async () => {
+  let url = 'http://localhost:8000/profiles/getgroup/';
+  let token = localStorage.getItem("token");
+  axios.create({
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    },
+  })
+    .request({
+      url: url,
+      method: "get",
+    })
+    .then((res) => {
+      setLeader(res.data.leader)
+    }
+    )
+}
+
+
+function Choosep(props){
+  const isLeader = props.Leader
+  if (isLeader===true ){
+    return   <NavItem
+    name='ChooseProjects'
+    >
+<NavLink
+target="_blank"
+active={activeItem === 'ChooseProject'}
+onClick={()=>{history.push("/student/ChooseProject")}}
+>
+Choose Project
+</NavLink>
+
+</NavItem>
+}
+else  return  null;
+}
+
   function Loginbutton(props){
     const logged = props.logged
     if (logged===null){
@@ -166,7 +206,7 @@ const refuseInv = async (grp) => {
                        </DropdownToggle>
                        
                        <DropdownMenu
-                        style={{minHeight:"50px" , minWidth:"220px"}}
+                        style={{minHeight:"50px" , minWidth:"250px"}}
                       >
                        {(() => {
                                                 if (notifications.length===0){
@@ -178,17 +218,13 @@ const refuseInv = async (grp) => {
                                                 }
                                             })()}
 
-                      {notifications.map((notif,index) => {
+                    {notifications.map((notif,index) => {
 
                       return  <div >
-                        <DropdownItem>
-                         
-                       <h5> {notif.title}</h5>
-                             
-                             {notif.body}
-                             <br/>
-                            {notif.created_on}
-                            
+                        <DropdownItem >
+                       <h5 style={{color:"#3498db"}}> {notif.title} </h5>  
+                         <h6>{notif.body}</h6>    
+                           <p style={{color:"#3498db", fontSize:"4"}}> {notif.created_on} </p> 
                       </DropdownItem>
                       
                     </div>
@@ -224,8 +260,9 @@ const refuseInv = async (grp) => {
                       <DropdownMenu
                         aria-labelledby="dropdownMenuButton"
                         className="dropdown-info"
+                        style={{ whiteSpace :"nowrap"}}
                       >
-                        <DropdownItem
+                        <DropdownItem 
      active={activeItem === 'Profile'}
      onClick={()=>{
        if(type==='student'){history.push("/student")}
@@ -238,7 +275,7 @@ const refuseInv = async (grp) => {
                           <DropdownItem
               onClick={()=>{history.push("/changePassword")}}
               target="_blank"
-                        >
+              style={{ whiteSpace :"nowrap"}}  >
                           change password
                                           </DropdownItem>
                           <DropdownItem
@@ -258,26 +295,9 @@ const refuseInv = async (grp) => {
   }
 
 
-function Choose(props){
-  const isLeader = props.Leader
-  if (isLeader===true){
-    return   <NavItem
-    name='ChooseProjects'
-    >
-<NavLink
-target="_blank"
-active={activeItem === 'ChooseProject'}
-onClick={()=>{history.push("/student/ChooseProject")}}
->
-Choose Project
-</NavLink>
-
-</NavItem>
-}
-else  return  null;
-}
 
   useEffect(()=> {
+    LeaderOrNo();
     getnotifs();
     getinvites();
       const updateNavbarColor = () => {
@@ -339,19 +359,8 @@ else  return  null;
           isOpen={navbarCollapse}
         >
     <Nav navbar>
-   <Choose Leader={Leader}/>
-   <NavItem
-      name='ChooseProjects'
-      >
-  <NavLink
-  target="_blank"
-  active={activeItem === 'ChooseProject'}
-  onClick={()=>{history.push("/student/ChooseProject")}}
-  >
-  Choose Project
-  </NavLink>
-  
-  </NavItem>
+   <Choosep Leader={Leader}/>
+   
       <NavItem
                       name='AllProjects'
                       >
@@ -416,7 +425,7 @@ else  return  null;
     
                        </DropdownToggle>
                       <DropdownMenu
-                        style={{minHeight:"50px" , minWidth:"210px"}}
+                        style={{minHeight:"50px" , minWidth:"220px"}}
                       >
 
 {(() => {

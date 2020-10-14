@@ -432,8 +432,8 @@ a:hover, a:active, a:focus {
 }
 
 .slideone{
-  background-image: url('../images/Graduation.jpg');
-  background-size: cover;
+  background-image: url('../images/bd133720e9237204.jpg');
+  background-size: 100%;
   }
 
   .slidetwo{
@@ -2377,9 +2377,9 @@ textarea.form-control {
     .dropdown-menu .dropdown-item {
       color: #ffffff;
       font-size: 14px;
-      padding: 15px 45px 15px 15px;
+      padding: 15px 15px 15px 15px;
       clear: both;
-      white-space: nowrap;
+      white-space:pre-wrap;
       width: 100%;
       display: block; 
     }
