@@ -157,8 +157,8 @@ function CreateGroup() {
         url: url,
         method: "get",
       })
-      .then((res) => {
-        setmem(res.data);
+      .then(async (res) => {
+        await setmem(res.data);
       }
       )
       .catch(() => {

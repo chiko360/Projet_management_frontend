@@ -53,7 +53,7 @@ function ChooseProject() {
   };
 
   document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
+  useEffect(() => {
     AOS.init();
     AOS.refresh();
     havegrp();
@@ -61,7 +61,7 @@ function ChooseProject() {
     return function cleanup() {
       document.body.classList.remove("landing-page");
     };
-  });
+  },[]);
 
 
   const havegrp = async () => {
