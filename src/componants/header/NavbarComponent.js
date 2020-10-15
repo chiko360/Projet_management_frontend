@@ -116,7 +116,7 @@ const refuseInv = async (grp) => {
   })
 }
 function formatdate(date){
-  var date = new Date(date * 1000);
+  var date = new Date(date);
   var dates = date.toLocaleDateString("fr-FR")
   var times = date.toLocaleTimeString("fr-FR")
   return(dates+' '+times);

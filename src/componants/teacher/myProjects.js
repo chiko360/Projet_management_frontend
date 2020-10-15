@@ -115,6 +115,13 @@ function TeacherMyProjects() {
         else { return null }
     }
 
+    function formatdate(date){
+        var date = new Date(date);
+        var dates = date.toLocaleDateString("fr-FR")
+        var times = date.toLocaleTimeString("fr-FR")
+        return(dates+' '+times);
+      }
+
     useEffect(() => {
         if (localStorage.getItem('type') !== 'teacher') {
             history.push('/Forbiden')
@@ -167,7 +174,7 @@ function TeacherMyProjects() {
                                             <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{post.title}</h5>
                                             <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                                                 <h3>promo : {post.promo}</h3>
-                                                <h3>created at : {post.creating_date}</h3>
+                                                <h3>created at : {formatdate(post.creating_date)}</h3>
                                                 <h3>introduction : {post.introduction}</h3>
                                                 <h3>tools : {post.tools}</h3>
                                                 <h3>tags : {post.tags}</h3>

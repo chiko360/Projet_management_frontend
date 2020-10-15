@@ -51,6 +51,7 @@ function ChooseProject() {
   const [dropdownOpen2, setDD2] = useState(false);
   const [dropdownOpen3, setDD3] = useState(false);
   const [dropdownOpen4, setDD4] = useState(false);
+  const [ServerError, setSE] = useState(null);
   let history = useHistory();
 
   const toggle = () => setDD(prevState => !prevState);
@@ -135,6 +136,23 @@ function ChooseProject() {
   const Addprojects = async () => {
     let url = 'http://localhost:8001/groups/addtofiche/';
     let token = localStorage.getItem("token");
+    let titles = [];
+    if (title!=null){
+      titles.push(title);
+    }
+    if (title1!=null){
+      titles.push(title1);
+    }
+    if (title2!=null){
+      titles.push(title2);
+    }
+    if (title3!=null){
+      titles.push(title3);
+    }
+    if (title4!=null){
+      titles.push(title4);
+    }
+
     axios.create({
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
@@ -144,14 +162,14 @@ function ChooseProject() {
       .request({
         url: url,
         method: "post",
-        data: { title,title1,title2 },
+        data: { titles },
       })
       .then((res) => {
         history.push('/student/group');
       }
       )
       .catch(() => {
-        history.push('/student/group');
+        setSE('server error .. refresh the page')
       })
   }
 
@@ -261,14 +279,13 @@ function ChooseProject() {
                 <br/><br/>
                 </Row>
                 <br /> <center>
-
+                <div style={{ fontSize: 12, color: "red" }}>{ServerError}</div>
                   <Button
                     block
                     className="btn-hover color-1"
                     onClick={Addprojects}>
                     Submit choices
                   </Button>
-
                 </center><br />
                 <br />
               </div>

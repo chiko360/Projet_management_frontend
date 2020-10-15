@@ -433,7 +433,7 @@ a:hover, a:active, a:focus {
 
 .slideone{
   background-image: url('../images/bd133720e9237204.jpg');
-  background-size: 100%;
+  background-size: cover;
   }
 
   .slidetwo{
