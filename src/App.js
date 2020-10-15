@@ -26,14 +26,14 @@ import {
 import IndexNavbar from './componants/header/NavbarComponent';
 import Icofont from 'react-icofont';
 
-console.log(etud);
-console.log(ens);
-console.log(entre);
-console.log(services);
-console.log(one);
-console.log(two);
-console.log(three);
-console.log(four);
+
+
+
+
+
+
+
+
 
 function App (props) {
  

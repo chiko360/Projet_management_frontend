@@ -21,6 +21,7 @@ function FinalResults() {
     const [members, setMembers] = useState([]);
     const [first_name, setfirstName] = useState('');
     const [last_name, setlastName] = useState('');
+    const [grp, setgrp]= useState('')
 
     const getResults = async () => {
         let url = 'http://localhost:8001/groups/finalresults/';
@@ -36,7 +37,8 @@ function FinalResults() {
         };
         await axios(options).then(res => {
             const response = res.data;
-            setRes(response)
+            setRes(response);
+            getMembers(results.grp);
         })
     }
 
@@ -108,10 +110,11 @@ function FinalResults() {
                                 {results.map((result, index) => {
                                     return <div className="container">
                                         <div class="card my-4">
-                                            <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{result.teacher_profile}</h5>
+                                            <h5 class="card-header headerrr headerrr-hover" data-aos="fade-up" data-aos-delay="400">{result.selected_project}</h5>
                                             <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                                                 <h3>groupe name : {result.groupfiche}</h3>
-                                                <h3>selected project : {result.selected_project}</h3>
+                                                <h3>selected project : {result.teacher_profile}</h3>
+                                <h2>members :</h2>{members.map((member, index) => {return <h1>{member.first_name} {member.last_name}</h1>})}
                                                 
                                             </div>
                                         </div>

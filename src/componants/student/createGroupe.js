@@ -8,17 +8,6 @@ import AOS from 'aos';
 import {
   Button,
   Modal,
-  UncontrolledTooltip,
-  PopoverBody,
-  PopoverHeader,
-  UncontrolledPopover,
-  Label,
-  Input,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
   Container,
   Row,
   Col
@@ -31,98 +20,23 @@ import avatar from '../../assets/images/avatar.jpg';
 function CreateGroup() {
 
 
-  const [posts, setPost] = useState([]);
-  const [title, setTitle] = useState(null);
-
   const [groupName, setGroupname] = useState('');
   const [members, setMembers] = useState([]);
   const [nameError, setNE] = useState(null);
-  const [MemStat, setStat] = useState('');
   const [ServerError, setSE] = useState(null);
+  const [addError, setAE] = useState(null);
   const [Grp, setGrp] = useState('');
   const [Leader, setLeader] = useState(false);
   const [mem, setmem] = useState([]);
   const [memm, setmemm] = useState([]);
   const [leadername, setLN] = useState([]);
   let history = useHistory();
-  const [modal, setModal] = React.useState(false);
   const [modaldelete, setModalDelete] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState("1");
 
-  const toggleModal = () => {
-    setModal(!modal);
-  }
   const toggleModalDelete = () => {
     setModalDelete(!modaldelete);
   }
-  const toggle = tab => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-    }
-  };
 
-  const getprojects = async () => {
-    let url = 'http://localhost:8001/posts/';
-    let token = localStorage.getItem("token")
-    let options = {
-      method: 'get',
-      url: url,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': 'Bearer ' + token
-      },
-    };
-    await axios(options).then(res => {
-      const response = res.data;
-      console.log(response)
-      setPost(response)
-    })
-  }
-
-
-  const handleCreationProject = async (props) => {
-    const isLeader = props.Leader;
-    if (isLeader === false) {
-      return null
-    }
-    else if (isLeader === true) {
-      for (var i = 0; i < posts.length; i++) {
-        var postslist = posts[i].label.split(' ');
-        const title = postslist[0]
-        Addprojects(title);
-      }
-    }
-  }
-
-
-  const Addprojects = async (title) => {
-    let url = 'http://localhost:8001/groups/addproject/';
-    let token = localStorage.getItem("token");
-    axios.create({
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': 'Bearer ' + token
-      },
-    })
-      .request({
-        url: url,
-        method: "post",
-        data: { title },
-      })
-      .then((res) => {
-        console.log(title + ' was added')
-      }
-      )
-      .catch(() => {
-        console.log('error');
-      })
-  }
-
-
-  const addproject = posts => {
-    setPost(posts);
-  }
 
   const loadOptionsProject = async (inputText, callback) => {
     let url = 'http://localhost:8001/posts/' + inputText;
@@ -162,7 +76,7 @@ function CreateGroup() {
       }
       )
       .catch(() => {
-        console.log('don\'t have a grp');
+        ;
       })
   }
 
@@ -234,7 +148,7 @@ function CreateGroup() {
       }
       )
       .catch(() => {
-        console.log('error');
+        ;
       })
   }
 
@@ -255,13 +169,11 @@ function CreateGroup() {
         data: { first_name, last_name },
       })
       .then((res) => {
-        console.log(first_name + ':' + last_name + ' was added')
-        window.location.reload();
+        setAE('invitation sent to' + first_name+" "+ last_name)
       }
       )
       .catch(() => {
-        console.log('error');
-        setSE('you don\'t have a groupe')
+        setSE('unknown error ocurred .. refresh the page')
       })
   }
 
@@ -341,7 +253,6 @@ function CreateGroup() {
       }
       )
       .catch(() => {
-        console.log('there is no results yet');
       })
   }
 
@@ -352,88 +263,7 @@ function CreateGroup() {
     getfinalresult();
     havegrp();
     getMembers();
-    getprojects();
   }, []);
-
-
-
-  function ChooseProject(props) {
-    const isLeader = props.Leader;
-    if (isLeader) {
-
-      return (
-        <>
-          <div>
-            <h3 data-aos="fade-up" data-aos-delay="200">
-              Enter the project's titles from the
-                        most wanted to the least wanted.   <br />
-            </h3>
-            <Container>
-              <div data-aos="fade-up" data-aos-delay="600">
-                <br />
-
-                <h5>Add your first choice..</h5>
-
-
-                <AsyncSelect
-                  value={title}
-                  cacheOptions
-                  onChange={addproject}
-                  placeholder='enter the title of the project..'
-                  loadOptions={loadOptionsProject}
-                />
-                <br /><br />
-
-                <h5>Add your second choice..</h5>
-
-
-                <AsyncSelect
-                  value={title}
-                  cacheOptions
-                  onChange={addproject}
-                  placeholder='enter the title of the project..'
-                  loadOptions={loadOptionsProject}
-                />
-                <br /><br />
-
-
-                <h5>Add your third choice..</h5>
-
-
-                <AsyncSelect
-                  value={title}
-                  cacheOptions
-                  onChange={addproject}
-                  placeholder='enter the title of the project..'
-                  loadOptions={loadOptionsProject}
-                />
-                <br />
-                <br />
-                <br /> <center>
-
-                  <Button
-                    block
-                    className="btn-hover color-1"
-                    onClick={() => { handleCreationProject() }}>
-                    Submit choices
-                      </Button>
-
-                </center><br />
-                <br />
-
-              </div>
-
-            </Container>
-          </div>
-
-
-        </>
-      );
-
-    }
-    else return null;
-  }
-
   
 
   function HeaderR(props) {
@@ -503,10 +333,9 @@ function CreateGroup() {
   function InputGN(props) {
     const havegrp = props.grp;
     if (havegrp === '') {
-
       return (
         <div>
-          <Form data-aos="fade-up" data-aos-delay="400" >
+          <Form>
             <br />
             <h3>Creat a group now </h3>
             <br />
@@ -575,7 +404,7 @@ function CreateGroup() {
                 </Col>
               </Row>
             </Container>
-
+            <div style={{ fontSize: 12, color: "red" }}>{addError}</div>
             <div style={{ fontSize: 12, color: "red" }}>{ServerError}</div>
 
           </Form>
@@ -590,15 +419,12 @@ function CreateGroup() {
 
 
   function DltButton(props) {
-    const isLeader = props.Leader;
+    const isLeader = props.Leader+ '';
     const first_name = props.first_name;
     const last_name = props.last_name;
     const leader = props.LN;
-    var LNList = leader.split(' ');
-    const leaderLN = LNList[0]
-    const leaderFN = LNList[1]
-    console.log(leaderFN);
-    if (first_name === leaderFN && last_name === leaderLN) {
+
+    if (first_name+' '+last_name === leader) {
       return null;
     }
 

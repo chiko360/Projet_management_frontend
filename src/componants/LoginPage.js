@@ -49,7 +49,7 @@ function Login() {
           data: { email, password },
         })
         .then((res) => {
-          console.log(res)
+          
           localStorage.setItem("token",res.data.token)
           if (res.data.account_type === 'student'){
             localStorage.setItem("type","student")
@@ -97,7 +97,7 @@ function Login() {
     AOS.init();
     AOS.refresh();
       let token = localStorage.getItem("token")
-      console.log(token)
+      
       let type = localStorage.getItem("type")
       if (token !==null){
         history.push('/'+type)

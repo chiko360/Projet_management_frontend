@@ -53,7 +53,7 @@ ReactDOM.render(
           <Route exact path="/student/themes" component={ApprovedProjects} />
           <Route exact path="/student/results" component={Resultspage} />
           <Route exact path="/student/group" component={CreateGroup} />
-          <Route exact path="/teacher/results " component={FinalResults} />
+          <Route exact path="/teacher/results" component={FinalResults} />
           <Route exact path="/sort" component={SortPage} />
           <Route exact path="/Forbiden" component={Forbiden} />
           <Route exact path="/500" component={InternalError} />

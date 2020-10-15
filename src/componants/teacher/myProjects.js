@@ -34,11 +34,6 @@ function TeacherMyProjects() {
     const toggleModalDelete = () => {
         setModalDelete(!modaldelete);
     }
-    const toggle = tab => {
-        if (activeTab !== tab) {
-            setActiveTab(tab);
-        }
-    };
 
     const getprojects = async () => {
         let url = 'http://localhost:8001/posts/myprojects/teacher/';
@@ -73,7 +68,8 @@ function TeacherMyProjects() {
         let response = await axios(options);
         let responseOK = response && response.status === 200;
         if (responseOK) {
-            getprojects();
+            toggleModalDelete();
+            history.go('/teacher/myprojects');
         }
     }
     const editProject = async (index) => {
@@ -189,7 +185,7 @@ function TeacherMyProjects() {
                                                     <div className="modal-footer">
                                                         <Button
                                                             outline
-                                                            className="btn-round"
+                                                            className="btn-hover color-11"
                                                             color="danger"
                                                             type="button"
                                                             onClick={() => { deleteProject(post.id) }}
@@ -200,7 +196,7 @@ function TeacherMyProjects() {
                                                         <div className="right-side">
                                                             <Button
                                                                 outline
-                                                                className="btn-round"
+                                                                className="btn-hover color-8"
                                                                 color="default"
                                                                 type="button"
                                                                 onClick={toggleModalDelete}
@@ -303,32 +299,3 @@ function TeacherMyProjects() {
 }
 
 export default TeacherMyProjects;
-//
-//<React.Fragment>
-//                <HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
-//                <header className="App-header">
-//                  <p>
-//                    my Projects
-//                  </p>
-//                </header>
-//                <div>
-//                        {posts.map((post,index) => {
-//                        //    setapr(post.approuved)
-//                        //    setid(post.id)
-//                        return <div>
-//                                <h2 class="ui top attached header">{post.title}</h2>
-//                                <div class="ui attached segment">
-//                                <h3>promo : {post.promo}</h3>
-//                                <h3>created at : {post.creating_date}</h3>
-//                                <h3>introduction : {post.introduction}</h3>
-//                                <h3>tools : {post.tools}</h3>
-//                                <h3>tags : {post.tags}</h3>
-//                                <h3>details :{post.details}</h3>
-//                                <h3>approuved : {String(post.approved)}</h3>
-//                                <Button color='red' onClick={()=>{deleteProject(post.id)}}>delete topic</Button>
-//                                <EditButton approuved={String(post.approved)} id={post.id} />
-//                                </div>
-//                            </div>
-//                    })}
-//                </div>
-//              </React.Fragment>

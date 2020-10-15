@@ -40,7 +40,7 @@ function StudentMyProjects() {
       }
     };
     const getprojects = async () => {
-        let url = 'http://localhost:8001/posts/myprojects/';
+        let url = 'http://localhost:8001/studentprojects/';
         let token = localStorage.getItem("token")
         let options = {
                     method: 'get',
@@ -157,7 +157,7 @@ function StudentMyProjects() {
                                                  <div class="card my-4">
                                                  <div class="card-body" data-aos="fade-up" data-aos-delay="400">
                                                  <br/><br/><br/><br/><br/><br/><br/><br/>
-                                                    <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/teacher/addproject"> add one now !</a></h1></center>
+                                                    <center><h1 > you haven't submited any projects yet, <a style={{color:'#3498db'}} href="/student/addproject"> add one now !</a></h1></center>
                                                     <br/><br/><br/><br/><br/><br/><br/>
                                                  </div>
                                                  </div>

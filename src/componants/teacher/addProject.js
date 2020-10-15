@@ -192,39 +192,3 @@ function AddProject() {
 }
 
 export default AddProject;
-
-//<React.Fragment>
-//<HorNavbar type={localStorage.getItem('type')} islogged={localStorage.getItem('token')}/>
-//<div className="auth-main">
-//  <div class="auth-content">
-//        <div className="auth-card">
-//          <Header as="h2" color="black" textAlign="center">
-//                  add project    
-//              </Header>
-//              <form class="ui form">
-//            <input type="text" name="title" placeholder="title" onChange={(event)=>{setTitle(event.target.value)}} /></form><br/>
-//            <form class="ui form">
-//            <select onChange={(event)=>{setPromo(event.target.value)}}>
-//                <option>2CPI</option>
-//                <option>1CS</option>
-//                <option>2CS</option>
-//                <option>3CS</option>
-//            </select> </form> <br/>
-//            <form class="ui form">
-//            <textarea rows="4" cols="50" type="text" name="introduction" placeholder="introduction" onChange={(event)=>{setIntro(event.target.value)}} /> 
-//            </form><br/>
-//            <form class="ui form">
-//            <textarea rows="4" cols="50" type="text" name="tools" placeholder="tools" onChange={(event)=>{setTools(event.target.value)}} />
-//            </form><br/>
-//            <form class="ui form">
-//            <textarea rows="10" cols="50" type="text" name="details" placeholder="details" onChange={(event)=>{setDetails(event.target.value)}} />
-//            </form><br/>
-//            <form class="ui form">
-//            <input type="text" name="keywords" placeholder="keywords" onChange={(event)=>{setTags(event.target.value)}} /> <br/>
-//            </form><br/>
-//            <AsyncSelect isMulti value={keywords} onChange={addkeyword} placeholder='type your keywords' loadOptions={loadOptions} />
-//            <Button class="ui button" color="blue" size="huge" type="submit" onClick={()=>{Post()}}>submit</Button>
-//          </div>
-//          </div>
-//      </div>
-//      </React.Fragment>

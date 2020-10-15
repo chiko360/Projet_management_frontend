@@ -79,7 +79,7 @@ function Resultspage() {
       }
       )
       .catch(() => {
-        console.log('there is no results yet');
+        ;
       })
   }
 

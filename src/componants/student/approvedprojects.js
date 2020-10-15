@@ -25,7 +25,7 @@ function ApprovedProjects() {
         };
         await axios(options).then(res => {
             const response = res.data;
-            console.log(response)
+            
             setPost(response)
         })
     }
@@ -63,133 +63,94 @@ function ApprovedProjects() {
         AOS.refresh();
     }, []);
 
-    function formatdate(date) {
-        var date = new Date(date * 1000);
-        var dates = date.toLocaleDateString("fr-FR")
-        var times = date.toLocaleTimeString("fr-FR")
-        return (dates + ' ' + times);
-    }
-
     return (
         <>
             <NavBlack type={localStorage.getItem('type')} islogged={localStorage.getItem('token')} />
             <br />
             <br />
             <br />
-            <div className="section about">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <section class="breadcrumbs">
-                                <div class="container" data-aos="fade-up" data-aos-delay="200">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2
-                                        >Check All Submited Projects.</h2>
-                                        <ol >
-                                            <li><a href="/">home</a></li>
-                                            <li><a href="/student">student</a></li>
-                                            <li>all projects</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </section>
-
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-8">
-                            {(() => {
-                                if (posts.length === 0) {
-                                    return <div className="container" data-aos="fade-up" data-aos-delay="400">
-                                        <div class="card my-4">
-                                            <div class="card-body">
-                                                <br /><br /><br /><br /><br /><br /><br />
-                                                <center><h1 > there is no project that has been submited yet.</h1></center>
-                                                <br /><br /><br /><br /><br /><br /><br />
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            })()}
-
-
-                            {posts.map((post, index) => {
-
-                                return <div className="container">
-                                    <div class="card my-4">
-                                        <div class=" card-header headerrr headerrr-hover " data-aos="fade-up" data-aos-delay="400"> <h2>{post.title}</h2>
-                                            <h5>by : {post.user}</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div className="section about">
+                            <Container>
+                                <section class="breadcrumbs">
+                                    <div class="container" data-aos="fade-up" data-aos-delay="200">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h2
+                                            >Check All Submited Projects.</h2>
+                                            <ol >
+                                                <li><a href="/index">home</a></li>
+                                                <li><a href="/student">student</a></li>
+                                                <li>all projects</li>
+                                            </ol>
                                         </div>
                                         <br />
                                         <h5>If you are a 3Cs student, weather your in SIW or ISI, you can propose you own project, <a style={{ color: '#3498db' }} href="/student/addProject"> Click here</a></h5>
                                     </div>
                                 </section>
 
-                                    <hr />
-                                           
-                                            {
-                                    (() => {
-                                        if (posts.length === 0) {
-                                            return <div className="container" data-aos="fade-up" data-aos-delay="400">
-                                                <div class="card my-4">
-                                                    <div class="card-body">
-                                                        <br /><br /><br /><br /><br /><br /><br />
-                                                        <center><h1 > there is no project that has been submited yet.</h1></center>
-                                                        <br /><br /><br /><br /><br /><br /><br />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    })()
-                                }
+                                <hr />
 
-                                {
-                                    posts.map((post, index) => {
-
-                                        return <div className="container">
+                                {(() => {
+                                    if (posts.length === 0) {
+                                        return <div className="container" data-aos="fade-up" data-aos-delay="400">
                                             <div class="card my-4">
-                                                <div class=" card-header headerrr headerrr-hover " data-aos="fade-up" data-aos-delay="400"> <h2>{post.title}</h2>
-                                                    <h5>by : {post.user}</h5>
+                                                <div class="card-body">
+                                                    <br /><br /><br /><br /><br /><br /><br />
+                                                    <center><h1 > there is no project that has been submited yet.</h1></center>
+                                                    <br /><br /><br /><br /><br /><br /><br />
                                                 </div>
-                                                <div class="card-body" data-aos="fade-up" data-aos-delay="600">
-                                                    <h5 style={{ color: '#3498db', float: 'right' }}>{post.creating_date}</h5>
-                                                    <br />
-                                                    <br />
-                                                    <h3 style={{ color: '#3498db' }} >What this project is about? </h3>
-                                                    <p> {post.introduction}</p>
-                                                    <br />
-                                                    <h3 style={{ color: '#3498db' }}>What do you need to make this project? </h3>
-                                                    <p> {post.tools}</p>
-                                                    <br />
-                                                    <h3 style={{ color: '#3498db' }}>You need more details? </h3>
-                                                    <p>{post.details}</p>
-                                                    <br />
-                                                    <h3 style={{ color: '#3498db' }}>Tags: </h3>
-                                                    <p>{post.tags}</p>
-                                                    <br />
-
-                                                    <Button
-                                                        style={{ float: 'right' }}
-                                                        className="btn-hover color-4 "
-                                                        onClick={() => { pdfDownload(post.title, post.user, post.creating_date, post.introduction, post.tools, post.details) }}>
-
-                                                        view in pdf</Button>
-
-                                                </div>
-                                                <br />
-                                                <br />
-
                                             </div>
                                         </div>
+                                    }
+                                })()}
 
-                                    })
-                                } 
-                        </Container>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                                {posts.map((post, index) => {
+
+                                    return <div className="container">
+                                        <div class="card my-4">
+                                            <div class=" card-header headerrr headerrr-hover " data-aos="fade-up" data-aos-delay="400"> <h2>{post.title}</h2>
+                                                <h5>by : {post.user}</h5>
+                                            </div>
+                                            <div class="card-body" data-aos="fade-up" data-aos-delay="600">
+                                                <h5 style={{ color: '#3498db', float: 'right' }}>{post.creating_date}</h5>
+                                                <br />
+                                                <br />
+                                                <h3 style={{ color: '#3498db' }} >What this project is about? </h3>
+                                                <p> {post.introduction}</p>
+                                                <br />
+                                                <h3 style={{ color: '#3498db' }}>What do you need to make this project? </h3>
+                                                <p> {post.tools}</p>
+                                                <br />
+                                                <h3 style={{ color: '#3498db' }}>You need more details? </h3>
+                                                <p>{post.details}</p>
+                                                <br />
+                                                <h3 style={{ color: '#3498db' }}>Tags: </h3>
+                                                <p>{post.tags}</p>
+                                                <br />
+
+                                                <Button
+                                                    style={{ float: 'right' }}
+                                                    className="btn-hover color-4 "
+                                                    onClick={() => { pdfDownload(post.title, post.user, post.creating_date, post.introduction, post.tools, post.details) }}>
+
+                                                    view in pdf</Button>
+
+                                            </div>
+                                            <br />
+                                            <br />
+
+                                        </div>
+                                    </div>
+
+                                })}
+                            </Container>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -74,7 +74,7 @@ const getinvites = async () => {
           };
   await axios(options).then(res => {
       const response = res.data;
-      console.log(response)
+      
       setInv(response)
   })
 }
@@ -123,7 +123,7 @@ function formatdate(date){
 }
 
 const LeaderOrNo = async () => {
-  let url = 'http://localhost:8000/profiles/getgroup/';
+  let url = 'http://localhost:8001/profiles/getgroup/';
   let token = localStorage.getItem("token");
   axios.create({
     headers: {

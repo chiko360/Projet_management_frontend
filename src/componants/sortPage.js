@@ -64,7 +64,7 @@ function Sortpage() {
       }
       )
       .catch(() => {
-        console.log('there is no results yet');
+        ;
       })
   }
 
@@ -83,7 +83,7 @@ function Sortpage() {
         data: { listLeaders },
       })
       .catch(() => {
-        console.log('error');
+        ;
       })
   }
 
@@ -102,7 +102,7 @@ function Sortpage() {
         data: { listLeaders },
       })
       .catch(() => {
-        console.log('error');
+        ;
       })
   }
 
