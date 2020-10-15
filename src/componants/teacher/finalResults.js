@@ -38,26 +38,6 @@ function FinalResults() {
         await axios(options).then(res => {
             const response = res.data;
             setRes(response);
-            getMembers(results.grp);
-        })
-    }
-
-    const getMembers = async (grp) => {
-        let url = 'http://localhost:8001/posts/myprojects/';
-        let token = localStorage.getItem("token")
-        let options = {
-            method: 'post',
-            url: url,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': 'Bearer ' + token
-            },
-            data: { 'grp': grp }
-        };
-        await axios(options).then(res => {
-            const response = res.data;
-            setMembers(response)
         })
     }
 
@@ -114,7 +94,6 @@ function FinalResults() {
                                             <div class="card-body" data-aos="fade-up" data-aos-delay="600">
                                                 <h3>groupe name : {result.groupfiche}</h3>
                                                 <h3>selected project : {result.teacher_profile}</h3>
-                                <h2>members :</h2>{members.map((member, index) => {return <h1>{member.first_name} {member.last_name}</h1>})}
                                                 
                                             </div>
                                         </div>

@@ -419,7 +419,7 @@ function CreateGroup() {
 
 
   function DltButton(props) {
-    const isLeader = props.Leader+ '';
+    const isLeader = props.Leader;
     const first_name = props.first_name;
     const last_name = props.last_name;
     const leader = props.LN;
@@ -450,7 +450,7 @@ function CreateGroup() {
               <Button
                 style={{ width: "100px" }}
                 className="btn-hover color-11"
-                onClick={() => { deletemember(first_name, last_name) }}                  >
+                onClick={() => { deletemember(first_name, last_name);toggleModalDelete();history.push('/student/group') }}                  >
                 Delete
                   </Button>
               <div className="divider" />

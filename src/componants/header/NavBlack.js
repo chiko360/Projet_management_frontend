@@ -98,6 +98,7 @@ function NavBlack(props) {
     };
     await axios(options).then(res => {
       const response = res.data;
+      history.push('/student/group')
       //TODO : message that he joing the groupe
     })
   }
